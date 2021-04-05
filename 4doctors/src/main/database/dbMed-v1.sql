@@ -10,6 +10,7 @@ DROP TYPE IF EXISTS TIPOFARMACO CASCADE;
 CREATE TYPE GENDER AS  ENUM ('M', 'F');
 CREATE TYPE TIPOPATOLOGIA AS  ENUM ('A', 'B', 'C');
 CREATE TYPE TIPOFARMACO AS  ENUM ('ETICI', 'OTC', 'SOP');
+CREATE TYPE STATUS AS ENUM ('PENDING', 'REJECTED', 'APPROVED');
 
 -------------------------
 
@@ -77,7 +78,7 @@ CREATE TABLE doctors.Ricetta (
   numeroprestazioni INT,
   tipo VARCHAR(2),
   priorità VARCHAR(3),
-  approvata BOOLEAN NOT NULL,
+  approvata STATUS NOT NULL,
   FOREIGN KEY (medico) REFERENCES doctors.Medico(cf) ON DELETE CASCADE ON UPDATE CASCADE ,
   FOREIGN KEY (paziente) REFERENCES doctors.Paziente(cf) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -159,6 +160,11 @@ CREATE TABLE doctors.Familiari(
   PRIMARY KEY (paziente1, paziente2),
   FOREIGN KEY (paziente1) REFERENCES doctors.Paziente(cf) ON DELETE CASCADE ON UPDATE CASCADE ,
   FOREIGN KEY (paziente2) REFERENCES doctors.Paziente(cf) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE doctors.Esenzione (
+  codice VARCHAR(16) PRIMARY KEY,
+  tipo VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE doctors.EsenzionePatologia(

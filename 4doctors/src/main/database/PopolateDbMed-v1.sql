@@ -1,7 +1,7 @@
-INSERT INTO doctors.Paziente VALUES ('MLNMTT96E16H816G','mattia','molinaro','M','1996-05-16','San Daniele Del Fr.','Via zef,9,Forgaria Nel Friuli(UD),33030',null,null);
-INSERT INTO doctors.Paziente VALUES ('VCNRRT96S13I775M','roberto', 'piva', 'M', '1996-11-13', 'Soave', 'Via degli alpini, 29 (VR), 37030', null, 'froci');
-INSERT INTO doctors.Paziente VALUES ('MTTRSO97E67L781I','rosa', 'miotto', 'F', '1998-07-23', 'Verona', 'Via degli boh, 33 (VR), 34876', null, null);
-INSERT INTO doctors.Paziente VALUES ('GVNPVAG4RE44S3D9', 'giovanni', 'piva', 'M', '1997-01-23' ,'Padova', 'Via Cesare Battisti, 124 (PD), 35121', 'celiachia', null);
+INSERT INTO doctors.Paziente VALUES ('MLNMTT96E16H816G','mattia','molinaro','M','1996-05-16','San Daniele Del Fr.','Via zef,9,Forgaria Nel Friuli(UD),33030');
+INSERT INTO doctors.Paziente VALUES ('VCNRRT96S13I775M','roberto', 'piva', 'M', '1996-11-13', 'Soave', 'Via degli alpini, 29 (VR), 37030');
+INSERT INTO doctors.Paziente VALUES ('MTTRSO97E67L781I','rosa', 'miotto', 'F', '1998-07-23', 'Verona', 'Via degli boh, 33 (VR), 34876');
+INSERT INTO doctors.Paziente VALUES ('GVNPVAG4RE44S3D9', 'giovanni', 'piva', 'M', '1997-01-23' ,'Padova', 'Via Cesare Battisti, 124 (PD), 35121');
 
 INSERT INTO doctors.Medico VALUES ('SON01MED1C0G1UR0', 'andrea', 'rossi', 'M', '1965-06-11', 'Venezia', 'A34VE', 'Via dei medici, 118 (VE), 34761');
 INSERT INTO doctors.Medico VALUES ('F345MED1K0283759', 'giulia', 'bianchi', 'F', '1979-04-06', 'Milano', 'A34VE', 'Via del corto, 143 (VE), 35676');

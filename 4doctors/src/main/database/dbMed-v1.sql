@@ -14,23 +14,21 @@ CREATE TYPE TIPOFARMACO AS  ENUM ('ETICI', 'OTC', 'SOP');
 -------------------------
 
 CREATE TABLE doctors.Paziente (
-  cf VARCHAR(16) PRIMARY KEY CHECK (char_length(cf)=16),
+  cf VARCHAR(16) PRIMARY KEY,
   nome VARCHAR(30) NOT NULL,
   cognome VARCHAR(30) NOT NULL,
-  email TEXT NOT NULL UNIQUE,
-  password TEXT NOT NULL,
   sesso GENDER NOT NULL,
   datanascita DATE NOT NULL,
   luogonascita VARCHAR(50) NOT NULL, --- nome della città (sigla provincia/nazione estera)
   indirizzoresidenza VARCHAR(50) --- via/piazza , nr.civ, Città (PROV.), cap
+--  allergie VARCHAR(200), 
+--  intolleranze VARCHAR(200)
 );
 
 CREATE TABLE doctors.Medico (
-  cf VARCHAR(16) PRIMARY KEY CHECK (char_length(cf)=16),
+  cf VARCHAR(16) PRIMARY KEY,
   nome VARCHAR(30) NOT NULL,
   cognome VARCHAR(30) NOT NULL,
-  email TEXT NOT NULL UNIQUE,
-  password TEXT NOT NULL,
   sesso GENDER NOT NULL,
   datanascita DATE NOT NULL,
   luogonascita VARCHAR(50) NOT NULL, --- nome della città (sigla provincia/nazione estera)
@@ -41,6 +39,21 @@ CREATE TABLE doctors.Medico (
 CREATE TABLE doctors.Vaccino (
   nome VARCHAR(30) PRIMARY KEY,
   tipo VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE doctors.Pressione (
+  paziente VARCHAR(16) NOT NULL,
+  data DATE NOT NULL,
+  ora TIME NOT NULL,
+  sistolica INT NOT NULL,
+  diastolica INT NOT NULL,
+  PRIMARY KEY (paziente, data, ora),
+  FOREIGN KEY (paziente) REFERENCES doctors.Paziente(cf) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE doctors.Esenzione (
+  codice VARCHAR(16) PRIMARY KEY,
+  tipo VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE doctors.Patologia (
@@ -77,7 +90,6 @@ CREATE TABLE doctors.Ricetta (
   numeroprestazioni INT,
   tipo VARCHAR(2),
   priorità VARCHAR(3),
-  approvata BOOLEAN NOT NULL,
   FOREIGN KEY (medico) REFERENCES doctors.Medico(cf) ON DELETE CASCADE ON UPDATE CASCADE ,
   FOREIGN KEY (paziente) REFERENCES doctors.Paziente(cf) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -100,17 +112,8 @@ CREATE TABLE doctors.Visita (
   paziente VARCHAR(16) NOT NULL,
   data DATE NOT NULL,
   ora TIME NOT NULL,
-  esito TEXT,
+  esito VARCHAR(200),
   PRIMARY KEY (medico, paziente, data, ora),
-  FOREIGN KEY (medico) REFERENCES doctors.Medico(cf) ON DELETE CASCADE ON UPDATE CASCADE ,
-  FOREIGN KEY (paziente) REFERENCES doctors.Paziente(cf) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE doctors.Segue (
-  medico VARCHAR(16) NOT NULL,
-  paziente VARCHAR(16) NOT NULL,
-  attivo BOOLEAN,
-  PRIMARY KEY (medico, paziente),
   FOREIGN KEY (medico) REFERENCES doctors.Medico(cf) ON DELETE CASCADE ON UPDATE CASCADE ,
   FOREIGN KEY (paziente) REFERENCES doctors.Paziente(cf) ON DELETE CASCADE ON UPDATE CASCADE
 );

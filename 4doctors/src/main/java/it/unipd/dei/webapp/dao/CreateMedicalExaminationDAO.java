@@ -12,7 +12,7 @@ import it.unipd.dei.webapp.resource.MedicalExamination;
  * @author Pietro Balzan
  */
 
-public class CreateMedicalExaminationDatabase {
+public class CreateMedicalExaminationDAO {
 
     /**
      * The SQL statement to be executed
@@ -39,7 +39,7 @@ public class CreateMedicalExaminationDatabase {
      * @param med_ex
      *            the examination to be stored into the database.
      */
-    public CreateMedicalExaminationDatabase(final Connection con, final MedicalExamination med_ex) {
+    public CreateMedicalExaminationDAO(final Connection con, final MedicalExamination med_ex) {
         this.con = con;
         this.med_ex = med_ex;
     }

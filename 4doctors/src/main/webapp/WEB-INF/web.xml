@@ -9,9 +9,21 @@
         The platform will provide dedicated functions for each user: doctors can consult shared data,
         while patients can access to their own medical records or reserve specific medical examinations.</description>
 
+    <welcome-file-list>
+        <welcome-file>jsp/patient-medical-examination-reservation.jsp</welcome-file>
+    </welcome-file-list>
+
+
+    <!-- ================= Servlets ================ -->
+
     <servlet>
         <servlet-name>PatientMedicalExamination</servlet-name>
         <servlet-class>it.unipd.dei.webapp.servlet.PatientExamReservationServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>PatientExaminationsList</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.PatientExaminationsListServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -19,6 +31,13 @@
         <url-pattern>/create-medical-examination</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>PatientExaminationsList</servlet-name>
+        <url-pattern>/medical-examinations-list</url-pattern>
+    </servlet-mapping>
+
+
+    <!-- ================= Resources ================ -->
 
     <resource-ref>
         <description>Connection pool to the database</description>

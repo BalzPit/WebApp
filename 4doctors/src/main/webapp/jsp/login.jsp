@@ -37,6 +37,6 @@
 </form><br>
 
 <label>Don't have an account yet? </label>
-<a href="jsp/patient_registration.jsp">Sign up</a>
+<a href="${pageContext.request.contextPath}/jsp/patient_registration.jsp">Sign up</a>
 </body>
 </html>

@@ -77,7 +77,12 @@ public final class LoginServlet extends AbstractDatabaseServlet {
                 req.setAttribute("message", message);
 
                 // forwards the control to the homepage
-                req.getRequestDispatcher("/protected/jsp/homepage.jsp").forward(req, res);
+                if (role.equals("patient")){
+                    req.getRequestDispatcher("/protected/jsp/patient/patient-homepage.jsp").forward(req, res);
+                }
+                else if (role.equals("doctor")){
+                    req.getRequestDispatcher("/protected/jsp/doctor/doctor-homepage.jsp").forward(req, res);
+                }
             }
             else {
                 message = new Message("Error while authenticating the user");

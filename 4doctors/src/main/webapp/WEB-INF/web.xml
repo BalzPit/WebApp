@@ -44,6 +44,15 @@
         <url-pattern>/verify</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>PatientHome</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.PatientHomeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PatientHome</servlet-name>
+        <url-pattern>/patient-homepage</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>LoginFilter</filter-name>
         <filter-class>it.unipd.dei.webapp.filter.LoginFilter</filter-class>

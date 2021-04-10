@@ -56,14 +56,16 @@ public class MedicalExaminationDAO {
      * @throws SQLException
      *             if any error occurs while storing the employee.
      */
-    public List<MedicalExamination> getMedicalExaminations() throws SQLException {
+    public ArrayList<List<MedicalExamination>> getMedicalExaminations() throws SQLException {
 
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         ResultSetMetaData rsmd;
 
         // the results of the search
-        final List<MedicalExamination> medicalExaminationList = new ArrayList<MedicalExamination>();
+        final List<MedicalExamination> pastMedicalExaminationList = new ArrayList<MedicalExamination>();
+        final List<MedicalExamination> futureMedicalExaminationList = new ArrayList<MedicalExamination>();
+        ArrayList<List<MedicalExamination>> result = new ArrayList<List<MedicalExamination>>(2);
 
         try {
             pstmt = con.prepareStatement(GET_MEDICAL_EXAMINATIONS_STATEMENT);
@@ -73,15 +75,20 @@ public class MedicalExaminationDAO {
 
             while (rs.next()){
 
-                medicalExaminationList.add(
-                        new MedicalExamination(
-                                rs.getString("medico"),
-                                rs.getString("paziente"),
-                                rs.getDate("data"),
-                                rs.getTime("ora"),
-                                rs.getString("esito")
-                        )
+                MedicalExamination medExamination = new MedicalExamination(
+                        rs.getString("medico"),
+                        rs.getString("paziente"),
+                        rs.getDate("data"),
+                        rs.getTime("ora"),
+                        rs.getString("esito")
                 );
+
+                if (medExamination.getDate().getTime() < System.currentTimeMillis()){
+                    pastMedicalExaminationList.add(medExamination);
+                }else{
+                    futureMedicalExaminationList.add(medExamination);
+                }
+
             }
 
         } finally {
@@ -96,6 +103,8 @@ public class MedicalExaminationDAO {
             con.close();
         }
 
-        return medicalExaminationList;
+        result.add(pastMedicalExaminationList);
+        result.add(futureMedicalExaminationList);
+        return result;
     }
 }

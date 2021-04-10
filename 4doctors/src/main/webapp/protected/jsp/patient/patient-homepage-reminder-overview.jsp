@@ -53,8 +53,9 @@
                 <c:import url="/jsp/include/show-message.jsp"/>
             </c:if>
 
-            <!-- display the list of found employees, if any -->
-            <c:if test='${not empty medicalExaminationList}'>
+            <!-- display the list of past medical examinations, if any -->
+            <c:if test='${not empty pastMedicalExaminationList}'>
+                <h3>Reminder of past medical examinations</h3>
                 <table>
                     <thead>
                     <tr>
@@ -63,7 +64,7 @@
                     </thead>
 
                     <tbody>
-                    <c:forEach var="medicalExamination" items="${medicalExaminationList}">
+                    <c:forEach var="medicalExamination" items="${pastMedicalExaminationList}">
                         <tr>
                             <td><c:out value="${medicalExamination.doctor_cf}"/></td>
                             <td><c:out value="${medicalExamination.date}"/></td>
@@ -73,6 +74,29 @@
                     </tbody>
                 </table>
             </c:if>
+
+            <!-- display the list of future medical examinations, if any -->
+            <c:if test='${not empty futureMedicalExaminationList}'>
+                <h3>Next appointements</h3>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Doctor</th><th>date</th><th>Outcome</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <c:forEach var="medicalExamination" items="${futureMedicalExaminationList}">
+                        <tr>
+                            <td><c:out value="${medicalExamination.doctor_cf}"/></td>
+                            <td><c:out value="${medicalExamination.date}"/></td>
+                            <td><c:out value="${medicalExamination.outcome}"/></td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </c:if>
+
         </c:if>
 
 

@@ -52,13 +52,17 @@ public final class PatientHomeServlet extends AbstractDatabaseServlet {
             // If the request type is reminder
             if (requestType.equals("reminder")){
 
-                List<MedicalExamination> medicalExaminationList = null;
+                ArrayList<List<MedicalExamination>> medicalExaminations = null;
+                List<MedicalExamination> pastMedicalExaminationList = null;
+                List<MedicalExamination> futureMedicalExaminationList = null;
 
                 try {
                     // creates a new object for accessing the database and searching the medical examinations
                     MedicalExaminationDAO test = new MedicalExaminationDAO(getDataSource().getConnection(), user_cf);
                     query = test.GET_MEDICAL_EXAMINATIONS_STATEMENT;
-                    medicalExaminationList = test.getMedicalExaminations();
+                    medicalExaminations = test.getMedicalExaminations();
+                    pastMedicalExaminationList = medicalExaminations.get(0);
+                    futureMedicalExaminationList = medicalExaminations.get(1);
 
                     m = new Message("Reminder Successfully shown.");
 
@@ -69,7 +73,8 @@ public final class PatientHomeServlet extends AbstractDatabaseServlet {
                 }
 
                 // stores the medical examination list and the message as a request attribute
-                req.setAttribute("medicalExaminationList", medicalExaminationList);
+                req.setAttribute("pastMedicalExaminationList", pastMedicalExaminationList);
+                req.setAttribute("futureMedicalExaminationList", futureMedicalExaminationList);
 
 
 

@@ -23,7 +23,8 @@ public class LoginFilter extends HttpFilter {
 
         HttpSession session = req.getSession(false);
         String loginURI = req.getContextPath() + "/jsp/login.jsp";
-        String homepageURI = req.getContextPath() + "/protected/jsp/homepage.jsp";
+        String patient_homepageURI = req.getContextPath() + "/protected/jsp/patient/patient-homepage.jsp";
+        String doctor_homepageURI = req.getContextPath() + "/protected/jsp/doctor/doctor-homepage.jsp";
 
         boolean isLoggedIn = (session != null && session.getAttribute("cf") != null);
 
@@ -32,7 +33,14 @@ public class LoginFilter extends HttpFilter {
         if(isLoggedIn && isLoginRequest){
             res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
             res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-            res.sendRedirect(homepageURI); // User is logged in, go to the homepage.
+
+            String role = (String) session.getAttribute("role");
+            if(role.equals("patient")){
+                res.sendRedirect(patient_homepageURI); // Patient is logged in, go to the homepage.
+            }
+            else if(role.equals("doctor")){
+                res.sendRedirect(doctor_homepageURI); // Doctor is logged in, go to the homepage.
+            }
         }
         else if(isLoggedIn || isLoginRequest){
             res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.

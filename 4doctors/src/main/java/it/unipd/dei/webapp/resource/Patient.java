@@ -8,13 +8,6 @@ import java.sql.Date;
 public class Patient {
 
     /**
-     * Enum that represent the types of the gender
-     */
-    public enum Gender{
-      M,F
-    }
-
-    /**
      * The codice fiscale of the patient
      */
     private final String cf;

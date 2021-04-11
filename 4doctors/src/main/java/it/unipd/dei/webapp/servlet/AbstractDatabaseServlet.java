@@ -2,17 +2,13 @@ package it.unipd.dei.webapp.servlet;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.sql.DataSource;
 
 /**
  * Gets the {@code DataSource} for managing the connection pool to the database.
- *
- * @author Nicola Ferro (ferro@dei.unipd.it)
- * @version 1.00
- * @since 1.00
  */
 public abstract class AbstractDatabaseServlet extends HttpServlet {
 
@@ -38,7 +34,7 @@ public abstract class AbstractDatabaseServlet extends HttpServlet {
 
         try {
             cxt = new InitialContext();
-            ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/doctors");
+            ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/4Doctors");
         } catch (NamingException e) {
             ds = null;
 

@@ -1,18 +1,22 @@
 package it.unipd.dei.webapp.servlet;
 
 import it.unipd.dei.webapp.dao.CreateMedicalExaminationDAO;
+import it.unipd.dei.webapp.dao.MedicalExaminationDAO;
 import it.unipd.dei.webapp.resource.MedicalExamination;
 import it.unipd.dei.webapp.resource.Message;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Allow the Patient to view a list of his/her own reserved
@@ -20,10 +24,69 @@ import java.text.SimpleDateFormat;
  *
  * @author Pietro Balzan
  */
-public class PatientExamReservationServlet extends AbstractDatabaseServlet {
+public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
 
     /**
-     * Creates a new examination (visita) into the database.
+     * Loads page and list of examinations
+     *
+     * @param req
+     *            the HTTP request from the client.
+     * @param res
+     *            the HTTP response from the server.
+     *
+     * @throws ServletException
+     *             if any error occurs while executing the servlet.
+     * @throws IOException
+     *             if any error occurs in the client/server communication.
+     */
+
+    public void doGet(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException {
+
+        HttpSession session = req.getSession(false);
+        String patient_cf = (String) session.getAttribute("cf");
+
+        //get current date as sql.date
+        Date date = new java.sql.Date(new java.util.Date().getTime());
+
+        // model
+        ArrayList<List<MedicalExamination>> examinations = null;
+        List<MedicalExamination> futureExaminations = null;
+        List<MedicalExamination> pastExaminations = null;
+        Message m;
+
+        try{
+            //get lists of future and past examination of the logged patient
+            MedicalExaminationDAO medicalExaminationDAO =
+                    new MedicalExaminationDAO(getDataSource().getConnection(), patient_cf);
+
+            //retrieve examinations from the db
+            examinations = medicalExaminationDAO.getMedicalExaminations();
+
+            pastExaminations = examinations.get(0);
+            futureExaminations = examinations.get(1);
+
+            m = new Message(String.format("Examinations successfully retrieved."));
+        }
+        catch (SQLException ex) {
+            m = new Message("Failed to retrieve examinations lists: unexpected error while accessing the database.",
+                    "E200", ex.getMessage());
+        }
+
+        // return JSP page as result
+        req.setAttribute("futureExaminationsList", futureExaminations);
+        req.setAttribute("pastExaminationsList", pastExaminations);
+        req.setAttribute("message", m);
+
+        // forwards the control back to the patient-medical-examinations JSP
+        req.getRequestDispatcher("/protected/jsp/patient/patient-medical-examinations.jsp").forward(req, res);
+
+    }
+
+
+
+    /**
+     * Create a new examination (visita) into the database and reload the page.
      *
      * @param req
      *            the HTTP request from the client.
@@ -40,9 +103,11 @@ public class PatientExamReservationServlet extends AbstractDatabaseServlet {
 
         //request parameters
 
-        //fixed patient and doctor, TODO: will be set dynamically later on: patient depends on who's logged in and doctor will be chosen from the list
+        //fixed patient and doctor, TODO: doctor will be chosen from the list
+        HttpSession session = req.getSession(false);
+        String patient_cf = (String) session.getAttribute("cf");
+
         String doctor_cf = "SON01MED1C0G1UR0"; //rossi
-        String patient_cf = "GVNPVAG4RE44S3D9"; //piva
 
         Date date = null;
         Time time = null;
@@ -78,12 +143,7 @@ public class PatientExamReservationServlet extends AbstractDatabaseServlet {
                         "E200", ex.getMessage());
         }
 
-        //return JSP page as result
-        // stores the employee and the message as a request attribute
-        req.setAttribute("examination", newExamination);
-        req.setAttribute("message", m);
-
-        // forwards the control to the create-employee-result JSP
-        req.getRequestDispatcher("/jsp/create-medical-examination-result.jsp").forward(req, res);
+        //return JSP page with all examinations lists
+        doGet(req, res);
     }
 }

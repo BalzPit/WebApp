@@ -6,28 +6,28 @@
 
     <groupId>it.unipd.dei.webapp</groupId>
 
-    <artifactId>4doctors</artifactId>
+    <artifactId>4Doctors</artifactId>
 
     <version>1.00</version>
 
     <packaging>war</packaging>
 
     <!-- Project description elements -->
-    <name>Web Applications 20/21 group project</name>
+    <name>4Doctors</name>
 
-    <description>Webapp for patient data management.
-        The platform will provide dedicated functions for each user: doctors can consult shared data,
-        while patients can access to their own medical records or reserve specific medical examinations.</description>
+    <description>Webapp for patient data management. The platform will provide dedicated functions for each user:
+        doctors can consult shared data while patients can access to their own medical records or reserve specific
+        medical examinations.</description>
 
-    <url>https://bitbucket.org/upd-dei-stud-prj/4doctors-wa2021</url>
+    <url>https://bitbucket.org/upd-dei-stud-prj/4doctors-wa2021/src/</url>
 
     <inceptionYear>2021</inceptionYear>
 
     <developers>
         <developer>
-            <id>pb</id>
-            <name>Pietro Balzan</name>
-            <email>pietro.balzan@studenti.unipd.it</email>
+            <id>nl</id>
+            <name>Nicola Levorato</name>
+            <email>nicola.levorato.2@studenti.unipd.it</email>
         </developer>
     </developers>
 
@@ -142,6 +142,12 @@
             <artifactId>tomcat-jdbc</artifactId>
             <version>9.0.7</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.5</version>
         </dependency>
     </dependencies>
 

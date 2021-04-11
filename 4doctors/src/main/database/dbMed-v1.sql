@@ -6,11 +6,17 @@ create schema Doctors;
 DROP TYPE IF EXISTS GENDER CASCADE;
 DROP TYPE IF EXISTS TIPOPATOLOGIA CASCADE;
 DROP TYPE IF EXISTS TIPOFARMACO CASCADE;
+DROP TYPE IF EXISTS STATUS CASCADE;
+DROP TYPE IF EXISTS TIPORICETTA CASCADE;
+DROP TYPE IF EXISTS PRIORITA CASCADE;
 
 CREATE TYPE GENDER AS  ENUM ('M', 'F');
 CREATE TYPE TIPOPATOLOGIA AS  ENUM ('A', 'B', 'C');
 CREATE TYPE TIPOFARMACO AS  ENUM ('ETICI', 'OTC', 'SOP');
 CREATE TYPE STATUS AS ENUM ('PENDING', 'REJECTED', 'APPROVED');
+CREATE TYPE TIPORICETTA AS ENUM ('FARMACO', 'ESAME');
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -------------------------
 
@@ -70,15 +76,14 @@ CREATE TABLE doctors.Esame (
 );
 
 CREATE TABLE doctors.Ricetta (
-  id INT PRIMARY KEY,
+  id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
   medico VARCHAR(16) NOT NULL,
   paziente VARCHAR(16) NOT NULL,
   data DATE NOT NULL,
   descrizione VARCHAR(200) NOT NULL,
   numeroprestazioni INT,
-  tipo VARCHAR(2),
-  priorità VARCHAR(3),
-  approvata STATUS NOT NULL,
+  tipo TIPORICETTA NOT NULL,
+  status STATUS NOT NULL,
   FOREIGN KEY (medico) REFERENCES doctors.Medico(cf) ON DELETE CASCADE ON UPDATE CASCADE ,
   FOREIGN KEY (paziente) REFERENCES doctors.Paziente(cf) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -138,7 +143,7 @@ CREATE TABLE doctors.FarmaciPerTerapia(
 
 CREATE TABLE doctors.FarmaciRicetta(
   farmaco VARCHAR(16) NOT NULL,
-  ricetta INT NOT NULL,
+  ricetta uuid NOT NULL,
   qta INT NOT NULL,
   PRIMARY KEY (farmaco,ricetta),
   FOREIGN KEY (farmaco) REFERENCES doctors.Farmaco(codice) ON DELETE CASCADE ON UPDATE CASCADE ,
@@ -185,7 +190,7 @@ CREATE TABLE doctors.Esente(
 
 CREATE TABLE doctors.RicettaEsame(
   esame VARCHAR(16) NOT NULL,
-  ricetta INT NOT NULL,
+  ricetta uuid NOT NULL,
   data DATE,
   esito VARCHAR(300),
   PRIMARY KEY (ricetta, esame),
@@ -197,7 +202,7 @@ CREATE TABLE doctors.Vaccinazione(
   vaccino  VARCHAR(30) NOT NULL,
   paziente VARCHAR(16) NOT NULL,
   data DATE NOT NULL,
-  dcadenza DATE,
+  decadenza DATE,
   PRIMARY KEY (paziente, vaccino, data),
   FOREIGN KEY (paziente) REFERENCES doctors.Paziente(cf) ON DELETE CASCADE ON UPDATE CASCADE ,
   FOREIGN KEY (vaccino) REFERENCES doctors.Vaccino(nome) ON DELETE CASCADE ON UPDATE CASCADE

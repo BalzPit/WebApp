@@ -1,7 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
 
 <Context>
 
-    <Resource name="jdbc/doctors"
+    <Resource name="jdbc/4Doctors"
               auth="Container"
               type="javax.sql.DataSource"
               factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"

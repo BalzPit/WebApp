@@ -1,50 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
 
-
-<web-app id="4doctors-webapp" version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+<web-app id="4Doctors" version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
 
     <display-name>4Doctors</display-name>
-    <description>Webapp for patient data management.
-        The platform will provide dedicated functions for each user: doctors can consult shared data,
-        while patients can access to their own medical records or reserve specific medical examinations.</description>
+    <description>Webapp for patient data management. The platform will provide dedicated functions for each user:
+        doctors can consult shared data while patients can access to their own medical records or reserve specific medical examinations.</description>
+
+        <!-- ================= Servlets ================ -->
+
+    <servlet>
+        <servlet-name>CreatePatient</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.CreatePatientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreatePatient</servlet-name>
+        <url-pattern>/create-patient</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoginUser</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginUser</servlet-name>
+        <url-pattern>/login-user</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutUser</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutUser</servlet-name>
+        <url-pattern>/logout-user</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Verification</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.VerificationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Verification</servlet-name>
+        <url-pattern>/verify</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PatientHome</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.PatientHomeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PatientHome</servlet-name>
+        <url-pattern>/patient-homepage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PatientExaminations</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.PatientMedicalExaminationsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PatientExaminations</servlet-name>
+        <url-pattern>/patient-medical-examinations-page</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>it.unipd.dei.webapp.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/protected/*</url-pattern>
+        <url-pattern>/jsp/login.jsp</url-pattern>
+    </filter-mapping>
 
     <welcome-file-list>
-        <welcome-file>jsp/patient-medical-examination-reservation.jsp</welcome-file>
+        <welcome-file>/jsp/login.jsp</welcome-file>
     </welcome-file-list>
 
-
-    <!-- ================= Servlets ================ -->
-
-    <servlet>
-        <servlet-name>PatientMedicalExamination</servlet-name>
-        <servlet-class>it.unipd.dei.webapp.servlet.PatientExamReservationServlet</servlet-class>
-    </servlet>
-
-    <servlet>
-        <servlet-name>PatientExaminationsList</servlet-name>
-        <servlet-class>it.unipd.dei.webapp.servlet.PatientExaminationsListServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>PatientMedicalExamination</servlet-name>
-        <url-pattern>/create-medical-examination</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>PatientExaminationsList</servlet-name>
-        <url-pattern>/medical-examinations-list</url-pattern>
-    </servlet-mapping>
-
-
-    <!-- ================= Resources ================ -->
+        <!-- ================= Resources ================ -->
 
     <resource-ref>
         <description>Connection pool to the database</description>
-        <res-ref-name>jdbc/doctors</res-ref-name>
+        <res-ref-name>jdbc/4Doctors</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
 
 </web-app>
-

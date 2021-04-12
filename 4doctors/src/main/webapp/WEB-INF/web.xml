@@ -25,16 +25,33 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
 
     <display-name>4Doctors</display-name>
-
     <description>
         Webapp for patient data management. The platform will provide dedicated functions for each user:
         doctors can consult shared data while patients can access to their own medical records or reserve specific
         medical examinations.
     </description>
 
+    <servlet>
+        <servlet-name>SearchPrescriptionByStatusServlet</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.SearchPrescriptionByStatusServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePrescriptionStatus</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.UpdatePrescriptionStatus</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SearchPrescriptionByStatusServlet</servlet-name>
+        <url-pattern>/prescription</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePrescriptionStatus</servlet-name>
+        <url-pattern>/prescription-update</url-pattern>
+    </servlet-mapping>
+
     <resource-ref>
         <description>Connection pool to the database</description>
-        <res-ref-name>jdbc/doctors</res-ref-name>
+        <res-ref-name>jdbc/4Doctors</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>

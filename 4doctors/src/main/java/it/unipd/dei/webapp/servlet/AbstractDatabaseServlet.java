@@ -54,13 +54,11 @@ public abstract class AbstractDatabaseServlet extends HttpServlet {
 
         try {
             cxt = new InitialContext();
-            ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/doctors");
+            ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/4Doctors");
         } catch (NamingException e) {
             ds = null;
 
-            throw new ServletException(
-                    String.format("Impossible to access the connection pool to the database: %s",
-                            e.getMessage()));
+            throw new ServletException(String.format("Impossible to access the connection pool to the database: %s", e.getMessage()));
         }
     }
 

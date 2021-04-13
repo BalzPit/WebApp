@@ -55,6 +55,15 @@
         <url-pattern>/patient-homepage</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ListMedicines</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.ListMedicinesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListMedicines</servlet-name>
+        <url-pattern>/list-medicines</url-pattern>
+    </servlet-mapping>
+
     <!-- FILTERS -->
 
     <filter>

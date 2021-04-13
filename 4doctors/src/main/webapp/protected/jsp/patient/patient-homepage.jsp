@@ -29,6 +29,11 @@
             <input name="type" type="submit" value="profile overview" />
         </form>
 
+        <%-- Available medicines in the database --%>
+        <h2>Medicine List</h2>
+        <form method="GET" action="<c:url value="/list-medicines"/>">
+            <input name="type" type="submit" value="list medicines" />
+        </form>
 
         <%-- Reminders --%>
         <h2>Reminders</h2>

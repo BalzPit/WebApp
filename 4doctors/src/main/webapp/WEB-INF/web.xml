@@ -64,6 +64,24 @@
         <url-pattern>/list-medicines</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>PrescriptionRequest</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.PrescriptionRequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PrescriptionRequest</servlet-name>
+        <url-pattern>/prescription-request</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PrescriptionHome</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.PrescriptionRequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PrescriptionHome</servlet-name>
+        <url-pattern>/prescriptions</url-pattern>
+    </servlet-mapping>
+
     <!-- FILTERS -->
 
     <filter>

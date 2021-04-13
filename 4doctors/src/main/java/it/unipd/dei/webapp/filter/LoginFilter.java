@@ -30,7 +30,7 @@ public class LoginFilter extends HttpFilter {
 
         boolean isLoginRequest = req.getRequestURI().equals(loginURI);
 
-        if(isLoggedIn && isLoginRequest){
+        if(isLoggedIn && isLoginRequest && session.getAttribute("role") != null){
             res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
             res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
 
@@ -41,6 +41,10 @@ public class LoginFilter extends HttpFilter {
             else if(role.equals("doctor")){
                 res.sendRedirect(doctor_homepageURI); // Doctor is logged in, go to the homepage.
             }
+            else{
+                session.invalidate();
+                res.sendRedirect(loginURI);
+            }
         }
         else if(isLoggedIn || isLoginRequest){
             res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
@@ -48,6 +52,6 @@ public class LoginFilter extends HttpFilter {
             chain.doFilter(req, res); // User is logged in, just continue request.
         }
         else
-            res.sendRedirect(loginURI);
+            res.sendRedirect(loginURI); // Not logged in, show login page.
     }
 }

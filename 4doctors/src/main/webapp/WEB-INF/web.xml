@@ -8,6 +8,8 @@
     <description>Webapp for patient data management. The platform will provide dedicated functions for each user:
         doctors can consult shared data while patients can access to their own medical records or reserve specific medical examinations.</description>
 
+    <!-- SERVLETS -->
+
     <servlet>
         <servlet-name>CreatePatient</servlet-name>
         <servlet-class>it.unipd.dei.webapp.servlet.CreatePatientServlet</servlet-class>
@@ -53,14 +55,34 @@
         <url-pattern>/patient-homepage</url-pattern>
     </servlet-mapping>
 
+    <!-- FILTERS -->
+
     <filter>
         <filter-name>LoginFilter</filter-name>
         <filter-class>it.unipd.dei.webapp.filter.LoginFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
-        <url-pattern>/protected/*</url-pattern>
+        <!-- <url-pattern>/protected/*</url-pattern> -->
         <url-pattern>/jsp/login.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>DoctorFilter</filter-name>
+        <filter-class>it.unipd.dei.webapp.filter.DoctorFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>DoctorFilter</filter-name>
+        <url-pattern>/protected/jsp/doctor/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>PatientFilter</filter-name>
+        <filter-class>it.unipd.dei.webapp.filter.PatientFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PatientFilter</filter-name>
+        <url-pattern>/protected/jsp/patient/*</url-pattern>
     </filter-mapping>
 
     <welcome-file-list>

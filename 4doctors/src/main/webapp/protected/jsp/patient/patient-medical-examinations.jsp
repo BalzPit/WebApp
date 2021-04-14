@@ -18,14 +18,23 @@
 	    <h1>New Medical Examination Form</h1>
 
 	    <form method="POST" action="<c:url value="/patient-medical-examinations-page"/>">
-		    <label for="date">Date:</label>
+
+            <label for="patientDoctor">Select Doctor:</label>
+	        <select name = "patientDoctor" id = "patientDoctor">
+	            <c:forEach var = "patientDoctor" items="${patientDoctors}" >
+	                <option value ="${patientDoctor.cf}">${patientDoctor.surname} ${patientDoctor.name}</option>
+	            </c:forEach>
+            </select><br/>
+
+		    <label for="date">Select Date:</label>
             <input name="date" type="date"/><br/>
 
-            <label for="time">Time:</label>
+            <label for="time">Select Time:</label>
             <input name="time" type="time"/><br/>
 
             <button type="submit">Submit</button><br/>
             <button type="reset">Reset the form</button>
+
 	    </form>
 
         <h1>Medical Examinations List</h1>

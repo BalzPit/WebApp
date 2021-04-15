@@ -82,6 +82,15 @@
         <url-pattern>/prescriptions</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>PrescriptionsList</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.ListUserPrescriptionsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PrescriptionsList</servlet-name>
+        <url-pattern>/list-user-prescriptions</url-pattern>
+    </servlet-mapping>
+
     <!-- FILTERS -->
 
     <filter>

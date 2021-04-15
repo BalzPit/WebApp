@@ -25,9 +25,10 @@
         <%-- List the prescriptions --%>
         <h2>List of your prescriptions</h2>
         <form method="GET" action="<c:url value="/list-user-prescriptions"/>">
-            <input name="type" type="submit" value="all" />
-            <input name="type" type="submit" value="pending" />
-            <input name="type" type="submit" value="rejected" />
+            <input name="typeReq" type="submit" value="all" />
+            <input name="typeReq" type="submit" value="pending" />
+            <input name="typeReq" type="submit" value="rejected" />
+            <input name="typeReq" type="submit" value="approved" />
         </form>
 
         <%-- Request --%>

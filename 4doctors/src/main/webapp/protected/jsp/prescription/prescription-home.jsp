@@ -34,16 +34,32 @@
         <%-- Request --%>
         <h2>Prescription request</h2>
         <form method="POST" action="<c:url value="/prescription-request"/>">
-            <label>Codice Fiscale Dottore:</label>
-            <input name="doctor cf" type="text"/><br>
+            <div>
+            <label>Doctor email</label>
+            <input name="doctor_email" type="text"/><br>
 
             <label>Description:</label>
             <input name="description" type="text"/><br>
+            <label>Times of validity (max. 10)</label>
+            <input type="number" id="quantity" name="numeroprestazioni" min="1" max="10"/>
+
 
             <input type="radio" id="exam" name="type" value="ESAME">
             <label for="patient">Exam</label>
             <input type="radio" id="medicine" name="type" value="FARMACO">
             <label for="doctor">Medicine</label><br><br>
+
+            <%-- <select name="medicine" id="medicine">
+                <c:forEach var="med" items="${medicineList}">
+                    <option name="code" value="<c:out value="${med.getCode()}"/>"><c:out value="${med.getName()}"/></option>
+                </c:forEach>
+            </select> --%>
+            <label>Medicine code</label>
+            <input name="code" type="text"><br>
+
+            <label>Quantity</label>
+            <input type="number" id="qnt" name="qnt"/>
+            </div>
 
             <button type="submit">Submit</button><br>
             <button type="reset">Reset</button>

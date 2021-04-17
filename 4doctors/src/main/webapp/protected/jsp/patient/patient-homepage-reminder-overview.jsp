@@ -36,7 +36,7 @@
                     <li>Surname: <c:out value="${personalInfo.getSurname()}"/></li>
                     <li>Gender: <c:out value="${personalInfo.getGender()}"/></li>
                     <li>Email: <c:out value="${personalInfo.getEmail()}"/></li>
-                    <li>Change password</li>
+                    <li> <a href="${pageContext.request.contextPath}/protected/jsp/patient/change-password.jsp">Change Password</a> </li>
                     <li>Birthday: <c:out value="${personalInfo.getBirthday()}"/></li>
                     <li>Birthplace: <c:out value="${personalInfo.getBirthplace()}"/></li>
                     <li>Address: <c:out value="${personalInfo.getAddress()}"/></li>

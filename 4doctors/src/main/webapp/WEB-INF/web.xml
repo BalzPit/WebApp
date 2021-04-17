@@ -119,6 +119,7 @@
     <filter-mapping>
         <filter-name>PatientFilter</filter-name>
         <url-pattern>/protected/jsp/patient/*</url-pattern>
+        <url-pattern>/protected/jsp/prescriptions/*</url-pattern>
     </filter-mapping>
 
     <welcome-file-list>

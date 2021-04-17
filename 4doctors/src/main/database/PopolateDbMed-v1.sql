@@ -56,3 +56,6 @@ INSERT INTO doctors.RicettaEsame VALUES ('AC23', '283723789', '2018-04-21', 'int
 
 INSERT INTO doctors.Vaccinazione VALUES ('Antitetanica', 'GVNPVAG4RE44S3D9', '2005-12-30', '2018-12-30');
 INSERT INTO doctors.Vaccinazione VALUES ('Meningite', 'MTTRSO97E67L781I', '2019-03-21', '2022-03-21');
+
+--INSERT INTO doctors.FarmaciRicetta (farmaco, ricetta, qta) VALUES ('234DF21345', '6cbc9dcd-7929-47da-84c1-21eab53d3131', 1);
+--INSERT INTO doctors.RicettaEsame VALUES ('AC23', 'abca3ff8-dea0-46ef-8292-2c3cd55c83e3', '2018-04-21', 'intollerante al lattosio');

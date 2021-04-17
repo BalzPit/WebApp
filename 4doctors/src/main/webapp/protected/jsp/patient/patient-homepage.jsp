@@ -17,6 +17,11 @@
             <h1>Welcome, <c:out value="${cf}"/></h1>
         </c:if>
 
+        <!-- display the message -->
+        <c:if test='${not empty message}'>
+            <c:import url="/jsp/include/show-message.jsp"/>
+        </c:if>
+
         <%-- Log out button --%>
         <form method="GET" action="<c:url value="/logout-user"/>">
             <input type="submit" value="Logout" />

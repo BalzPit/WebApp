@@ -33,8 +33,7 @@ public class ListMedicinesDAO {
     /**
      * Check if a user is in the database
      *
-     * @throws SQLException
-     *             if any error occurs while accessing the database.
+     * @throws SQLException : if any error occurs while accessing the database.
      */
     public List<Medicine> getListMedicines() throws SQLException {
 

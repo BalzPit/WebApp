@@ -72,11 +72,11 @@ public class Medicine extends Resource {
     }
 
     /**
-     * Creates a {@code Employee} from its JSON representation.
+     * Creates a {@code Medicine} from its JSON representation.
      *
      * @param in the input stream containing the JSON document.
      *
-     * @return the {@code Employee} created from the JSON representation.
+     * @return the {@code Medicne} created from the JSON representation.
      *
      * @throws IOException if something goes wrong while parsing.
      */

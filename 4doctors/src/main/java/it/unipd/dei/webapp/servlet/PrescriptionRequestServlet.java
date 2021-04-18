@@ -79,15 +79,15 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
             date = new Date(System.currentTimeMillis());
             code = req.getParameter("code");
             quantity = Integer.parseInt(req.getParameter("qnt"));
+            type = req.getParameter("type");
 
+            //check if duration end quantity overcome their range
             if(duration<1 || duration>10){
                 throw new InputFormatException("Validity times must be greater than 0 and lower than 11!");
             }
             if(quantity<1 || quantity>100){
                 throw  new InputFormatException("The quantity must be in the range of 1-100");
             }
-
-            type = req.getParameter("type");
 
             // Check if some parameters are null
             if(doctor_email == null || patient_cf == null || description == null || type == null ) {
@@ -113,12 +113,8 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
                 throw new InputFormatException("The format of the parameter Codice Fiscale is wrong");
             }
 
-
-
-            // Create a new Gender enum with the gender type retrieved from the form
             Prescription.TypeOfPrescription typeEnum = Prescription.TypeOfPrescription.valueOf(type);
 
-            // creates a new patient from the request parameters
             prescription = new Prescription(id, doctor_cf, patient_cf, date, description, duration, typeEnum, status);
 
             // creates a new object for accessing the database and stores the patient

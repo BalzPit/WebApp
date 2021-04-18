@@ -16,7 +16,10 @@ public class ListUserPrescriptionsDAO{
      */
     private static final String ListPrescriptions_STATEMENT = "SELECT * FROM doctors.ricetta WHERE paziente = ? ORDER BY status DESC  ";
 
-    private static final String ListPrescriptions_STATEMENT_filtered = "SELECT * FROM doctors.ricetta WHERE paziente = ? AND status = ? ORDER BY status DESC  ";
+    /**
+     * The SQL statement for retrieve only the prescriptions which have a particular status given by the user
+     */
+    private static final String ListPrescriptions_STATEMENT_filtered = "SELECT * FROM doctors.ricetta WHERE paziente = ? AND status = ? ORDER BY data DESC  ";
 
     /**
      * The connection to the database
@@ -40,7 +43,7 @@ public class ListUserPrescriptionsDAO{
     }
 
     /**
-     * Check if a user is in the database
+     * Get the list of the prescriptions of a patient
      *
      * @throws SQLException
      *             if any error occurs while accessing the database.

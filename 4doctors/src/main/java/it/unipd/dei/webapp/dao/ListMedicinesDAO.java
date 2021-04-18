@@ -23,15 +23,15 @@ public class ListMedicinesDAO {
     /**
      * Creates a new object for checking a user into the database.
      *
-     * @param con
-     *            the connection to the database.
+     * @param con the connection to the database.
+     *
      */
     public ListMedicinesDAO(final Connection con) {
         this.con = con;
     }
 
     /**
-     * Check if a user is in the database
+     * Get the list of all medicines
      *
      * @throws SQLException : if any error occurs while accessing the database.
      */

@@ -42,7 +42,7 @@ public final class PrescriptionRequestDAO {
     }
 
     /**
-     * Stores a new patient into the database
+     * Make a new request of a prescription to a doctor
      *
      * @throws SQLException
      *             if any error occurs while storing the employee.

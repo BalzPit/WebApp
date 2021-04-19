@@ -47,10 +47,10 @@
                 height: 100%;
                 text-align: center;
             }
-            .prescription-item.approved {
+            .prescription-item.APPROVED {
                 background-color: #9bff98;
             }
-            .prescription-item.rejected {
+            .prescription-item.REJECTED {
                 background-color: #ff9898;
             }
 		</style>
@@ -77,12 +77,12 @@
                             <input type="submit" value="Approve">
                             <input type="submit" value="Reject">
                         </form>-->
-                        <form method="POST" action="prescription-update">
+                        <form method="POST" action="doctor/prescription-update">
                             <input type="submit" value="Approve">
                             <input type="hidden" name="id" value="<c:out value="${prescription.id}"/>">
                             <input type="hidden" name="status" value="APPROVED">
                         </form>
-                        <form method="POST" action="prescription-update">
+                        <form method="POST" action="doctor/prescription-update">
                             <input type="submit" value="Reject">
                             <input type="hidden" name="id" value="<c:out value="${prescription.id}"/>">
                             <input type="hidden" name="status" value="REJECTED">
@@ -100,20 +100,9 @@
 
         <div class="prescription-header">Past prescriptions</div>
         <div class="prescription-box">
-        <c:if test='${not empty approved}'>
-            <c:forEach var="prescription" items="${approved}">
-                <div class="prescription-item approved">
-                    <div>
-                        <span><c:out value="${prescription.date}"/></span><br>
-                        <span><c:out value="${prescription.patient}"/></span>
-                        <p><c:out value="${prescription.description}"/></p>
-                    </div>
-                </div>
-            </c:forEach>
-        </c:if>
-        <c:if test='${not empty rejected}'>
-            <c:forEach var="prescription" items="${rejected}">
-                <div class="prescription-item rejected">
+        <c:if test='${not empty past}'>
+            <c:forEach var="prescription" items="${past}">
+                <div class="prescription-item <c:out value="${prescription.status}"/>">
                     <div>
                         <span><c:out value="${prescription.date}"/></span><br>
                         <span><c:out value="${prescription.patient}"/></span>

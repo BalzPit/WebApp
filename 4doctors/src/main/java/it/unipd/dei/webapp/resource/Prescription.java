@@ -2,7 +2,7 @@ package it.unipd.dei.webapp.resource;
 
 import java.sql.Date;
 
-// Represents the data about a presecription
+// Represents the data about a prescription
 public class Prescription {
 
     public enum Status {
@@ -25,7 +25,7 @@ public class Prescription {
     // The date when the prescription request has been done
     private final Date date;
 
-    // A short description about the motivation of the presciption request
+    // A short description about the motivation of the prescription request
     private final String description;
 
     // The duration of the prescription

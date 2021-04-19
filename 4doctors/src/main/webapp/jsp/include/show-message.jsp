@@ -13,4 +13,4 @@
 	<c:otherwise>
 		<p><c:out value="${message.message}"/></p>
 	</c:otherwise>
-</c:choose>
+</c:choose>    	

@@ -1,6 +1,7 @@
 package it.unipd.dei.webapp.resource;
 
 import java.sql.Date;
+import org.json.JSONObject;
 
 /**
  * Represents the data about a patient.
@@ -158,5 +159,25 @@ public class Patient {
      */
     public final Gender getGender() {
         return gender;
+    }
+
+    /**
+     * Convert a patient object into a JSONObject
+     *
+     * @return a JSONObject containing the patient
+     */
+    public final JSONObject toJson(){
+
+        JSONObject patientJson = new JSONObject();
+        patientJson.put("cf", cf);
+        patientJson.put("name", name);
+        patientJson.put("surname", surname);
+        patientJson.put("email", email);
+        patientJson.put("birthday", birthday);
+        patientJson.put("birthplace", birthplace);
+        patientJson.put("address", address);
+        patientJson.put("gender", gender);
+
+        return patientJson;
     }
 }

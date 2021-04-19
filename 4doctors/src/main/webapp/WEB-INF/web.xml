@@ -37,6 +37,7 @@
         <url-pattern>/logout-user</url-pattern>
     </servlet-mapping>
 
+    <!--
     <servlet>
         <servlet-name>Verification</servlet-name>
         <servlet-class>it.unipd.dei.webapp.servlet.VerificationServlet</servlet-class>
@@ -45,6 +46,7 @@
         <servlet-name>Verification</servlet-name>
         <url-pattern>/verify</url-pattern>
     </servlet-mapping>
+    -->
 
     <servlet>
         <servlet-name>PatientHome</servlet-name>
@@ -101,6 +103,7 @@
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
 
+    <!--
     <servlet>
         <servlet-name>ChangePassword</servlet-name>
         <servlet-class>it.unipd.dei.webapp.servlet.ChangePasswordServlet</servlet-class>
@@ -110,6 +113,7 @@
         <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/change-password</url-pattern>
     </servlet-mapping>
+    -->
 
     <!-- FILTERS -->
 

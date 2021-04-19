@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class Medicine extends Resource {
+
     private final String code;
     private final String name;
     private final String medicine_class;
@@ -76,7 +77,7 @@ public class Medicine extends Resource {
      *
      * @param in the input stream containing the JSON document.
      *
-     * @return the {@code Medicne} created from the JSON representation.
+     * @return the {@code Medicine} created from the JSON representation.
      *
      * @throws IOException if something goes wrong while parsing.
      */
@@ -97,7 +98,7 @@ public class Medicine extends Resource {
 
             // there are no more events
             if (jp.nextToken() == null) {
-                throw new IOException("Unable to parse JSON: no employee object found.");
+                throw new IOException("Unable to parse JSON: no medicine object found.");
             }
         }
 

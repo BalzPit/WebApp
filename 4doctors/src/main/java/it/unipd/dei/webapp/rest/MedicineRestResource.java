@@ -47,7 +47,7 @@ public final class MedicineRestResource extends RestResource {
 
         try{
             // creates a new object for accessing the database and lists all the employees
-            medicineList = new ListMedicinesDAO(con).getListMedicines();
+            medicineList = new MedicineDAO(con).getListMedicines();
 
             if(medicineList != null) {
                 res.setStatus(HttpServletResponse.SC_OK);
@@ -62,6 +62,43 @@ public final class MedicineRestResource extends RestResource {
             m = new Message("Cannot search employee: unexpected error.", "E5A1", t.getMessage());
             res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             m.toJSON(res.getOutputStream());
+        }
+    }
+
+    public void addMedicine() throws IOException{
+
+        Message m = null;
+
+        try{
+
+            final Medicine medicine =  Medicine.fromJSON(req.getInputStream());
+
+            // creates a new object for accessing the database and stores the employee
+            if(new MedicineDAO(con).addMedicine(medicine)){
+
+                res.setStatus(HttpServletResponse.SC_CREATED);
+
+            } else {
+                // it should not happen
+                m = new Message("Cannot create the medicine: unexpected error.", "E5A1", null);
+                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                m.toJSON(res.getOutputStream());
+            }
+        } catch (Throwable t) {
+            if (t instanceof SQLException && ((SQLException) t).getSQLState().equals("23505")) {
+                m = new Message("Cannot create the medicine: it already exists.", "E5A2", t.getMessage());
+                res.setStatus(HttpServletResponse.SC_CONFLICT);
+                m.toJSON(res.getOutputStream());
+            } if (t instanceof SQLException ) {
+                m = new Message("Cannot create the medicine! SQL ERROR", "E5A3", t.getMessage());
+                res.setStatus(HttpServletResponse.SC_CONFLICT);
+                m.toJSON(res.getOutputStream());
+            }
+            else {
+                m = new Message("Cannot create the medicine: unexpected error.", "E5A1", t.getMessage());
+                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                m.toJSON(res.getOutputStream());
+            }
         }
     }
 }

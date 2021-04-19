@@ -47,7 +47,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                 return;
             }
 
-            // if the requested resource was an Employee, delegate its processing and return
+            // if the requested resource was a Medicine, delegate its processing and return
             if (processMedicine(req, res)) {
                 return;
             }
@@ -157,7 +157,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
         }
 
         try {
-            // strip everyhing until after the /employee
+            // strip everyhing until after the /medicine
             path = path.substring(path.lastIndexOf("medicine") + 8);
 
             // the request URI is: /employee
@@ -168,6 +168,9 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                 switch (method) {
                     case "GET":
                         new MedicineRestResource(req, res, getDataSource().getConnection()).listMedicines();
+                        break;
+                    case "POST":
+                        new MedicineRestResource(req, res, getDataSource().getConnection()).addMedicine();
                         break;
                     default:
                         m = new Message("Unsupported operation for URI /medicine.",

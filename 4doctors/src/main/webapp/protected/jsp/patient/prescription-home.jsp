@@ -54,7 +54,7 @@
                     <option name="code" value="<c:out value="${med.getCode()}"/>"><c:out value="${med.getName()}"/></option>
                 </c:forEach>
             </select> --%>
-            <label>Medicine code</label>
+            <label>code: </label>
             <input name="code" type="text"><br>
 
             <label>Quantity</label>

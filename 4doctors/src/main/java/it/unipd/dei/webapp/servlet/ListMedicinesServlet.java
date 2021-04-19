@@ -1,7 +1,7 @@
 package it.unipd.dei.webapp.servlet;
 
 
-import it.unipd.dei.webapp.dao.ListMedicinesDAO;
+import it.unipd.dei.webapp.dao.MedicineDAO;
 import it.unipd.dei.webapp.resource.Medicine;
 import it.unipd.dei.webapp.resource.Message;
 
@@ -42,7 +42,7 @@ public final class ListMedicinesServlet extends AbstractDatabaseServlet {
 
         try{
             // creates a new object for accessing the database and stores the patient
-            ListMedicinesDAO show = new ListMedicinesDAO(getDataSource().getConnection());
+            MedicineDAO show = new MedicineDAO(getDataSource().getConnection());
             medicineList = show.getListMedicines();
             message = new Message("Medicine succesfully searched!");
 

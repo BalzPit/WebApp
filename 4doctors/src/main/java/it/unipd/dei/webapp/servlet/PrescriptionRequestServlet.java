@@ -1,7 +1,7 @@
 package it.unipd.dei.webapp.servlet;
 
-import it.unipd.dei.webapp.dao.ListMedicinesDAO;
-import it.unipd.dei.webapp.dao.PrescriptionRequestDAO;
+import it.unipd.dei.webapp.dao.MedicineDAO;
+import it.unipd.dei.webapp.dao.PrescriptionDAO;
 import it.unipd.dei.webapp.resource.Medicine;
 import it.unipd.dei.webapp.resource.Message;
 import it.unipd.dei.webapp.resource.Prescription;
@@ -78,15 +78,12 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
             duration = Integer.parseInt(req.getParameter("numeroprestazioni"));
             date = new Date(System.currentTimeMillis());
             code = req.getParameter("code");
-            quantity = Integer.parseInt(req.getParameter("qnt"));
+
             type = req.getParameter("type");
 
             //check if duration end quantity overcome their range
             if(duration<1 || duration>10){
                 throw new InputFormatException("Validity times must be greater than 0 and lower than 11!");
-            }
-            if(quantity<1 || quantity>100){
-                throw  new InputFormatException("The quantity must be in the range of 1-100");
             }
 
             // Check if some parameters are null
@@ -97,6 +94,18 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
             // Check if some parameters are empty
             if(doctor_email.isEmpty() || patient_cf.isEmpty() || description.isEmpty() || type.isEmpty() ) {
                 throw new InputFormatException("One or more input parameters are empty");
+            }
+
+            Prescription.TypeOfPrescription typeEnum = Prescription.TypeOfPrescription.valueOf(type);
+
+            if(typeEnum == Prescription.TypeOfPrescription.FARMACO){
+                quantity = Integer.parseInt(req.getParameter("qnt"));
+            }
+            else{
+                quantity = 1;
+            }
+            if(quantity<1 || quantity>100){
+                throw  new InputFormatException("The quantity must be in the range of 1-100");
             }
 
             // Removing leading and trailing white space
@@ -113,12 +122,10 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
                 throw new InputFormatException("The format of the parameter Codice Fiscale is wrong");
             }
 
-            Prescription.TypeOfPrescription typeEnum = Prescription.TypeOfPrescription.valueOf(type);
-
             prescription = new Prescription(id, doctor_cf, patient_cf, date, description, duration, typeEnum, status);
 
             // creates a new object for accessing the database and stores the patient
-            new PrescriptionRequestDAO(getDataSource().getConnection(), prescription, doctor_email, code, quantity).prescriptionRequest();
+            new PrescriptionDAO(getDataSource().getConnection()).prescriptionRequest(prescription, doctor_email, code, quantity);
 
             message = new Message("Prescription successfully forwarded to the doctor.");
 
@@ -154,7 +161,7 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
 
         try{
             // creates a new object for accessing the database and stores the patient
-            ListMedicinesDAO show = new ListMedicinesDAO(getDataSource().getConnection());
+            MedicineDAO show = new MedicineDAO(getDataSource().getConnection());
             medicineList = show.getListMedicines();
             message = new Message("Medicine succesfully searched!");
 

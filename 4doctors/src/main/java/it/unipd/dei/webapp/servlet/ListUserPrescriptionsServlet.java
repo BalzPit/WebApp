@@ -1,7 +1,7 @@
 package it.unipd.dei.webapp.servlet;
 
 
-import it.unipd.dei.webapp.dao.ListUserPrescriptionsDAO;
+import it.unipd.dei.webapp.dao.PrescriptionDAO;
 import it.unipd.dei.webapp.resource.Message;
 import it.unipd.dei.webapp.resource.Prescription;
 import it.unipd.dei.webapp.utils.InputFormatException;
@@ -61,8 +61,8 @@ public final class ListUserPrescriptionsServlet extends AbstractDatabaseServlet 
                 throw new InputFormatException("The format of the parameter Codice Fiscale is wrong");
             }
             // creates a new object for accessing the database and stores the patient
-            ListUserPrescriptionsDAO listPresc = new ListUserPrescriptionsDAO(getDataSource().getConnection(), cf, type);
-            pres = listPresc.listPrescriptions();
+            PrescriptionDAO listPresc = new PrescriptionDAO(getDataSource().getConnection());
+            pres = listPresc.listUserPrescriptions(cf, type);
             message = new Message("Prescriptions succesfully searched into the database!");
 
         } catch (SQLException | InputFormatException ex) {

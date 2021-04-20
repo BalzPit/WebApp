@@ -1,10 +1,15 @@
 package it.unipd.dei.webapp.resource;
 
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import java.io.IOException;
+import java.io.OutputStream;
+
 /**
  * Represents a message or an error message.
  */
-public class Message {
+public class Message extends Resource{
 
     /**
      * The message
@@ -93,5 +98,32 @@ public class Message {
      */
     public final boolean isError() {
         return isError;
+    }
+
+    public final void toJSON(final OutputStream out) throws IOException {
+
+        final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
+
+        jg.writeStartObject();
+
+        jg.writeFieldName("message");
+
+        jg.writeStartObject();
+
+        jg.writeStringField("message", message);
+
+        if(errorCode != null) {
+            jg.writeStringField("error-code", errorCode);
+        }
+
+        if(errorDetails != null) {
+            jg.writeStringField("error-details", errorDetails);
+        }
+
+        jg.writeEndObject();
+
+        jg.writeEndObject();
+
+        jg.flush();
     }
 }

@@ -43,10 +43,6 @@
             <input name="type" type="submit" value="reminder" />
         </form>
 
-        <form method="GET" action="<c:url value="/patient-medical-examinations-page"/>">
-            <input name="type" type="submit" value="Medical Examinations" />
-        </form>
-
     </body>
 
 </html>

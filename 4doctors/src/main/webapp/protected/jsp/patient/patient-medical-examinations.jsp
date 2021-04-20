@@ -11,6 +11,8 @@
 
     <body>
 
+        <c:import url="/protected/jsp/patient/patient-header.jsp"/>
+
         <form method="GET" action="<c:url value="/patient-homepage"/>">
             <button type="submit" value="profile overview">Home</button><br/>
         </form>

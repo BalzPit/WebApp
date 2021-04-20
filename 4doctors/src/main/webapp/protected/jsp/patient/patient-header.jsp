@@ -10,7 +10,7 @@
     <form action="" method="GET" style="margin: 5px">
         <input type="submit" value="Prescriptions" style="width: 110px" />
     </form>
-    <form action="<c:url value="/patient-homepage"/>" method="GET" style="margin: 5px">
+    <form action="<c:url value="/patient-medical-examinations"/>" method="GET" style="margin: 5px">
         <input name="type" type="submit" value="Examinations" />
     </form>
     <form action="<c:url value="/patient-homepage"/>" method="GET" style="margin: 5px">

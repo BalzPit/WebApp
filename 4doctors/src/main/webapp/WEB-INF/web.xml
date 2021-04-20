@@ -61,14 +61,13 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>PatientExaminations</servlet-name>
-        <url-pattern>/patient-medical-examinations-page</url-pattern>
+        <url-pattern>/patient-medical-examinations</url-pattern>
     </servlet-mapping>
 
     <servlet>
         <servlet-name>RestManagerServlet</servlet-name>
         <servlet-class>it.unipd.dei.webapp.servlet.RestManagerServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>RestManagerServlet</servlet-name>
         <url-pattern>/rest/*</url-pattern>

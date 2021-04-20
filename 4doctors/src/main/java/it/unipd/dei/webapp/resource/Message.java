@@ -100,10 +100,7 @@ public class Message extends Resource {
         return isError;
     }
 
-<<<<<<< HEAD
-=======
     @Override
->>>>>>> 8e56aadedb9bf473adb7b0033221a33a776a7d25
     public final void toJSON(final OutputStream out) throws IOException {
 
         final JsonGenerator jg = JSON_FACTORY.createGenerator(out);

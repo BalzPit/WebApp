@@ -14,9 +14,10 @@ public class PatientDAO {
     /**
      * Stores a new patient into the database
      *
+     *
      * @param patient the patient to store in the database
      * @throws SQLException
-     *             if any error occurs while storing the patient.
+     *        if any error occurs while storing the patient.
      */
     public static void createPatient(Patient patient) throws SQLException, NamingException {
 

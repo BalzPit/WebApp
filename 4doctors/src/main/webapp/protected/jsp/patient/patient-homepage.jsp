@@ -36,11 +36,22 @@
             <input name="type" type="submit" value="profile overview" />
         </form>
 
-
         <%-- Reminders --%>
         <h2>Reminders</h2>
         <form method="GET" action="<c:url value="/patient-homepage"/>">
             <input name="type" type="submit" value="reminder" />
+        </form>
+
+        <%-- Available medicines in the database --%>
+        <h2>Medicine List</h2>
+        <form method="GET" action="<c:url value="/list-medicines"/>">
+            <input name="type" type="submit" value="list medicines" />
+        </form>
+
+        <%-- Go to the prescriptions page --%>
+        <h2>Prescriptions</h2>
+        <form method="GET" action="<c:url value="/prescriptions"/>">
+            <input name="type" type="submit" value="prescriptions" />
         </form>
 
     </body>

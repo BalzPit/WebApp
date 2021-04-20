@@ -2,7 +2,7 @@ INSERT INTO doctors.Paziente VALUES ('MLNMTT96E16H816G','mattia','molinaro','ema
 INSERT INTO doctors.Paziente VALUES ('VCNRRT96S13I775M','roberto', 'piva','email2','5f4dcc3b5aa765d61d8327deb882cf99','M', '1996-11-13', 'Soave', 'Via degli alpini, 29 (VR), 37030');
 INSERT INTO doctors.Paziente VALUES ('MTTRSO97E67L781I','rosa', 'miotto','email3','5f4dcc3b5aa765d61d8327deb882cf99','F', '1998-07-23', 'Verona', 'Via degli boh, 33 (VR), 34876');
 INSERT INTO doctors.Paziente VALUES ('GVNPVAG4RE44S3D9', 'giovanni','piva','email4','5f4dcc3b5aa765d61d8327deb882cf99', 'M', '1997-01-23' ,'Padova', 'Via Cesare Battisti, 124 (PD), 35121');
-INSERT INTO doctors.Paziente VALUES ('BLLMCL94B14L736U','Marcello','Bullo','bullo.marcello@gmail.com','098f6bcd4621d373cade4e832627b4f6','M','2021-04-08','Padova','via Sografi')
+INSERT INTO doctors.Paziente VALUES ('BLLMCL94B14L736U','Marcello','Bullo','bullo.marcello@gmail.com','098f6bcd4621d373cade4e832627b4f6','M','2021-04-08','Padova','via Sografi');
 
 INSERT INTO doctors.Medico VALUES ('SON01MED1C0G1UR0', 'andrea', 'rossi','email5','5f4dcc3b5aa765d61d8327deb882cf99', 'M', '1965-06-11', 'Venezia', 'A34VE', 'Via dei medici, 118 (VE), 34761');
 INSERT INTO doctors.Medico VALUES ('F345MED1K0283759', 'giulia', 'bianchi','email6','5f4dcc3b5aa765d61d8327deb882cf99', 'F', '1979-04-06', 'Milano', 'A34VE', 'Via del corto, 143 (VE), 35676');
@@ -83,3 +83,8 @@ INSERT INTO doctors.Vaccinazione VALUES ('Meningite', 'MTTRSO97E67L781I', '2019-
 
 --INSERT INTO doctors.FarmaciRicetta (farmaco, ricetta, qta) VALUES ('234DF21345', '6cbc9dcd-7929-47da-84c1-21eab53d3131', 1);
 --INSERT INTO doctors.RicettaEsame VALUES ('AC23', 'abca3ff8-dea0-46ef-8292-2c3cd55c83e3', '2018-04-21', 'intollerante al lattosio');
+
+INSERT INTO doctors.Segue VALUES ('SON01MED1C0G1UR0', 'GVNPVAG4RE44S3D9', '1');
+INSERT INTO doctors.Segue VALUES ('F345MED1K0283759', 'VCNRRT96S13I775M', '1');
+
+INSERT INTO doctors.admin VALUES ('nico9779', 'Nicola', 'Levorato', 'nicola.levorato.2@studenti.unipd.it', md5('password'));

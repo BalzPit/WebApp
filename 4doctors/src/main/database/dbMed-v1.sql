@@ -46,6 +46,14 @@ CREATE TABLE doctors.Medico (
   indirizzoresidenza VARCHAR(50) --- via/piazza , nr.civ, Città(PROV.), cap
 );
 
+CREATE TABLE doctors.Admin (
+  username VARCHAR(30) PRIMARY KEY,
+  nome VARCHAR(30) NOT NULL,
+  cognome VARCHAR(30) NOT NULL,
+  email TEXT NOT NULL UNIQUE,
+  password TEXT NOT NULL
+);
+
 CREATE TABLE doctors.Vaccino (
   nome VARCHAR(30) PRIMARY KEY,
   tipo VARCHAR(50) NOT NULL

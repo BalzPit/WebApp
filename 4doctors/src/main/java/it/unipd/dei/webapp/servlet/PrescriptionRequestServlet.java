@@ -148,7 +148,7 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
         req.setAttribute("cf", patient_cf);
 
         // forwards the control
-        req.getRequestDispatcher("/protected/jsp/prescription/prescription-home.jsp").forward(req, res);
+        req.getRequestDispatcher("/protected/jsp/patient/prescription-home.jsp").forward(req, res);
     }
 
     @Override
@@ -175,6 +175,6 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
         req.setAttribute("cf", patient_cf);
 
         // forwards the control
-        req.getRequestDispatcher("/protected/jsp/prescription/prescription-home.jsp").forward(req, res);
+        req.getRequestDispatcher("/protected/jsp/patient/prescription-home.jsp").forward(req, res);
     }
 }

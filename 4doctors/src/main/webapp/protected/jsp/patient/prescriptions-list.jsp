@@ -13,14 +13,11 @@
     <%-- BODY --%>
     <body>
 
+        <c:import url="/protected/jsp/patient/patient-header.jsp"/>
+
         <c:if test='${not empty cf}'>
             <h1>List of all prescriptions of <c:out value="${cf}"/></h1>
         </c:if>
-
-        <%-- Log out button --%>
-        <form method="GET" action="<c:url value="/logout-user"/>">
-            <input type="submit" value="Logout" />
-        </form>
 
         <!-- display the message -->
         <c:if test='${not empty message}'>

@@ -76,7 +76,7 @@ public final class ListUserPrescriptionsServlet extends AbstractDatabaseServlet 
         //req.setAttribute("typeReq", type);
 
         // forwards the control
-        req.getRequestDispatcher("/protected/jsp/prescription/prescriptions-list.jsp").forward(req, res);
+        req.getRequestDispatcher("/protected/jsp/patient/prescriptions-list.jsp").forward(req, res);
 
 
     }

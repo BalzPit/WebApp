@@ -25,8 +25,9 @@ public class LoginFilter extends HttpFilter {
         String loginURI = req.getContextPath() + "/jsp/login.jsp";
         String patient_homepageURI = req.getContextPath() + "/protected/jsp/patient/patient-homepage.jsp";
         String doctor_homepageURI = req.getContextPath() + "/protected/jsp/doctor/doctor-homepage.jsp";
+        String admin_homepageURI = req.getContextPath() + "/protected/jsp/admin/admin-homepage.jsp";
 
-        boolean isLoggedIn = (session != null && session.getAttribute("cf") != null);
+        boolean isLoggedIn = (session != null && (session.getAttribute("cf") != null || session.getAttribute("username") != null));
 
         boolean isLoginRequest = req.getRequestURI().equals(loginURI);
 
@@ -40,6 +41,9 @@ public class LoginFilter extends HttpFilter {
             }
             else if(role.equals("doctor")){
                 res.sendRedirect(doctor_homepageURI); // Doctor is logged in, go to the homepage.
+            }
+            else if(role.equals("admin")){
+                res.sendRedirect(admin_homepageURI); // Admin is logged in, go to the homepage.
             }
             else{
                 session.invalidate();

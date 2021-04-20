@@ -20,7 +20,7 @@ public class PatientFilter extends HttpFilter {
         String loginURI = req.getContextPath() + "/jsp/login.jsp";
         String unauthorizedPage = req.getContextPath() + "/jsp/unauthorized.jsp";
 
-        boolean isLoggedIn = (session != null && session.getAttribute("cf") != null);
+        boolean isLoggedIn = (session != null && (session.getAttribute("cf") != null || session.getAttribute("username") != null));
 
         if(isLoggedIn && session.getAttribute("role") != null) {
             if (session.getAttribute("role").equals("patient")) {

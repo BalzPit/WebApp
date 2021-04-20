@@ -16,6 +16,9 @@
         <c:when test='${sessionScope.role.equals("doctor")}'>
             <a href="${pageContext.request.contextPath}/protected/jsp/doctor/doctor-homepage.jsp">go back to the homepage</a>
         </c:when>
+        <c:when test='${sessionScope.role.equals("admin")}'>
+            <a href="${pageContext.request.contextPath}/protected/jsp/admin/admin-homepage.jsp">go back to the homepage</a>
+        </c:when>
         <c:otherwise>
             <a href="${pageContext.request.contextPath}/jsp/login.jsp">go back to the login</a>
         </c:otherwise>

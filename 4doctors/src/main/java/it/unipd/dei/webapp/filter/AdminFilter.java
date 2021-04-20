@@ -9,9 +9,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Filter used to redirect the user into unauthorized page if he is not logged in as doctor
+ * Filter used to redirect the user into unauthorized page if he is not logged in as admin
  */
-public class DoctorFilter extends HttpFilter {
+public class AdminFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
@@ -20,13 +20,13 @@ public class DoctorFilter extends HttpFilter {
         String loginURI = req.getContextPath() + "/jsp/login.jsp";
         String unauthorizedPage = req.getContextPath() + "/jsp/unauthorized.jsp";
 
-        boolean isLoggedIn = (session != null && (session.getAttribute("cf") != null || session.getAttribute("username") != null));
+        boolean isLoggedIn = (session != null && (session.getAttribute("username") != null || session.getAttribute("cf") != null));
 
         if(isLoggedIn && session.getAttribute("role") != null) {
-            if (session.getAttribute("role").equals("doctor")) {
+            if (session.getAttribute("role").equals("admin")) {
                 res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
                 res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-                chain.doFilter(req, res); // Doctor is logged in, just continue request.
+                chain.doFilter(req, res); // Admin is logged in, just continue request.
             }
             else {
                 res.sendRedirect(unauthorizedPage); //Not authorized, show the proper page
@@ -34,6 +34,5 @@ public class DoctorFilter extends HttpFilter {
         } else {
             res.sendRedirect(loginURI); // Not logged in, show login page.
         }
-
     }
 }

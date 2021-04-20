@@ -13,6 +13,8 @@
     <%-- BODY --%>
     <body>
 
+        <c:import url="/protected/jsp/patient/patient-header.jsp"/>
+
         <c:if test='${not empty cf}'>
             <h1>Welcome, <c:out value="${cf}"/></h1>
         </c:if>

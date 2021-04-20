@@ -9,19 +9,17 @@
     </head>
 
     <body>
+        <c:import url="/protected/jsp/patient/patient-header.jsp"/>
+
         <c:if test='${not empty sessionScope.patient.cf}'>
             <h1>Welcome, <c:out value="${sessionScope.patient.cf}"/></h1>
         </c:if>
 
-        <form method="GET" action="<c:url value="/logout-user"/>">
-            <input type="submit" value="Logout" />
-        </form>
-
 
         <%-- Profile Overview --%>
-        <h2>Profile Overview</h2>
-        <p>You are logged as <c:out value="${sessionScope.patient.cf}"/>.</p>
-        <c:if test='${requestType=="profile overview"}'>
+        <c:if test='${requestType=="Profile"}'>
+            <h2>Profile</h2>
+            <p>You are logged as <c:out value="${cf}"/>.</p>
 
             <!-- display the message -->
             <c:if test='${not empty message}'>
@@ -45,8 +43,9 @@
         </c:if>
 
 
-        <h2>Reminders</h2>
-        <c:if test='${requestType=="reminder"}'>
+        <c:if test='${requestType=="Examinations"}'>
+            <h2>Examinations</h2>
+            <p>You are logged as <c:out value="${cf}"/>.</p>
 
             <!-- display the message -->
             <c:if test='${not empty message}'>

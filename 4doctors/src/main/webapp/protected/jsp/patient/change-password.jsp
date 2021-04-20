@@ -9,6 +9,8 @@
   </head>
 
   <body>
+  <c:import url="/protected/jsp/patient/patient-header.jsp"/>
+
   <h1>Change Password</h1>
 
   <!-- display the message -->

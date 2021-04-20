@@ -10,10 +10,7 @@
 
     <body>
 
-        <form method="GET" action="<c:url value="/logout-user"/>">
-            <input type="submit" value="Logout" />
-        </form>
-
+        <c:import url="/protected/jsp/patient/patient-header.jsp"/>
 
         <h2>List of medicines actually available</h2>
 

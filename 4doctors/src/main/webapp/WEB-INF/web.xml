@@ -138,7 +138,7 @@
 
     <servlet>
         <servlet-name>DoctorPrescriptionManager</servlet-name>
-        <servlet-class>it.unipd.dei.webapp.servlet.SearchPrescriptionByStatusServlet</servlet-class>
+        <servlet-class>it.unipd.dei.webapp.servlet.DoctorPrescriptionManagerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DoctorPrescriptionManager</servlet-name>

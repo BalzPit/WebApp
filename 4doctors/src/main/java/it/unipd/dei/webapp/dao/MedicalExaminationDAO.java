@@ -33,7 +33,7 @@ public class MedicalExaminationDAO {
     private final Connection con;
 
     /**
-     * The patient to which the medical exainations are displayed
+     * The patient to which the medical examinations are displayed
      */
     private final String cf;
 

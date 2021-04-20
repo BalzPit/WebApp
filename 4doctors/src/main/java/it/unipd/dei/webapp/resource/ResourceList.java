@@ -1,7 +1,9 @@
 package it.unipd.dei.webapp.resource;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import java.io.*;
+
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * Represents a list of {@link Resource} objects.

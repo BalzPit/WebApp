@@ -9,7 +9,7 @@ import java.io.OutputStream;
 /**
  * Represents a message or an error message.
  */
-public class Message extends Resource{
+public class Message extends Resource {
 
     /**
      * The message
@@ -100,6 +100,7 @@ public class Message extends Resource{
         return isError;
     }
 
+    @Override
     public final void toJSON(final OutputStream out) throws IOException {
 
         final JsonGenerator jg = JSON_FACTORY.createGenerator(out);

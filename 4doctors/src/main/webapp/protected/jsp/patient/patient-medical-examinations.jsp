@@ -13,13 +13,9 @@
 
         <c:import url="/protected/jsp/patient/patient-header.jsp"/>
 
-        <form method="GET" action="<c:url value="/patient-homepage"/>">
-            <button type="submit" value="profile overview">Home</button><br/>
-        </form>
-
 	    <h1>New Medical Examination Form</h1>
 
-	    <form method="POST" action="<c:url value="/patient-medical-examinations-page"/>">
+	    <form method="POST" action="<c:url value="/patient-medical-examinations"/>">
 
             <label for="patientDoctor">Select Doctor:</label>
 	        <select name = "patientDoctor" id = "patientDoctor">

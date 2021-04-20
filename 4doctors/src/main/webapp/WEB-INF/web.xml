@@ -118,16 +118,6 @@
         <url-pattern>/list-user-prescriptions</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>RestManagerServlet</servlet-name>
-        <servlet-class>it.unipd.dei.webapp.servlet.RestManagerServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>RestManagerServlet</servlet-name>
-        <url-pattern>/rest/*</url-pattern>
-    </servlet-mapping>
-
     <!-- FILTERS -->
 
     <filter>

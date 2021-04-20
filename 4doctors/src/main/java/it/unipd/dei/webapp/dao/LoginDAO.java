@@ -1,5 +1,8 @@
 package it.unipd.dei.webapp.dao;
 
+import it.unipd.dei.webapp.utils.DataSourceProvider;
+
+import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,53 +24,26 @@ public class LoginDAO {
     private static final String MEDIC_STATEMENT = "SELECT * FROM doctors.Medico WHERE cf=? AND password=md5(?)";
 
     /**
-     * The connection to the database
+     * The SQL statement to be executed for the admin
      */
-    private final Connection con;
+    private static final String ADMIN_STATEMENT = "SELECT * FROM doctors.Admin WHERE username=? AND password=md5(?)";
 
     /**
-     * The cf of the user
-     */
-    private final String cf;
-
-    /**
-     * The password of the user
-     */
-    private final String password;
-
-    /**
-     * The role of the user
-     */
-    private final String role;
-
-    /**
-     * Creates a new object for checking a user into the database.
-     *
-     * @param con the connection to the database.
-     * @param cf the cf of the user.
-     * @param password the password of the user.
-     * @param role the role of the user.
-     */
-    public LoginDAO(final Connection con, final String cf, final String password, final String role) {
-        this.con = con;
-        this.cf = cf;
-        this.password = password;
-        this.role = role;
-    }
-
-    /**
-     * Check if a user is in the database
+     * Check if a patient or a medic is in the database
      *
      * @throws SQLException
      *             if any error occurs while accessing the database.
      */
-    public boolean authenticateUser() throws SQLException {
+    public static boolean authenticateUser(String cf, String password, String role) throws SQLException, NamingException {
 
+        Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet result = null;
         boolean authenticated = false;
 
         try {
+            con = DataSourceProvider.getDataSource().getConnection();
+
             if(role.equals("patient")){
                 pstmt = con.prepareStatement(PATIENT_STATEMENT);
             }
@@ -88,6 +64,8 @@ public class LoginDAO {
                 authenticated = true;
             }
 
+            return authenticated;
+
         } finally {
             if (pstmt != null) {
                 pstmt.close();
@@ -95,9 +73,52 @@ public class LoginDAO {
             if(result != null){
                 result.close();
             }
-
-            con.close();
+            if(con!=null){
+                con.close();
+            }
         }
-        return authenticated;
+    }
+
+    /**
+     * Check if an admin is in the database
+     *
+     * @param username of the admin
+     * @param password of the admin
+     * @return true if admin is found in the database
+     */
+    public static boolean authenticateAdmin(String username, String password) throws SQLException, NamingException {
+
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet result = null;
+        boolean authenticated = false;
+
+        try {
+            con = DataSourceProvider.getDataSource().getConnection();
+
+            pstmt = con.prepareStatement(ADMIN_STATEMENT);
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            result = pstmt.executeQuery();
+
+            // Check if an admin has been retrieved from database
+            if(result.next()){
+                authenticated = true;
+            }
+
+            return authenticated;
+
+        } finally {
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if(result != null){
+                result.close();
+            }
+            if(con!=null){
+                con.close();
+            }
+        }
     }
 }

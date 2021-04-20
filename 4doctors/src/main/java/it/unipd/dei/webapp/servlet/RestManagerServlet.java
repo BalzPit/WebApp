@@ -1,8 +1,11 @@
 package it.unipd.dei.webapp.servlet;
 
 import it.unipd.dei.webapp.resource.*;
+import it.unipd.dei.webapp.rest.DoctorRestResource;
 import it.unipd.dei.webapp.rest.MedicineRestResource;
 import it.unipd.dei.webapp.rest.MedicalExaminationRestResource;
+import it.unipd.dei.webapp.rest.PatientRestResource;
+import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -54,6 +57,14 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
             }
             // if the requested resource was a Medical Examination, delegate its processing and return
             if (processMedicalExamination(req, res)) {
+                return;
+            }
+            // if the requested resource was a Patient, delegate its processing and return
+            if(processPatient(req, res)){
+                return;
+            }
+            // if the requested resource was a Doctor, delegate its processing and return
+            if(processDoctor(req, res)){
                 return;
             }
 
@@ -290,5 +301,91 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
 
         return true;
 
+    }
+
+
+    // rest/patient/list
+    // GET or DELETE patient/{patient_cf}
+    private boolean processPatient(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        String op = req.getRequestURI();
+        String[] tokens = op.split("/");
+
+        if (tokens.length<4 || !(tokens[3].equals("patient") || tokens[3].equals("list"))){
+            return false;
+        }
+
+        if(tokens.length == 5 && tokens[3].equals("patient") && tokens[4].equals("list")){
+            switch (req.getMethod()) {
+                case "GET":
+                    new PatientRestResource(req, res).getAllPatients();
+                    break;
+            }
+        } else if(tokens.length == 5 && tokens[3].equals("patient")){
+            switch (req.getMethod()) {
+                case "GET":
+                    new PatientRestResource(req, res).getPatient();
+                    break;
+                case "DELETE":
+                    new PatientRestResource(req, res).deletePatient();
+                    break;
+                default:
+                    res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                    res.getWriter().write(new JSONObject().put("result", "error").toString());
+            }
+        }
+        else {
+            return false;
+        }
+
+        return true;
+    }
+
+    // doctor/list
+    // GET or PUT or DELETE doctor/{doctor_cf}
+    // doctor/
+    private boolean processDoctor(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        String op = req.getRequestURI();
+        String[] tokens = op.split("/");
+
+        if (tokens.length<4 || !(tokens[3].equals("doctor") || tokens[3].equals("list"))){
+            return false;
+        }
+
+        if(tokens.length == 5 && tokens[3].equals("doctor") && tokens[4].equals("list")){
+            switch (req.getMethod()) {
+                case "GET":
+                    new DoctorRestResource(req, res).getAllActiveDoctors();
+                    break;
+            }
+        } else if(tokens.length == 5 && tokens[3].equals("doctor")){
+            switch (req.getMethod()) {
+                case "GET":
+                    new DoctorRestResource(req, res).getDoctor();
+                    break;
+                case "PUT":
+                    new DoctorRestResource(req, res).updateDoctorStatus();
+                    break;
+                case "DELETE":
+                    new DoctorRestResource(req, res).deleteDoctor();
+                    break;
+                default:
+                    res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                    res.getWriter().write(new JSONObject().put("result", "error").toString());
+            }
+        } else if(tokens.length == 4 && tokens[3].equals("doctor")){
+            switch (req.getMethod()) {
+                case "POST":
+                    new DoctorRestResource(req, res).createDoctor();
+                    break;
+                default:
+                    res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                    res.getWriter().write(new JSONObject().put("result", "error").toString());
+            }
+        }
+        else {
+            return false;
+        }
+
+        return true;
     }
 }

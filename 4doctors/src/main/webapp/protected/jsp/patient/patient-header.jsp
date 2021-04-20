@@ -3,21 +3,10 @@
 
 <header style="display: inline-flex">
 
-    <form action="" method="GET" style="margin: 5px">
-        <input type="hidden" value="Home" style="width: 110px" />
-        <a href="${pageContext.request.contextPath}/protected/jsp/patient/patient-homepage.jsp">Home</a>
-    </form>
-    <form action="<c:url value="/prescriptions"/>" method="GET" style="margin: 5px">
-        <input name="type" type="submit" value="prescriptions" style="width: 110px" />
-    </form>
-    <form action="<c:url value="/patient-medical-examinations"/>" method="GET" style="margin: 5px">
-        <input name="type" type="submit" value="Examinations" />
-    </form>
-    <form action="<c:url value="/patient-homepage"/>" method="GET" style="margin: 5px">
-        <input name="type" type="submit" value="Profile" />
-    </form>
-    <form action="<c:url value="/user/logout"/>" method="GET" style="margin: 5px">
-        <input type="submit" value="Log out" style="width: 110px" />
-    </form>
+    <a href="${pageContext.request.contextPath}/protected/jsp/patient/patient-homepage.jsp" style="margin: 5px">Home</a>
+    <a href="${pageContext.request.contextPath}/prescriptions?type=prescriptions" style="margin: 5px">Prescriptions</a>
+    <a href="${pageContext.request.contextPath}/patient-medical-examinations?type=Examinations" style="margin: 5px">Examinations</a>
+    <a href="${pageContext.request.contextPath}/patient-homepage?type=Profile" style="margin: 5px">Profile</a>
+    <a href="${pageContext.request.contextPath}/user/logout" style="margin: 5px">Log out</a>
 
 </header>

@@ -3,7 +3,8 @@
 
 <header style="display: inline-flex">
     <form action="" method="GET" style="margin: 5px">
-        <input type="submit" value="Home" style="width: 110px" />
+        <input type="hidden" value="Home" style="width: 110px" />
+        <a href="${pageContext.request.contextPath}/protected/jsp/doctor/doctor-homepage.jsp">Home</a>
     </form>
     <form action="" method="GET" style="margin: 5px">
         <input type="submit" value="Patients" style="width: 110px" />

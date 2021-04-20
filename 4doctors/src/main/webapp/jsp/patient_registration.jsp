@@ -17,7 +17,7 @@
     <c:import url="/jsp/include/show-message.jsp"/>
 </c:if>
 
-<form method="POST" action="<c:url value="/create-patient"/>">
+<form method="POST" action="<c:url value="/patient"/>">
     <label>Codice Fiscale:</label>
     <input name="cf" type="text"/><br>
 

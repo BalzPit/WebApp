@@ -20,7 +20,7 @@
     <p>Patient <c:out value="${patient.cf}"/> successfully registered</p>
 </c:if>
 
-<form method="POST" action="<c:url value="/login-user"/>">
+<form method="POST" action="<c:url value="/user/login"/>">
     <label>Codice Fiscale:</label>
     <input name="cf" type="text"/><br>
 

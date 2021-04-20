@@ -16,7 +16,7 @@
 
     <p>We already sent a verification code to your email.</p>
 
-    <form method="POST" action="<c:url value="/verify"/>">
+    <form method="POST" action="<c:url value="/user/verify"/>">
         <label>Verification Code</label>
         <input type="text" name="code"/>
         <button type="submit">Verify</button>

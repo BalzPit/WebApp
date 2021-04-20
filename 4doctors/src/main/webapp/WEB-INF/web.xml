@@ -136,6 +136,24 @@
         <url-pattern>/admin/homepage</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DoctorPrescriptionManager</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.SearchPrescriptionByStatusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DoctorPrescriptionManager</servlet-name>
+        <url-pattern>/prescription-manager</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdatePrescriptionStatusServlet</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.UpdatePrescriptionStatusServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdatePrescriptionStatusServlet</servlet-name>
+        <url-pattern>/prescription-update</url-pattern>
+    </servlet-mapping>
+
     <!-- FILTERS -->
 
     <filter>

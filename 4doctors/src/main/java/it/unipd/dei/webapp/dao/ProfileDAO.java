@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 
 
-public class OverviewDAO {
+public class ProfileDAO {
 
     /**
      * The SQL statement to be executed to retrieve the user personal information
@@ -37,7 +37,7 @@ public class OverviewDAO {
      * @param cf
      *            the patient to which the medical exainations are displayed.
      */
-    public OverviewDAO(final Connection con, final String cf) {
+    public ProfileDAO(final Connection con, final String cf) {
         this.con = con;
         this.cf = cf;
     }

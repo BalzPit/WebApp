@@ -1,7 +1,7 @@
 package it.unipd.dei.webapp.servlet;
 
 import it.unipd.dei.webapp.dao.MedicalExaminationDAO;
-import it.unipd.dei.webapp.dao.OverviewDAO;
+import it.unipd.dei.webapp.dao.ProfileDAO;
 import it.unipd.dei.webapp.resource.Patient;
 import it.unipd.dei.webapp.resource.Message;
 import it.unipd.dei.webapp.resource.MedicalExamination;
@@ -83,7 +83,7 @@ public final class PatientHomeServlet extends AbstractDatabaseServlet {
 
                 Patient patient = null;
                 try{
-                    OverviewDAO overview = new OverviewDAO(getDataSource().getConnection(), user_cf);
+                    ProfileDAO overview = new ProfileDAO(getDataSource().getConnection(), user_cf);
                     patient = overview.getPatient();
 
                     m = new Message("Profile Overview successfully entered.\n Request type: " + requestType);

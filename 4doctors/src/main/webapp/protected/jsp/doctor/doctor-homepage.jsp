@@ -3,13 +3,15 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
-<c:if test='${not empty cf}'>
-    <h1>Welcome, doctor <c:out value="${cf}"/></h1>
-</c:if>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+    </head>
+
+    <body>
+        <c:import url="/protected/jsp/doctor/doctor-header.jsp"/>
+        <c:if test='${not empty cf}'>
+            <h1>Welcome, doctor <c:out value="${cf}"/></h1>
+        </c:if>
+    </body>
 </html>

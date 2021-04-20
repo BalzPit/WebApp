@@ -1,15 +1,20 @@
 package it.unipd.dei.webapp.resource;
 
-import com.fasterxml.jackson.core.JsonGenerator;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * Represents the data about a doctor.
  */
-public class Doctor extends Resource {
+public class Doctor {
 
     /**
      * The codice fiscale of the doctor
@@ -182,43 +187,53 @@ public class Doctor extends Resource {
         return aslcode;
     }
 
+    /**
+     * Convert a doctor object into a JSONObject
+     *
+     * @return a JSONObject containing the doctor
+     */
+    public final JSONObject toJson(){
 
+        JSONObject doctorJson = new JSONObject();
+        doctorJson.put("cf", cf);
+        doctorJson.put("name", name);
+        doctorJson.put("surname", surname);
+        doctorJson.put("email", email);
+        doctorJson.put("birthday", birthday);
+        doctorJson.put("birthplace", birthplace);
+        doctorJson.put("address", address);
+        doctorJson.put("gender", gender);
+        doctorJson.put("aslcode", aslcode);
 
-    @Override
-    public final void toJSON(final OutputStream out) throws IOException {
+        return doctorJson;
+    }
 
-        final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
+    /**
+     * Convert a JSON into a doctor object
+     *
+     * @param inputStream JSON sent from client
+     * @return doctor object converted from a JSON
+     */
+    public static Doctor fromJSON(InputStream inputStream) throws IOException, ParseException, JSONException {
 
-        jg.writeStartObject();
+        String doctorString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+        JSONObject doctorJson = new JSONObject(doctorString);
 
-        jg.writeFieldName("doctor");
+        String cf = doctorJson.getString("cf");
+        String name = doctorJson.getString("name");
+        String surname = doctorJson.getString("surname");
+        String email = doctorJson.getString("email");
+        String password = doctorJson.getString("password");
 
-        jg.writeStartObject();
+        String birthdayString = doctorJson.getString("birthday");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date birthday = new Date(sdf.parse(birthdayString).getTime());
 
-        jg.writeStringField("cf", cf);
+        String birthplace = doctorJson.getString("birthplace");
+        String address = doctorJson.getString("address");
+        Gender gender = Gender.valueOf(doctorJson.getString("gender"));
+        String aslcode = doctorJson.getString("aslcode");
 
-        jg.writeStringField("name", name);
-
-        jg.writeStringField("surname", surname);
-
-        jg.writeStringField("email", email);
-
-        jg.writeStringField("password", password);
-
-        jg.writeStringField("birthday", birthday.toString());
-
-        jg.writeStringField("birthplace", birthplace);
-
-        jg.writeStringField("address", address);
-
-        jg.writeStringField("gender", gender.toString());
-
-        jg.writeStringField("aslcode", aslcode);
-
-        jg.writeEndObject();
-
-        jg.writeEndObject();
-
-        jg.flush();
+        return new Doctor(cf, name, surname, email, password, birthday, birthplace, address, gender, aslcode);
     }
 }

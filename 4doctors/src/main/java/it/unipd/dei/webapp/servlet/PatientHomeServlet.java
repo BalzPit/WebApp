@@ -46,11 +46,12 @@ public final class PatientHomeServlet extends AbstractDatabaseServlet {
         // retrieves the request parameter
         String requestType = req.getParameter("type");
 
+
         // If the request is not null...
         if (requestType != null){
 
             // If the request type is reminder
-            if (requestType.equals("reminder")){
+            if (requestType.equals("Examinations")){
 
                 ArrayList<List<MedicalExamination>> medicalExaminations = null;
                 List<MedicalExamination> pastMedicalExaminationList = null;
@@ -64,7 +65,7 @@ public final class PatientHomeServlet extends AbstractDatabaseServlet {
                     pastMedicalExaminationList = medicalExaminations.get(0);
                     futureMedicalExaminationList = medicalExaminations.get(1);
 
-                    m = new Message("Reminder Successfully shown.");
+                    m = new Message("Examinations successfully shown.");
 
                 } catch (SQLException ex) {
 
@@ -78,14 +79,14 @@ public final class PatientHomeServlet extends AbstractDatabaseServlet {
 
 
 
-            } else if (requestType.equals("profile overview")){
+            } else if (requestType.equals("Profile")){
 
                 Patient patient = null;
                 try{
                     OverviewDAO overview = new OverviewDAO(getDataSource().getConnection(), user_cf);
                     patient = overview.getPatient();
 
-                    m = new Message("Profile Overview Successfully entered.\n Request type: " + requestType);
+                    m = new Message("Profile Overview successfully entered.\n Request type: " + requestType);
                 } catch (SQLException ex) {
 
                     m = new Message("Cannot search for personal information: unexpected error while accessing the database.\n The query which will be performed is "+query+ ", Request type: " + requestType,

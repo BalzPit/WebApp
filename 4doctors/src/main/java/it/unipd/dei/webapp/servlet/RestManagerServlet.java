@@ -306,6 +306,15 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
 
     // rest/patient/list
     // GET or DELETE patient/{patient_cf}
+    /**
+     * Checks whether the request if for a {@link Patient} resource and, in case, processes it.
+     *
+     * @param req the HTTP request.
+     * @param res the HTTP response.
+     * @return {@code true} if the request was for a {@code Patient}; {@code false} otherwise.
+     *
+     * @throws IOException if any error occurs in the client/server communication.
+     */
     private boolean processPatient(HttpServletRequest req, HttpServletResponse res) throws IOException {
         String op = req.getRequestURI();
         String[] tokens = op.split("/");
@@ -343,6 +352,15 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
     // doctor/list
     // GET or PUT or DELETE doctor/{doctor_cf}
     // doctor/
+    /**
+     * Checks whether the request if for a {@link Doctor} resource and, in case, processes it.
+     *
+     * @param req the HTTP request.
+     * @param res the HTTP response.
+     * @return {@code true} if the request was for a {@code Doctor}; {@code false} otherwise.
+     *
+     * @throws IOException if any error occurs in the client/server communication.
+     */
     private boolean processDoctor(HttpServletRequest req, HttpServletResponse res) throws IOException {
         String op = req.getRequestURI();
         String[] tokens = op.split("/");

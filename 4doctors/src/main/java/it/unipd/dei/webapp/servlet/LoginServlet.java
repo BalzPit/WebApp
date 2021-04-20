@@ -4,7 +4,9 @@ import it.unipd.dei.webapp.dao.LoginDAO;
 import it.unipd.dei.webapp.resource.Message;
 import it.unipd.dei.webapp.utils.InputFormatException;
 
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,7 +16,7 @@ import java.sql.SQLException;
 /**
  * Log the user in the webapp
  */
-public final class LoginServlet extends AbstractDatabaseServlet {
+public final class LoginServlet extends HttpServlet {
 
     /**
      * Log a user into the webapp.
@@ -52,21 +54,21 @@ public final class LoginServlet extends AbstractDatabaseServlet {
                 throw new InputFormatException("One or more input parameters are null");
             }
 
+            // Removing leading and trailing white space and converting to upper case
+            cf = cf.trim().toUpperCase();
+
             // Check if some parameters are empty
             if(cf.isEmpty() || password.isEmpty() || role.isEmpty()) {
                 throw new InputFormatException("One or more input parameters are empty");
             }
-
-            // Removing leading and trailing white space and converting to upper case
-            cf = cf.trim().toUpperCase();
 
             // Check if cf has a bad format
             if(cf.length() != 16 || cf.contains(" ")){
                 throw new InputFormatException("The format of the parameter Codice Fiscale is wrong");
             }
 
-            // creates a new object for accessing the database and log the user
-            boolean authenticated = new LoginDAO(getDataSource().getConnection(), cf, password, role).authenticateUser();
+            // Log the user
+            boolean authenticated = LoginDAO.authenticateUser(cf, password, role);
 
             if(authenticated){
                 HttpSession session = req.getSession();
@@ -100,6 +102,9 @@ public final class LoginServlet extends AbstractDatabaseServlet {
         } catch (SQLException ex) {
             message = new Message("Cannot log in the user: unexpected error while accessing the database.",
                         "E200", ex.getMessage());
+        } catch (NamingException ex) {
+            message = new Message("Impossible to access the connection pool to the database.",
+                    "E203", ex.getMessage());
         }
 
         req.setAttribute("message", message);

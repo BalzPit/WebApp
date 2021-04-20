@@ -5,8 +5,8 @@ import it.unipd.dei.webapp.dao.PasswordDAO;
 import it.unipd.dei.webapp.resource.Message;
 import it.unipd.dei.webapp.utils.InputFormatException;
 
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,7 +44,7 @@ public class ChangePasswordServlet extends AbstractDatabaseServlet {
                 throw new InputFormatException("One or more input parameters are empty");
             }
 
-            boolean authenticated = new LoginDAO(getDataSource().getConnection(), user_cf, current_pws, role).authenticateUser();
+            boolean authenticated = LoginDAO.authenticateUser(user_cf, current_pws, role);
 
             if (authenticated){
                 if (new_pws.equals(confirm_pws)) {
@@ -65,7 +65,7 @@ public class ChangePasswordServlet extends AbstractDatabaseServlet {
         } catch (InputFormatException ex){
             message = new Message("Cannot change password. Invalid input parameters",
                     "E100", ex.getMessage());
-        } catch (SQLException ex){
+        } catch (SQLException | NamingException ex){
             message = new Message("Cannot change password: unexpected error while accessing the database.",
                     "E200", ex.getMessage());
         }

@@ -80,12 +80,6 @@ public final class CreatePatientServlet extends HttpServlet {
                 throw new InputFormatException("One or more input parameters are null");
             }
 
-            // Check if some parameters are empty
-            if(cf.isEmpty() || name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty() ||
-                    retype_password.isEmpty() ||birthday.isEmpty() || birthplace.isEmpty() || address.isEmpty() || gender.isEmpty()) {
-                throw new InputFormatException("One or more input parameters are empty");
-            }
-
             // Removing leading and trailing white space
             cf = cf.trim().toUpperCase();
             name = name.trim();
@@ -93,6 +87,12 @@ public final class CreatePatientServlet extends HttpServlet {
             email = email.trim();
             birthplace = birthplace.trim();
             address = address.trim();
+
+            // Check if some parameters are empty
+            if(cf.isEmpty() || name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty() ||
+                    retype_password.isEmpty() ||birthday.isEmpty() || birthplace.isEmpty() || address.isEmpty() || gender.isEmpty()) {
+                throw new InputFormatException("One or more input parameters are empty");
+            }
 
             // Check if cf has a bad format
             if(cf.length() != 16 || cf.contains(" ")){
@@ -112,7 +112,7 @@ public final class CreatePatientServlet extends HttpServlet {
             Gender genderEnum = Gender.valueOf(gender);
 
             // Check if a patient with cf is already stored in database before sending email
-            if(PatientDAO.searchPatientByCf(cf)){
+            if(PatientDAO.searchPatientByCf(cf) != null){
                 message = new Message("Patient already stored in database", "E202", String.format("Duplicate patient with cf=%s", cf));
                 req.setAttribute("message", message);
                 req.getRequestDispatcher("/jsp/patient_registration.jsp").forward(req, res);
@@ -120,7 +120,7 @@ public final class CreatePatientServlet extends HttpServlet {
             }
 
             // Check if a patient with email is already stored in database before sending email
-            if(PatientDAO.searchPatientByEmail(email)){
+            if(PatientDAO.searchPatientByEmail(email) != null){
                 message = new Message("Patient already stored in database", "E203", String.format("Duplicate patient with email=%s", email));
                 req.setAttribute("message", message);
                 req.getRequestDispatcher("/jsp/patient_registration.jsp").forward(req, res);

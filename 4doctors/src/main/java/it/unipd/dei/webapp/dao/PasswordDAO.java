@@ -1,8 +1,5 @@
 package it.unipd.dei.webapp.dao;
 
-import it.unipd.dei.webapp.resource.Gender;
-import it.unipd.dei.webapp.resource.Patient;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -57,6 +57,7 @@
 	</head>
 
     <body>
+        <c:import url="/protected/jsp/doctor/doctor-header.jsp"/>
 	    <h2>Prescriptions</h2>
 	    <!-- display the message -->
         <c:import url="/jsp/include/show-message.jsp"/>
@@ -68,21 +69,17 @@
             <c:forEach var="prescription" items="${pending}">
                 <div class="prescription-item" data-id="<c:out value="${prescription.id}"/>">
                     <div>
-                        <span><c:out value="${prescription.date}"/></span><br>
-                        <span><c:out value="${prescription.patient}"/></span>
-                        <p><c:out value="${prescription.description}"/></p>
+                        <span>Date: <c:out value="${prescription.date}"/></span><br>
+                        <span>Patient: <c:out value="${prescription.patient}"/></span>
+                        <p>Description: <c:out value="${prescription.description}"/></p>
                     </div>
                     <div>
-                        <!--<form method="GET" action="prescription-update">
-                            <input type="submit" value="Approve">
-                            <input type="submit" value="Reject">
-                        </form>-->
-                        <form method="POST" action="doctor/prescription-update">
+                        <form method="POST" action="<c:url value="prescription-update"/>">
                             <input type="submit" value="Approve">
                             <input type="hidden" name="id" value="<c:out value="${prescription.id}"/>">
                             <input type="hidden" name="status" value="APPROVED">
                         </form>
-                        <form method="POST" action="doctor/prescription-update">
+                        <form method="POST" action="<c:url value="prescription-update"/>">
                             <input type="submit" value="Reject">
                             <input type="hidden" name="id" value="<c:out value="${prescription.id}"/>">
                             <input type="hidden" name="status" value="REJECTED">
@@ -104,9 +101,9 @@
             <c:forEach var="prescription" items="${past}">
                 <div class="prescription-item <c:out value="${prescription.status}"/>">
                     <div>
-                        <span><c:out value="${prescription.date}"/></span><br>
-                        <span><c:out value="${prescription.patient}"/></span>
-                        <p><c:out value="${prescription.description}"/></p>
+                        <span>Date: <c:out value="${prescription.date}"/></span><br>
+                        <span>Patient: <c:out value="${prescription.patient}"/></span>
+                        <p>Description: <c:out value="${prescription.description}"/></p>
                     </div>
                 </div>
             </c:forEach>

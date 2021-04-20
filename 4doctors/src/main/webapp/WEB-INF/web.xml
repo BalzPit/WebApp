@@ -65,12 +65,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>SearchDoctorPrescriptionByStatusServlet</servlet-name>
+        <servlet-name>DoctorPrescriptionManager</servlet-name>
         <servlet-class>it.unipd.dei.webapp.servlet.SearchPrescriptionByStatusServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>SearchDoctorPrescriptionByStatusServlet</servlet-name>
-        <url-pattern>/doctor/prescription-manager</url-pattern>
+        <servlet-name>DoctorPrescriptionManager</servlet-name>
+        <url-pattern>/prescription-manager</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -79,7 +79,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UpdatePrescriptionStatusServlet</servlet-name>
-        <url-pattern>/doctor/prescription-update</url-pattern>
+        <url-pattern>/prescription-update</url-pattern>
     </servlet-mapping>
 
     <!-- FILTERS -->

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet invoked to retrieve all prescriptions data needed for the doctor-prescription-manager page
  */
-public class SearchDoctorPrescriptionByStatusServlet extends AbstractDatabaseServlet {
+public class DoctorPrescriptionManagerServlet extends AbstractDatabaseServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -65,9 +65,11 @@ public class SearchDoctorPrescriptionByStatusServlet extends AbstractDatabaseSer
         req.getRequestDispatcher("/protected/jsp/doctor/doctor-prescription-manager.jsp").forward(req, res);
     }
 
+    //TODO
+    /*
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         doGet(req, res);
-    }
+    }*/
  
 }

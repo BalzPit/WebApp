@@ -48,9 +48,9 @@ public class UpdatePrescriptionStatusServlet extends AbstractDatabaseServlet {
 
         // stores the message as a request attribute
         req.setAttribute("message", m);
-        // forwards the control to the PrescriptionManagerServlet
-        req.getRequestDispatcher("/doctor/prescription-manager").forward(req, res);
-        //req.getRequestDispatcher("jsp/prescription-update.jsp").forward(req, res);
+        // forwards the control to the DoctorPrescriptionManagerServlet
+        req.getRequestDispatcher("/prescription-manager").forward(req, res);
+
     }
 
 }

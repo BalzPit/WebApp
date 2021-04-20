@@ -81,9 +81,7 @@ public final class LoginServlet extends AbstractDatabaseServlet {
                     req.getRequestDispatcher("/protected/jsp/patient/patient-homepage.jsp").forward(req, res);
                 }
                 else if (role.equals("doctor")){
-                    //TODO req.getRequestDispatcher("/protected/jsp/doctor/doctor-homepage.jsp").forward(req, res);
-                    req.getRequestDispatcher("/doctor/prescription-manager").forward(req, res);
-
+                    req.getRequestDispatcher("/protected/jsp/doctor/doctor-homepage.jsp").forward(req, res);
                 }
             }
             else {

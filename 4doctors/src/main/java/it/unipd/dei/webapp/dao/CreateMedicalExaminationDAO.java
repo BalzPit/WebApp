@@ -2,6 +2,7 @@ package it.unipd.dei.webapp.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import it.unipd.dei.webapp.resource.MedicalExamination;
@@ -17,7 +18,7 @@ public class CreateMedicalExaminationDAO {
     /**
      * The SQL statement to be executed
      */
-    private static final String STATEMENT = "INSERT INTO doctors.Visita (medico, paziente, data, ora, esito) VALUES (?, ?, ?, ?, ?)";
+    private static final String STATEMENT = "INSERT INTO doctors.Visita (medico, paziente, data, ora, esito) VALUES (?, ?, ?, ?, ?) RETURNING *";
 
     /**
      * The connection to the database
@@ -52,9 +53,13 @@ public class CreateMedicalExaminationDAO {
      * @throws SQLException
      *             if any error occurs while storing the examination.
      */
-    public void createMedicalExamination() throws SQLException {
+    public MedicalExamination createMedicalExamination() throws SQLException {
 
         PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        //the created examination
+        MedicalExamination medEx = null;
 
         try {
             pstmt = con.prepareStatement(STATEMENT);
@@ -64,7 +69,15 @@ public class CreateMedicalExaminationDAO {
             pstmt.setTime(4, med_ex.getTime());
             pstmt.setString(5, med_ex.getOutcome());
 
-            pstmt.execute();
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                medEx = new MedicalExamination( rs.getString("doctor_cf"),
+                                                rs.getString("patient_cf"),
+                                                rs.getDate("date"),
+                                                rs.getTime("time"),
+                                                rs.getString("outcome"));
+            }
 
         } finally {
             if (pstmt != null) {
@@ -73,6 +86,8 @@ public class CreateMedicalExaminationDAO {
 
             con.close();
         }
+
+        return medEx;
     }
 
 }

@@ -1,11 +1,12 @@
 package it.unipd.dei.webapp.servlet;
 
-import it.unipd.dei.webapp.dao.CreateMedicalExaminationDAO;
 import it.unipd.dei.webapp.dao.DoctorDAO;
+import it.unipd.dei.webapp.dao.MedExDAO;
 import it.unipd.dei.webapp.dao.MedicalExaminationDAO;
 import it.unipd.dei.webapp.resource.Doctor;
 import it.unipd.dei.webapp.resource.MedicalExamination;
 import it.unipd.dei.webapp.resource.Message;
+import it.unipd.dei.webapp.resource.BookingTime;
 import it.unipd.dei.webapp.utils.InputFormatException;
 
 import javax.naming.NamingException;
@@ -60,6 +61,9 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
         List<Doctor> patientDoctors = null;
         Message m;
 
+        //get times (empty arraylist as parameter to get standard list with all times not booked)
+        ArrayList<BookingTime> bookingTimeList = BookingTime.TimesList(new ArrayList<>());
+
         try{
             //get doctors of the patient to set list items
             patientDoctors = DoctorDAO.searchActiveDoctorsByPatientCF(patient_cf);
@@ -85,6 +89,7 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
         req.setAttribute("futureExaminationsList", futureExaminations);
         req.setAttribute("pastExaminationsList", pastExaminations);
         req.setAttribute("patientDoctors", patientDoctors);
+        req.setAttribute("timeSelection", bookingTimeList);
         req.setAttribute("message", m);
 
         // forwards the control back to the patient-medical-examinations JSP
@@ -112,10 +117,10 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
 
         //request parameters
 
-        //fixed doctor TODO: doctor will be chosen from the list
         HttpSession session = req.getSession(false);
         String patient_cf = (String) session.getAttribute("cf");
 
+        //al parameters selected in the form
         String doctor_cf = null;
         Date date = null;
         Time time = null;
@@ -131,7 +136,7 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
         try{
             //convert date and time strings to java.sql format for storage in the database
             java.util.Date selectedDate = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("date"));
-            java.util.Date selectedTime = new SimpleDateFormat("hh:mm").parse(req.getParameter("time"));
+            java.util.Date selectedTime = new SimpleDateFormat("hh:mm").parse(req.getParameter("timeToSelect"));
 
             date =  new java.sql.Date(selectedDate.getTime());
             time =  new java.sql.Time(selectedTime.getTime());
@@ -141,29 +146,31 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
 
             //check date is in the future (can only reserve future examinations
             if(date.compareTo(currentDate) < 0 ) {
-                throw new InputFormatException("Can only reserve future examinations");
+                throw new InputFormatException("Can only reserve examinations at future dates.");
             }
 
             // creates a new medical examination from the request parameters
             newExamination = new MedicalExamination(doctor_cf, patient_cf, date, time, outcome);
-            // creates a new object for accessing the database and stores the patient
-            new CreateMedicalExaminationDAO(getDataSource().getConnection(), newExamination)
-                    .createMedicalExamination();
+            // stores the new examination
+            MedExDAO.createMedicalExamination(newExamination);
 
-            m = new Message(String.format("Examination successfully added to the database."));
+
+            m = new Message("Examination successfully added to the database.");
 
         }
         catch (ParseException ex){
-            m = new Message("Cannot create the new Examination. Date or Time parsing failed.",
+            m = new Message("Cannot create the new medical examination. Date or Time parsing failed.",
                     "E100", ex.getMessage());
         }
         catch (SQLException ex) {
-                m = new Message("Cannot create the new Visita: unexpected error while accessing the database.",
+                m = new Message("Cannot create the new medical examination: unexpected error while accessing the database.",
                         "E200", ex.getMessage());
         }
         catch (InputFormatException ex){
             m = new Message("Cannot reserve medical examination. Invalid input parameters",
                     "E100", ex.getMessage());
+        } catch (NamingException e) {
+            e.printStackTrace();
         }
 
         //return JSP page with all examinations lists

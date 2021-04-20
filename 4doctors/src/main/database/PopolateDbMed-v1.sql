@@ -32,7 +32,7 @@ INSERT INTO doctors.Ricetta VALUES (283723789, 'SON01MED1C0G1UR0', 'MTTRSO97E67L
 INSERT INTO doctors.Terapia VALUES ('MLNMTT96E16H816G', '10A', '2018-06-07', null, '2 Areosol al giorno' );
 INSERT INTO doctors.Terapia VALUES ('VCNRRT96S13I775M', '23B', '2019-02-12', '2019-02-28', '1 compressa Tachipirina 100mg');
 
-INSERT INTO doctors.Visita VALUES ('SON01MED1C0G1UR0', 'MTTRSO97E67L781I', '2018-12-12', '17:10' , 'Probabile mononucleosi');
+INSERT INTO doctors.Visita VALUES ('SON01MED1C0G1UR0', 'MTTRSO97E67L781I', '2018-12-12', '17:00' , 'Probabile mononucleosi');
 INSERT INTO doctors.Visita VALUES ('F345MED1K0283759', 'GVNPVAG4RE44S3D9', '2019-04-21', '16:30' , 'Pressione stabile');
 INSERT INTO doctors.Visita VALUES ('F345MED1K0283759', 'MLNMTT96E16H816G', '2019-05-30', '16:30' , 'tosse');
 

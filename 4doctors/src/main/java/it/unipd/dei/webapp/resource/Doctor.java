@@ -1,11 +1,15 @@
 package it.unipd.dei.webapp.resource;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Date;
 
 /**
  * Represents the data about a doctor.
  */
-public class Doctor {
+public class Doctor extends Resource {
 
     /**
      * The codice fiscale of the doctor
@@ -176,5 +180,45 @@ public class Doctor {
      */
     public String getAslcode() {
         return aslcode;
+    }
+
+
+
+    @Override
+    public final void toJSON(final OutputStream out) throws IOException {
+
+        final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
+
+        jg.writeStartObject();
+
+        jg.writeFieldName("doctor");
+
+        jg.writeStartObject();
+
+        jg.writeStringField("cf", cf);
+
+        jg.writeStringField("name", name);
+
+        jg.writeStringField("surname", surname);
+
+        jg.writeStringField("email", email);
+
+        jg.writeStringField("password", password);
+
+        jg.writeStringField("birthday", birthday.toString());
+
+        jg.writeStringField("birthplace", birthplace);
+
+        jg.writeStringField("address", address);
+
+        jg.writeStringField("gender", gender.toString());
+
+        jg.writeStringField("aslcode", aslcode);
+
+        jg.writeEndObject();
+
+        jg.writeEndObject();
+
+        jg.flush();
     }
 }

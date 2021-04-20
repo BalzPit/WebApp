@@ -49,6 +49,64 @@ public class DoctorDAO {
 
 
     /**
+     * Get the Doctor specified by the cf from the database
+     *
+     * @param cf
+     * @return
+     * @throws SQLException
+     * @throws NamingException
+     */
+    public static Doctor searchDoctorByCF(String cf) throws SQLException, NamingException {
+        final String SINGLE_DOCTOR_STATEMENT = "SELECT * FROM doctors.Medico Where cf = ?";
+
+        PreparedStatement pstmt_doctor = null;
+        Connection con = null;
+        ResultSet rs_doctor = null;
+
+        final Doctor doc;
+
+        try {
+
+            con = DataSourceProvider.getDataSource().getConnection();
+
+            pstmt_doctor = con.prepareStatement(SINGLE_DOCTOR_STATEMENT);
+            pstmt_doctor.setString(1, cf);
+
+            rs_doctor = pstmt_doctor.executeQuery();
+
+            //select the only doctor if any
+            rs_doctor.next();
+
+            doc = new Doctor(
+                    rs_doctor.getString("cf"),
+                    rs_doctor.getString("nome"),
+                    rs_doctor.getString("cognome"),
+                    rs_doctor.getString("email"),
+                    rs_doctor.getString("password"),
+                    rs_doctor.getDate("datanascita"),
+                    rs_doctor.getString("luogonascita"),
+                    rs_doctor.getString("indirizzoresidenza"),
+                    Gender.valueOf(rs_doctor.getString("sesso")),
+                    rs_doctor.getString("CodiceASL")
+            );
+
+        } finally {
+            if (pstmt_doctor != null) {
+                pstmt_doctor.close();
+            }
+            if(rs_doctor != null){
+                rs_doctor.close();
+            }
+
+            con.close();
+        }
+
+        return doc;
+    }
+
+
+
+    /**
      * get a list of the currently active doctors of a given patient from the database
      *
      * @param patient_cf
@@ -56,13 +114,10 @@ public class DoctorDAO {
      */
     public static List<Doctor> searchActiveDoctorsByPatientCF(String patient_cf) throws SQLException, NamingException{
         final String DOCTOR_LIST_STATEMENT = "SELECT medico FROM doctors.Segue WHERE paziente = ? AND attivo = '1'";
-        final String SINGLE_DOCTOR_STATEMENT = "SELECT * FROM doctors.Medico Where cf = ?";
 
         PreparedStatement pstmt_list = null;
-        PreparedStatement pstmt_doctor = null;
         Connection con = null;
         ResultSet rs_list = null;
-        ResultSet rs_doctor = null;
 
         final List<Doctor> doctors = new ArrayList<Doctor>();
 
@@ -76,27 +131,8 @@ public class DoctorDAO {
             rs_list = pstmt_list.executeQuery();
 
             while (rs_list.next()){
-                //get doctor from db
-                pstmt_doctor = con.prepareStatement(SINGLE_DOCTOR_STATEMENT);
-                pstmt_doctor.setString(1, rs_list.getString("medico"));
-
-                rs_doctor = pstmt_doctor.executeQuery();
-
-                //select the only doctor if any
-                rs_doctor.next();
-
-                Doctor doc = new Doctor(
-                        rs_doctor.getString("cf"),
-                        rs_doctor.getString("nome"),
-                        rs_doctor.getString("cognome"),
-                        rs_doctor.getString("email"),
-                        rs_doctor.getString("password"),
-                        rs_doctor.getDate("datanascita"),
-                        rs_doctor.getString("luogonascita"),
-                        rs_doctor.getString("indirizzoresidenza"),
-                        Gender.valueOf(rs_doctor.getString("sesso")),
-                        rs_doctor.getString("CodiceASL")
-                );
+                //get the doctor from te server
+                Doctor doc = DoctorDAO.searchDoctorByCF(rs_list.getString("medico"));
 
                 doctors.add(doc);
             }
@@ -105,14 +141,8 @@ public class DoctorDAO {
             if (pstmt_list != null) {
                 pstmt_list.close();
             }
-            if (pstmt_doctor != null) {
-                pstmt_doctor.close();
-            }
             if(rs_list != null){
                 rs_list.close();
-            }
-            if(rs_doctor != null){
-                rs_doctor.close();
             }
 
             con.close();

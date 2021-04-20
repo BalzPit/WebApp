@@ -29,8 +29,12 @@
 		    <label for="date">Select Date:</label>
             <input name="date" type="date"/><br/>
 
-            <label for="time">Select Time:</label>
-            <input name="time" type="time"/><br/>
+            <label for="timeToSelect">Select Time:</label>
+            <select name = "timeToSelect" id = "timeToSelect">
+                <c:forEach var = "timeToSelect" items="${timeSelection}" >
+            	    <option ng-disabled="${timeToSelect.booked}" value ="${timeToSelect.hour}:${timeToSelect.min}">${timeToSelect.hour}:${timeToSelect.min}</option>
+            	</c:forEach>
+            </select><br/>
 
             <button type="submit">Submit</button><br/>
             <button type="reset">Reset the form</button>

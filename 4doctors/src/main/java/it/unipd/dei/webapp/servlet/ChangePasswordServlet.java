@@ -49,7 +49,7 @@ public class ChangePasswordServlet extends AbstractDatabaseServlet {
             if (authenticated){
                 if (new_pws.equals(confirm_pws)) {
                     PasswordDAO pwsDao = new PasswordDAO(getDataSource().getConnection(), user_cf);
-                    pwsDao.setPassword(new_pws);
+                    pwsDao.setPassword(new_pws, role);
                     message = new Message("Password successfully changed.");
                     req.setAttribute("message", message);
                     req.getRequestDispatcher("/protected/jsp/patient/patient-homepage.jsp").forward(req, res);
@@ -71,7 +71,7 @@ public class ChangePasswordServlet extends AbstractDatabaseServlet {
         }
 
         req.setAttribute("message", message);
-        req.getRequestDispatcher("/protected/jsp/patient/change-password.jsp").forward(req, res);
+        req.getRequestDispatcher("/protected/jsp/patient/patient-change-password.jsp").forward(req, res);
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse res)

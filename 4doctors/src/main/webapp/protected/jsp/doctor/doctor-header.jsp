@@ -2,20 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <header style="display: inline-flex">
-    <form action="" method="GET" style="margin: 5px">
-        <input type="hidden" value="Home" style="width: 110px" />
-        <a href="${pageContext.request.contextPath}/protected/jsp/doctor/doctor-homepage.jsp">Home</a>
-    </form>
-    <form action="" method="GET" style="margin: 5px">
-        <input type="submit" value="Patients" style="width: 110px" />
-    </form>
-    <form action="<c:url value="/prescription-manager"/>" method="GET" style="margin: 5px">
-        <input type="submit" value="Prescriptions" style="width: 110px" />
-    </form>
-    <form action="" method="GET" style="margin: 5px">
-        <input type="submit" value="Profile" style="width: 110px" />
-    </form>
-    <form action="<c:url value="/user/logout"/>" method="GET" style="margin: 5px">
-        <input type="submit" value="Log out" style="width: 110px" />
-    </form>
+
+    <a href="${pageContext.request.contextPath}/protected/jsp/doctor/doctor-homepage.jsp" style="margin: 5px">Home</a>
+    <a href="${pageContext.request.contextPath}/protected/jsp/doctor/doctor-homepage.jsp" style="margin: 5px">Patients</a>
+    <a href="${pageContext.request.contextPath}/protected/jsp/doctor/doctor-homepage.jsp" style="margin: 5px">Prescriptions</a>
+    <a href="${pageContext.request.contextPath}/profile?type=Profile" style="margin: 5px">Profile</a>
+    <a href="${pageContext.request.contextPath}/user/logout" style="margin: 5px">Log out</a>
+
 </header>

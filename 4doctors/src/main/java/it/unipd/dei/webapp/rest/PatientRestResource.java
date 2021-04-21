@@ -14,11 +14,21 @@ import java.util.List;
 
 public class PatientRestResource extends RestResource {
 
+    /**
+     * Creates a new REST resource for managing {@code Patient} resources.
+     *
+     * @param req the HTTP request.
+     * @param res the HTTP response.
+     */
     public PatientRestResource(HttpServletRequest req, HttpServletResponse res) {
         super(req, res, null);
     }
 
     // patient/list/
+
+    /**
+     * Get a list of all patients in the database
+     */
     public void getAllPatients() throws IOException {
 
         try {
@@ -37,6 +47,9 @@ public class PatientRestResource extends RestResource {
     }
 
     // patient/{patient_cf}
+    /**
+     * Search a patient in the database by CF
+     */
     public void getPatient() throws IOException {
         String op = req.getRequestURI();
         String[] tokens = op.split("/");
@@ -67,6 +80,9 @@ public class PatientRestResource extends RestResource {
     }
 
     // patient/{patient_cf}
+    /**
+     * Delete a patient from the database
+     */
     public void deletePatient() throws IOException {
         String op = req.getRequestURI();
         String[] tokens = op.split("/");

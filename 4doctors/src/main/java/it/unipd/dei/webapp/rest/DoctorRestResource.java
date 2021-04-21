@@ -16,11 +16,20 @@ import java.util.List;
 
 public class DoctorRestResource extends RestResource {
 
+    /**
+     * Creates a new REST resource for managing {@code Doctor} resources.
+     *
+     * @param req the HTTP request.
+     * @param res the HTTP response.
+     */
     public DoctorRestResource(HttpServletRequest req, HttpServletResponse res) {
         super(req, res, null);
     }
 
     // doctor/list/
+    /**
+     * Get a list of all active doctors
+     */
     public void getAllActiveDoctors() throws IOException {
 
         try {
@@ -39,6 +48,9 @@ public class DoctorRestResource extends RestResource {
     }
 
     // doctor/{doctor_cf}
+    /**
+     * Search a doctor in the database by CF
+     */
     public void getDoctor() throws IOException {
         String op = req.getRequestURI();
         String[] tokens = op.split("/");
@@ -69,6 +81,10 @@ public class DoctorRestResource extends RestResource {
     }
 
     // doctor/
+
+    /**
+     * Create a new doctor in the database
+     */
     public void createDoctor() throws IOException {
 
         try {
@@ -106,6 +122,9 @@ public class DoctorRestResource extends RestResource {
     }
 
     // doctor/{doctor_cf}
+    /**
+     * Update the status of the doctor making him no more active in the relation Segue of the database
+     */
     public void updateDoctorStatus() throws IOException {
         String op = req.getRequestURI();
         String[] tokens = op.split("/");
@@ -141,6 +160,9 @@ public class DoctorRestResource extends RestResource {
     }
 
     // doctor/{doctor_cf}
+    /**
+     * Delete a doctor from the database
+     */
     public void deleteDoctor() throws IOException {
         String op = req.getRequestURI();
         String[] tokens = op.split("/");

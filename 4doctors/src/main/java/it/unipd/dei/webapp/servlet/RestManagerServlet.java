@@ -325,6 +325,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
 
         if(tokens.length == 5 && tokens[3].equals("patient") && tokens[4].equals("list")){
             switch (req.getMethod()) {
+                // Get a list of all patients
                 case "GET":
                     new PatientRestResource(req, res).getAllPatients();
                     break;
@@ -332,9 +333,11 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
         } else if(tokens.length == 5 && tokens[3].equals("patient")){
             switch (req.getMethod()) {
                 case "GET":
+                    // Get a single patient by CF
                     new PatientRestResource(req, res).getPatient();
                     break;
                 case "DELETE":
+                    // Delete a single patient by CF
                     new PatientRestResource(req, res).deletePatient();
                     break;
                 default:
@@ -371,6 +374,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
 
         if(tokens.length == 5 && tokens[3].equals("doctor") && tokens[4].equals("list")){
             switch (req.getMethod()) {
+                // Get a list of all active doctors
                 case "GET":
                     new DoctorRestResource(req, res).getAllActiveDoctors();
                     break;
@@ -378,12 +382,15 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
         } else if(tokens.length == 5 && tokens[3].equals("doctor")){
             switch (req.getMethod()) {
                 case "GET":
+                    // Get a single doctor by CF
                     new DoctorRestResource(req, res).getDoctor();
                     break;
                 case "PUT":
+                    // Update the status of a doctor
                     new DoctorRestResource(req, res).updateDoctorStatus();
                     break;
                 case "DELETE":
+                    // Delete a single doctor by CF
                     new DoctorRestResource(req, res).deleteDoctor();
                     break;
                 default:
@@ -393,6 +400,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
         } else if(tokens.length == 4 && tokens[3].equals("doctor")){
             switch (req.getMethod()) {
                 case "POST":
+                    // Insert a new doctor in the database
                     new DoctorRestResource(req, res).createDoctor();
                     break;
                 default:

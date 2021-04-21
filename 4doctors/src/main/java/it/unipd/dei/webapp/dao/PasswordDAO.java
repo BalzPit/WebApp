@@ -14,7 +14,11 @@ public class PasswordDAO {
      * The SQL statement to be executed to retrieve the user password
      */
 
-    public static final String SET_PASSWORD_STATEMENT = "UPDATE doctors.paziente " +
+    public static final String SET_PATIENT_PASSWORD_STATEMENT = "UPDATE doctors.paziente " +
+            "SET password=md5(?) " +
+            "WHERE cf=?";
+
+    public static final String SET_DOCTOR_PASSWORD_STATEMENT = "UPDATE doctors.medico " +
             "SET password=md5(?) " +
             "WHERE cf=?";
 
@@ -41,13 +45,20 @@ public class PasswordDAO {
         this.cf = cf;
     }
 
-    public void setPassword (String new_psw) throws SQLException {
+    public void setPassword (String new_psw, String role) throws SQLException {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         String psw = null;
 
         try {
-            pstmt = con.prepareStatement(SET_PASSWORD_STATEMENT);
+            if (role.equals("patient")) {
+                pstmt = con.prepareStatement(SET_PATIENT_PASSWORD_STATEMENT);
+
+            } else if (role.equals("doctor")) {
+                pstmt = con.prepareStatement(SET_DOCTOR_PASSWORD_STATEMENT);
+
+            }
+
             pstmt.setString(1, new_psw);
             pstmt.setString(2, this.cf);
 

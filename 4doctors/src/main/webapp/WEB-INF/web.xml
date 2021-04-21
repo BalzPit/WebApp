@@ -47,12 +47,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>PatientHome</servlet-name>
-        <servlet-class>it.unipd.dei.webapp.servlet.PatientHomeServlet</servlet-class>
+        <servlet-name>Profile</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.ProfileServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>PatientHome</servlet-name>
-        <url-pattern>/patient-homepage</url-pattern>
+        <servlet-name>Profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
     </servlet-mapping>
 
     <servlet>

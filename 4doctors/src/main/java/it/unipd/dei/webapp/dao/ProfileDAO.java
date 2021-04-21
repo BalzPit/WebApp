@@ -1,6 +1,7 @@
 package it.unipd.dei.webapp.dao;
 
 import it.unipd.dei.webapp.resource.Patient;
+import it.unipd.dei.webapp.resource.Doctor;
 import it.unipd.dei.webapp.resource.Gender;
 
 import java.sql.Connection;
@@ -16,8 +17,11 @@ public class ProfileDAO {
      * The SQL statement to be executed to retrieve the user personal information
      */
 
-    public static final String GET_PERSONAL_INFO_STATEMENT = "SELECT cf, nome, cognome, email, password, sesso, datanascita, luogonascita, indirizzoresidenza FROM doctors.Paziente " +
-            "WHERE cf = ? ";
+    public static final String GET_PATIENT_PERSONAL_INFO_STATEMENT = "SELECT cf, nome, cognome, email, password, sesso, datanascita, luogonascita, indirizzoresidenza FROM doctors.Paziente " +
+            "WHERE cf = ?";
+
+    public static final String GET_DOCTOR_PERSONAL_INFO_STATEMENT = "SELECT cf, nome, cognome, email, password, sesso, datanascita, luogonascita, codiceasl, indirizzoresidenza FROM doctors.Medico " +
+            "WHERE cf = ?";
 
     /**
      * The connection to the database
@@ -56,7 +60,7 @@ public class ProfileDAO {
         Patient patient = null;
 
         try {
-            pstmt = con.prepareStatement(GET_PERSONAL_INFO_STATEMENT);
+            pstmt = con.prepareStatement(GET_PATIENT_PERSONAL_INFO_STATEMENT);
             pstmt.setString(1, this.cf);
 
             rs = pstmt.executeQuery();
@@ -88,5 +92,48 @@ public class ProfileDAO {
         }
 
         return patient;
+    }
+
+    public Doctor getDoctor() throws SQLException {
+
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        Doctor doctor = null;
+
+        try {
+            pstmt = con.prepareStatement(GET_DOCTOR_PERSONAL_INFO_STATEMENT);
+            pstmt.setString(1, this.cf);
+
+            rs = pstmt.executeQuery();
+
+            rs.next();
+
+            doctor = new Doctor(
+                    rs.getString("cf"),
+                    rs.getString("nome"),
+                    rs.getString("cognome"),
+                    rs.getString("email"),
+                    rs.getString("password"),
+                    rs.getDate("datanascita"),
+                    rs.getString("luogonascita"),
+                    rs.getString("indirizzoresidenza"),
+                    Gender.valueOf(rs.getString("sesso")),
+                    rs.getString("codiceasl")
+            );
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+
+            if (pstmt != null) {
+                pstmt.close();
+            }
+
+            con.close();
+        }
+
+        return doctor;
     }
 }

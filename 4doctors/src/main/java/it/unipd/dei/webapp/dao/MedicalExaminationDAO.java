@@ -43,7 +43,7 @@ public class MedicalExaminationDAO {
      * @param con
      *            the connection to the database.
      * @param cf
-     *            the patient to which the medical exainations are displayed.
+     *            the patient to which the medical examinations are displayed.
      */
     public MedicalExaminationDAO(final Connection con, final String cf) {
         this.con = con;
@@ -54,7 +54,7 @@ public class MedicalExaminationDAO {
      * Get the medical examinations of the patient
      *
      * @throws SQLException
-     *             if any error occurs while storing the employee.
+     *             if any error occurs while storing the medical examination.
      */
     public ArrayList<List<MedicalExamination>> getMedicalExaminations() throws SQLException {
 

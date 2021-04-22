@@ -2,6 +2,7 @@ package it.unipd.dei.webapp.rest;
 
 import it.unipd.dei.webapp.dao.*;
 import it.unipd.dei.webapp.resource.*;
+import it.unipd.dei.webapp.utils.ErrorCode;
 
 import java.io.*;
 import java.sql.Connection;
@@ -49,19 +50,14 @@ public final class MedicineRestResource extends RestResource {
             // creates a new object for accessing the database and lists all the employees
             medicineList = new MedicineDAO(con).getListMedicines();
 
-            if(medicineList != null) {
-                res.setStatus(HttpServletResponse.SC_OK);
-                new ResourceList(medicineList).toJSON(res.getOutputStream());
-            } else {
-                // it should not happen
-                m = new Message("Cannot list employees: unexpected error.", "E5A1", null);
-                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                m.toJSON(res.getOutputStream());
-            }
+            res.setStatus(HttpServletResponse.SC_OK);
+            new ResourceList(medicineList).toJSON(res.getOutputStream());
+
         } catch (Throwable t) {
-            m = new Message("Cannot search employee: unexpected error.", "E5A1", t.getMessage());
-            res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            m.toJSON(res.getOutputStream());
+            ErrorCode ec = ErrorCode.MEDICINE_NOT_FOUND;
+            res.setStatus(ec.getHTTPCode());
+            //res.setContentType("application/json");
+            res.getWriter().write(ec.toJSON().toString());
         }
     }
 
@@ -73,31 +69,29 @@ public final class MedicineRestResource extends RestResource {
 
             final Medicine medicine =  Medicine.fromJSON(req.getInputStream());
 
-            // creates a new object for accessing the database and stores the employee
+            // creates a new object for accessing the database and stores the medicine
             if(new MedicineDAO(con).addMedicine(medicine)){
 
                 res.setStatus(HttpServletResponse.SC_CREATED);
 
             } else {
-                // it should not happen
-                m = new Message("Cannot create the medicine: unexpected error.", "E5A1", null);
-                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                m.toJSON(res.getOutputStream());
+                ErrorCode ec = ErrorCode.MEDICINE_NOT_CREATED;
+                res.setStatus(ec.getHTTPCode());
+                //res.setContentType("application/json");
+                res.getWriter().write(ec.toJSON().toString());
             }
         } catch (Throwable t) {
             if (t instanceof SQLException && ((SQLException) t).getSQLState().equals("23505")) {
-                m = new Message("Cannot create the medicine: it already exists.", "E5A2", t.getMessage());
-                res.setStatus(HttpServletResponse.SC_CONFLICT);
-                m.toJSON(res.getOutputStream());
-            } if (t instanceof SQLException ) {
-                m = new Message("Cannot create the medicine! SQL ERROR", "E5A3", t.getMessage());
-                res.setStatus(HttpServletResponse.SC_CONFLICT);
-                m.toJSON(res.getOutputStream());
+                ErrorCode ec = ErrorCode.MEDICINE_CONFLICT;
+                res.setStatus(ec.getHTTPCode());
+                //res.setContentType("application/json");
+                res.getWriter().write(ec.toJSON().toString());
             }
             else {
-                m = new Message("Cannot create the medicine: unexpected error.", "E5A1", t.getMessage());
-                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                m.toJSON(res.getOutputStream());
+                ErrorCode ec = ErrorCode.SERVER_ERROR;
+                res.setStatus(ec.getHTTPCode());
+                //res.setContentType("application/json");
+                res.getWriter().write(ec.toJSON().toString());
             }
         }
     }

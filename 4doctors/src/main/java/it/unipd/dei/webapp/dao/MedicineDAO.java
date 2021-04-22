@@ -79,6 +79,8 @@ public class MedicineDAO {
         String description = medicine.getDescription();
         int index = 1;
 
+        boolean result = false;
+
         try {
             pstmt = con.prepareStatement(MEDICINE_STATEMENT);
             pstmt.setString(index++, code);
@@ -86,7 +88,7 @@ public class MedicineDAO {
             pstmt.setObject(index++, m_class, Types.OTHER);
             pstmt.setString(index++, producer);
             pstmt.setString(index, description);
-            pstmt.execute();
+            if(pstmt.executeUpdate() == 1) result = true;
 
         } finally {
             if (pstmt != null) {
@@ -95,7 +97,7 @@ public class MedicineDAO {
 
             con.close();
         }
-        return true;  //if no exeptions has been thrown
+        return result;  //if no exeptions has been thrown
     }
 
 }

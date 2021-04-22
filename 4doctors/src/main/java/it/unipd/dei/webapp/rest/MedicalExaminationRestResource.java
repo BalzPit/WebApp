@@ -1,11 +1,11 @@
 package it.unipd.dei.webapp.rest;
 
-import it.unipd.dei.webapp.dao.CreateMedicalExaminationDAO;
 import it.unipd.dei.webapp.dao.MedExDAO;
 import it.unipd.dei.webapp.resource.BookingTime;
 import it.unipd.dei.webapp.resource.MedicalExamination;
 import it.unipd.dei.webapp.resource.Message;
 import it.unipd.dei.webapp.resource.ResourceList;
+import it.unipd.dei.webapp.utils.ErrorCode;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -57,12 +57,10 @@ public class MedicalExaminationRestResource extends RestResource{
             //invalid parameters
             if(medicalExamination.getDate().compareTo(currentDate) < 0 ||  bookingTime.getMin() == null
                     ||  bookingTime.getHour() == null) {
-                m = new Message(
-                        "Cannot create the examination: date or time are not valid.",
-                        "E4A7", String.format("Request date: %s, time: %s; need future date and time to be among the acceptable inputs.",
-                        medicalExamination.getDate(), medicalExamination.getTime()));
-                res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                m.toJSON(res.getOutputStream());
+                ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_INVALID_PARAMETERS;
+                res.setStatus(ec.getHTTPCode());
+                //res.setContentType("application/json");
+                res.getWriter().write(ec.toJSON().toString());
                 return;
             }
 
@@ -73,20 +71,22 @@ public class MedicalExaminationRestResource extends RestResource{
                 res.setStatus(HttpServletResponse.SC_CREATED);
                 mE.toJSON(res.getOutputStream());
             } else {
-                // it should not happen
-                m = new Message("Cannot create the medical examination: unexpected error.", "E5A1", null);
-                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                m.toJSON(res.getOutputStream());
+                ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_NOT_CREATED;
+                res.setStatus(ec.getHTTPCode());
+                //res.setContentType("application/json");
+                res.getWriter().write(ec.toJSON().toString());
             }
         } catch (Throwable t) {
             if (t instanceof SQLException && ((SQLException) t).getSQLState().equals("23505")) {
-                m = new Message("Cannot create the medical examination: it already exists.", "E5A2", t.getMessage());
-                res.setStatus(HttpServletResponse.SC_CONFLICT);
-                m.toJSON(res.getOutputStream());
+                ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_CONFLICT;
+                res.setStatus(ec.getHTTPCode());
+                //res.setContentType("application/json");
+                res.getWriter().write(ec.toJSON().toString());
             } else {
-                m = new Message("Cannot create the medical examination: unexpected error.", "E5A1", t.getMessage());
-                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                m.toJSON(res.getOutputStream());
+                ErrorCode ec = ErrorCode.SERVER_ERROR;
+                res.setStatus(ec.getHTTPCode());
+                //res.setContentType("application/json");
+                res.getWriter().write(ec.toJSON().toString());
             }
         }
     }
@@ -117,9 +117,10 @@ public class MedicalExaminationRestResource extends RestResource{
 
             if(params.length != 3){
                 //failed to split
-                m = new Message(String.format("\"Cannot read examination: error while parsing URI. Examination from %s on %s at %s not found.", params[0], params[1], params[2]), "E5A7", "wrong parameters structure");
-                res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                m.toJSON(res.getOutputStream());
+                ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_BAD_URI;
+                res.setStatus(ec.getHTTPCode());
+                //res.setContentType("application/json");
+                res.getWriter().write(ec.toJSON().toString());
                 return;
             }
 
@@ -136,14 +137,16 @@ public class MedicalExaminationRestResource extends RestResource{
                 res.setStatus(HttpServletResponse.SC_OK);
                 mE.toJSON(res.getOutputStream());
             } else {
-                m = new Message(String.format("Examination from %s on %s at %s not found.", doctor_cf, date, time), "E5A3", null);
-                res.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                m.toJSON(res.getOutputStream());
+                ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_NOT_FOUND;
+                res.setStatus(ec.getHTTPCode());
+                //res.setContentType("application/json");
+                res.getWriter().write(ec.toJSON().toString());
             }
         } catch (Throwable t) {
-            m = new Message("Cannot read examination: unexpected error.", "E5A1", t.getMessage());
-            res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            m.toJSON(res.getOutputStream());
+            ErrorCode ec = ErrorCode.SERVER_ERROR;
+            res.setStatus(ec.getHTTPCode());
+            //res.setContentType("application/json");
+            res.getWriter().write(ec.toJSON().toString());
         }
     }
 
@@ -189,19 +192,6 @@ public class MedicalExaminationRestResource extends RestResource{
 
             final MedicalExamination updatedExamination = MedicalExamination.fromJSON(req.getInputStream());
 
-            //can only change the outcome of the examination
-            if (!doctor_cf.equals(updatedExamination.getDoctor_cf())    ||
-                     date.compareTo(updatedExamination.getDate()) != 0  ||
-                     time.compareTo(updatedExamination.getTime()) != 0) {
-                m = new Message(
-                        "Wrong request for URI /medicalExamination/{doctor_cf}/{date}/{time}: URI request and med ex resource differ.",
-                        "E4A7", String.format("Request URI doctor_cf: %s, date: %s, time: %s; med ex resource doctor_cf: %s, date: %s, time: %s.",
-                        doctor_cf, date, time, updatedExamination.getDoctor_cf(), updatedExamination.getDate(), updatedExamination.getTime()));
-                res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                m.toJSON(res.getOutputStream());
-                return;
-            }
-
             // creates a new object for accessing the database and updates the medical examination
             mE = MedExDAO.updateMedicalExaminationOutcome(updatedExamination);
 
@@ -209,20 +199,16 @@ public class MedicalExaminationRestResource extends RestResource{
                 res.setStatus(HttpServletResponse.SC_OK);
                 mE.toJSON(res.getOutputStream());
             } else {
-                m = new Message(String.format("Examination from %s on %s at %s not found.", doctor_cf, date, time), "E5A3", null);
-                res.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                m.toJSON(res.getOutputStream());
+                ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_NOT_FOUND;
+                res.setStatus(ec.getHTTPCode());
+                //res.setContentType("application/json");
+                res.getWriter().write(ec.toJSON().toString());
             }
         } catch (Throwable t) {
-            if (t instanceof SQLException && ((SQLException) t).getSQLState().equals("23503")) {
-                m = new Message("Cannot update the examination: other resources depend on it.", "E5A4", t.getMessage());
-                res.setStatus(HttpServletResponse.SC_CONFLICT);
-                m.toJSON(res.getOutputStream());
-            } else {
-                m = new Message("Cannot update the examination: unexpected error.", "E5A1", t.getMessage());
-                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                m.toJSON(res.getOutputStream());
-            }
+            ErrorCode ec = ErrorCode.SERVER_ERROR;
+            res.setStatus(ec.getHTTPCode());
+            //res.setContentType("application/json");
+            res.getWriter().write(ec.toJSON().toString());
         }
     }
 
@@ -255,19 +241,14 @@ public class MedicalExaminationRestResource extends RestResource{
             // creates a new object for accessing the database and search the medical examination
             medicalExaminationList = MedExDAO.getMedicalExaminations(patientCf);
 
-            if(medicalExaminationList != null) {
-                res.setStatus(HttpServletResponse.SC_OK);
-                new ResourceList(medicalExaminationList).toJSON(res.getOutputStream());
-            } else {
-                // it should not happen
-                m = new Message("Cannot search medical examinations: unexpected error.", "E5A1", null);
-                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                m.toJSON(res.getOutputStream());
-            }
+            res.setStatus(HttpServletResponse.SC_OK);
+            new ResourceList(medicalExaminationList).toJSON(res.getOutputStream());
+
         } catch (Throwable t) {
-            m = new Message(String.format("Patient_cf = %s, Cannot search medical examination: unexpected error.", patientCf), "E5A1", t.getMessage());
-            res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            m.toJSON(res.getOutputStream());
+            ErrorCode ec = ErrorCode.SERVER_ERROR;
+            res.setStatus(ec.getHTTPCode());
+            //res.setContentType("application/json");
+            res.getWriter().write(ec.toJSON().toString());
         }
     }
 
@@ -298,9 +279,10 @@ public class MedicalExaminationRestResource extends RestResource{
 
             if(params.length != 3){
                 //failed to split
-                m = new Message("Cannot read examination to delete: error while parsing URI.", "E5A7", "wrong parameters structure");
-                res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                m.toJSON(res.getOutputStream());
+                ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_INVALID_PARAMETERS;
+                res.setStatus(ec.getHTTPCode());
+                //res.setContentType("application/json");
+                res.getWriter().write(ec.toJSON().toString());
                 return;
             }
 
@@ -318,20 +300,16 @@ public class MedicalExaminationRestResource extends RestResource{
                 res.setStatus(HttpServletResponse.SC_OK);
                 mE.toJSON(res.getOutputStream());
             } else {
-                m = new Message(String.format("Examination from %s on %s at %s not found.", doctor_cf, date, time), "E5A3", null);
-                res.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                m.toJSON(res.getOutputStream());
+                ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_NOT_FOUND;
+                res.setStatus(ec.getHTTPCode());
+                //res.setContentType("application/json");
+                res.getWriter().write(ec.toJSON().toString());
             }
         } catch (Throwable t) {
-            if (t instanceof SQLException && ((SQLException) t).getSQLState().equals("23503")) {
-                m = new Message("Cannot delete the medical examination: other resources depend on it.", "E5A4", t.getMessage());
-                res.setStatus(HttpServletResponse.SC_CONFLICT);
-                m.toJSON(res.getOutputStream());
-            } else {
-                m = new Message("Cannot delete the medical examination: unexpected error.", "E5A1", t.getMessage());
-                res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                m.toJSON(res.getOutputStream());
-            }
+            ErrorCode ec = ErrorCode.SERVER_ERROR;
+            res.setStatus(ec.getHTTPCode());
+            //res.setContentType("application/json");
+            res.getWriter().write(ec.toJSON().toString());
         }
     }
 

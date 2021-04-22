@@ -5,6 +5,7 @@ import it.unipd.dei.webapp.rest.DoctorRestResource;
 import it.unipd.dei.webapp.rest.MedicineRestResource;
 import it.unipd.dei.webapp.rest.MedicalExaminationRestResource;
 import it.unipd.dei.webapp.rest.PatientRestResource;
+import it.unipd.dei.webapp.utils.ErrorCode;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -42,42 +43,36 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
             throws ServletException, IOException {
 
         res.setContentType(JSON_UTF_8_MEDIA_TYPE);
-        final OutputStream out = res.getOutputStream();
 
-        try {
-            // if the request method and/or the MIME media type are not allowed, return.
-            // Appropriate error message sent by {@code checkMethodMediaType}
-            if (!checkMethodMediaType(req, res)) {
-                return;
-            }
-
-            // if the requested resource was a Medicine, delegate its processing and return
-            if (processMedicine(req, res)) {
-                return;
-            }
-            // if the requested resource was a Medical Examination, delegate its processing and return
-            if (processMedicalExamination(req, res)) {
-                return;
-            }
-            // if the requested resource was a Patient, delegate its processing and return
-            if(processPatient(req, res)){
-                return;
-            }
-            // if the requested resource was a Doctor, delegate its processing and return
-            if(processDoctor(req, res)){
-                return;
-            }
-
-            // if none of the above process methods succeeds, it means an unknow resource has been requested
-            final Message m = new Message("Unknown resource requested.", "E4A6",
-                    String.format("Requested resource is %s.", req.getRequestURI()));
-            res.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            m.toJSON(out);
-        } finally {
-            // ensure to always flush and close the output stream
-            out.flush();
-            out.close();
+        // if the request method and/or the MIME media type are not allowed, return.
+        // Appropriate error message sent by {@code checkMethodMediaType}
+        if (!checkMethodMediaType(req, res)) {
+            return;
         }
+
+        // if the requested resource was a Medicine, delegate its processing and return
+        if (processMedicine(req, res)) {
+            return;
+        }
+        // if the requested resource was a Medical Examination, delegate its processing and return
+        if (processMedicalExamination(req, res)) {
+            return;
+        }
+        // if the requested resource was a Patient, delegate its processing and return
+        if(processPatient(req, res)){
+            return;
+        }
+        // if the requested resource was a Doctor, delegate its processing and return
+        if(processDoctor(req, res)){
+            return;
+        }
+
+        // if none of the above process methods succeeds, it means an unknow resource has been requested
+        ErrorCode ec = ErrorCode.UNKNOWN_OPERATION;
+        res.setStatus(ec.getHTTPCode());
+        //res.setContentType("application/json");
+        res.getWriter().write(ec.toJSON().toString());
+
     }
 
     /**
@@ -95,22 +90,22 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
         final String method = req.getMethod();
         final String contentType = req.getHeader("Content-Type");
         final String accept = req.getHeader("Accept");
-        final OutputStream out = res.getOutputStream();
 
         Message m = null;
 
         if (accept == null) {
-            m = new Message("Output media type not specified.", "E4A1", "Accept request header missing.");
-            res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            m.toJSON(out);
+            ErrorCode ec = ErrorCode.UNSPECIFIED_MEDIA_TYPE;
+            res.setStatus(ec.getHTTPCode());
+            //res.setContentType("application/json");
+            res.getWriter().write(ec.toJSON().toString());
             return false;
         }
 
         if (!accept.contains(JSON_MEDIA_TYPE) && !accept.equals(ALL_MEDIA_TYPE)) {
-            m = new Message("Unsupported output media type. Resources are represented only in application/json.",
-                    "E4A2", String.format("Requested representation is %s.", accept));
-            res.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
-            m.toJSON(out);
+            ErrorCode ec = ErrorCode.UNSUPPORTED_MEDIA_TYPE;
+            res.setStatus(ec.getHTTPCode());
+            //res.setContentType("application/json");
+            res.getWriter().write(ec.toJSON().toString());
             return false;
         }
 
@@ -123,26 +118,27 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
             case "POST":
             case "PUT":
                 if (contentType == null) {
-                    m = new Message("Input media type not specified.", "E4A3", "Content-Type request header missing.");
-                    res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                    m.toJSON(out);
+                    ErrorCode ec = ErrorCode.UNSPECIFIED_MEDIA_TYPE;
+                    res.setStatus(ec.getHTTPCode());
+                    //res.setContentType("application/json");
+                    res.getWriter().write(ec.toJSON().toString());
                     return false;
                 }
 
                 if (!contentType.contains(JSON_MEDIA_TYPE)) {
-                    m = new Message("Unsupported input media type. Resources are represented only in application/json.",
-                            "E4A4", String.format("Submitted representation is %s.", contentType));
-                    res.setStatus(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
-                    m.toJSON(out);
+                    ErrorCode ec = ErrorCode.UNSUPPORTED_MEDIA_TYPE;
+                    res.setStatus(ec.getHTTPCode());
+                    //res.setContentType("application/json");
+                    res.getWriter().write(ec.toJSON().toString());
                     return false;
                 }
 
                 break;
             default:
-                m = new Message("Unsupported operation.",
-                        "E4A5", String.format("Requested operation %s.", method));
-                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                m.toJSON(out);
+                ErrorCode ec = ErrorCode.METHOD_NOT_ALLOWED;
+                res.setStatus(ec.getHTTPCode());
+                //res.setContentType("application/json");
+                res.getWriter().write(ec.toJSON().toString());
                 return false;
         }
 
@@ -162,7 +158,6 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
     private boolean processMedicine(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
         final String method = req.getMethod();
-        final OutputStream out = res.getOutputStream();
 
         String path = req.getRequestURI();
         Message m = null;
@@ -189,18 +184,18 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                         new MedicineRestResource(req, res, getDataSource().getConnection()).addMedicine();
                         break;
                     default:
-                        m = new Message("Unsupported operation for URI /medicine.",
-                                "E4A5", String.format("Requested operation %s.", method));
-                        res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                        m.toJSON(res.getOutputStream());
-                        break;
+                        ErrorCode ec = ErrorCode.MEDICINE_UNSUPPORTED_OPERATION;
+                        res.setStatus(ec.getHTTPCode());
+                        //res.setContentType("application/json");
+                        res.getWriter().write(ec.toJSON().toString());
                 }
             }
 
         } catch(Throwable t) {
-            m = new Message("Unexpected error.", "E5A1", t.getMessage());
-            res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            m.toJSON(res.getOutputStream());
+            ErrorCode ec = ErrorCode.SERVER_ERROR;
+            res.setStatus(ec.getHTTPCode());
+            //res.setContentType("application/json");
+            res.getWriter().write(ec.toJSON().toString());
         }
 
         return true;
@@ -213,30 +208,28 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
      *
      * @param req the HTTP request.
      * @param res the HTTP response.
-     * @return {@code true} if the request was for an {@code Employee}; {@code false} otherwise.
+     * @return {@code true} if the request was for an {@code MedicalExamination}; {@code false} otherwise.
      *
      * @throws IOException if any error occurs in the client/server communication.
      */
     private boolean processMedicalExamination(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
         final String method = req.getMethod();
-        final OutputStream out = res.getOutputStream();
 
         String path = req.getRequestURI();
         Message m = null;
 
-        // the requested resource was not an employee
+        // the requested resource was not a medical examination
         if(path.lastIndexOf("rest/medicalExamination") <= 0) {
             return false;
         }
 
         try {
-            // strip everyhing until after the /medicalExamination
+            // strip everything until after the /medicalExamination
             path = path.substring(path.lastIndexOf("medicalExamination") + 18);
 
-            // the request URI is: /employee
-            // if method GET, list employees
-            // if method POST, create employee
+            // the request URI is: /medicalExamination
+            // if method POST, create medical examination
             if (path.length() == 0 || path.equals("/")) {
 
                 switch (method) {
@@ -244,11 +237,10 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                         new MedicalExaminationRestResource(req, res, getDataSource().getConnection()).createMedicalExamination();
                         break;
                     default:
-                        m = new Message("Unsupported operation for URI /medicalExamination.",
-                                "E4A5", String.format("Requested operation %s.", method));
-                        res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                        m.toJSON(res.getOutputStream());
-                        break;
+                        ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_UNSUPPORTED_OPERATION;
+                        res.setStatus(ec.getHTTPCode());
+                        //res.setContentType("application/json");
+                        res.getWriter().write(ec.toJSON().toString());
                 }
             } else {
                 // the request URI is: /medicalExamination/patient/{patient_cf}
@@ -256,21 +248,20 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                     path = path.substring(path.lastIndexOf("patient") + 7);
 
                     if (path.length() == 0 || path.equals("/")) {
-                        m = new Message("Wrong format for URI /medicalExamination/patient/{patient_cf}: no {patient_cf} specified.",
-                                "E4A7", String.format("Requesed URI: %s.", req.getRequestURI()));
-                        res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                        m.toJSON(res.getOutputStream());
+                        ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_BAD_URI;
+                        res.setStatus(ec.getHTTPCode());
+                        //res.setContentType("application/json");
+                        res.getWriter().write(ec.toJSON().toString());
                     } else {
                         switch (method) {
                             case "GET":
                                 new MedicalExaminationRestResource(req, res, getDataSource().getConnection()).searchMedicalExaminationByPatient();
                                 break;
                             default:
-                                m = new Message("Unsupported operation for URI /medicalExamination/patient/{patient_cf}.", "E4A5",
-                                        String.format("Requested operation %s.", method));
-                                res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                                m.toJSON(res.getOutputStream());
-                                break;
+                                ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_UNSUPPORTED_OPERATION;
+                                res.setStatus(ec.getHTTPCode());
+                                //res.setContentType("application/json");
+                                res.getWriter().write(ec.toJSON().toString());
                         }
                     }
                 } else {
@@ -286,17 +277,18 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                             new MedicalExaminationRestResource(req, res, getDataSource().getConnection()).deleteMedicalExamination();
                             break;
                         default:
-                            m = new Message("Unsupported operation for URI /medicalExamination/{doctor_cf}/{date}/{time}.",
-                                    "E4A5", String.format("Requested operation %s.", method));
-                            res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                            m.toJSON(res.getOutputStream());
+                            ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_UNSUPPORTED_OPERATION;
+                            res.setStatus(ec.getHTTPCode());
+                            //res.setContentType("application/json");
+                            res.getWriter().write(ec.toJSON().toString());
                     }
                 }
             }
         } catch(Throwable t) {
-            m = new Message("Unexpected error.", "E5A1", t.getMessage());
-            res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            m.toJSON(res.getOutputStream());
+            ErrorCode ec = ErrorCode.SERVER_ERROR;
+            res.setStatus(ec.getHTTPCode());
+            //res.setContentType("application/json");
+            res.getWriter().write(ec.toJSON().toString());
         }
 
         return true;

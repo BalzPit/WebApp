@@ -1,15 +1,12 @@
 package it.unipd.dei.webapp.resource;
 
 
-import com.fasterxml.jackson.core.JsonGenerator;
-
-import java.io.IOException;
-import java.io.OutputStream;
+import org.json.JSONObject;
 
 /**
  * Represents a message or an error message.
  */
-public class Message extends Resource {
+public class Message {
 
     /**
      * The message
@@ -100,31 +97,25 @@ public class Message extends Resource {
         return isError;
     }
 
-    @Override
-    public final void toJSON(final OutputStream out) throws IOException {
+    /**
+     * Convert a message object into a JSONObject
+     *
+     * @return a JSONObject containing a message
+     */
+    public final JSONObject toJSON() {
 
-        final JsonGenerator jg = JSON_FACTORY.createGenerator(out);
+        JSONObject messageJson = new JSONObject();
+        messageJson.put("message", message);
 
-        jg.writeStartObject();
-
-        jg.writeFieldName("message");
-
-        jg.writeStartObject();
-
-        jg.writeStringField("message", message);
-
-        if(errorCode != null) {
-            jg.writeStringField("error-code", errorCode);
+        if(errorCode != null){
+            messageJson.put("error-code", errorCode);
         }
 
-        if(errorDetails != null) {
-            jg.writeStringField("error-details", errorDetails);
+        if(errorDetails != null){
+            messageJson.put("error-details", errorDetails);
         }
 
-        jg.writeEndObject();
+        return messageJson;
 
-        jg.writeEndObject();
-
-        jg.flush();
     }
 }

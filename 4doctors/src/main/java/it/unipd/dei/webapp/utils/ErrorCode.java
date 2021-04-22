@@ -13,8 +13,10 @@ public enum ErrorCode {
     DOCTOR_NOT_FOUND("E4D1", HttpServletResponse.SC_NOT_FOUND, "Doctor not found"),
     DOCTOR_NOT_CREATED("E5D2", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to create doctor"),
     DOCTOR_CONFLICT("E5D3", HttpServletResponse.SC_CONFLICT,"Cannot create the doctor: it already exists."),
+    DOCTOR_UNSUPPORTED_OPERATION("E4D4", HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Unsupported operation for URI /doctor."),
 
     PATIENT_NOT_FOUND("E4P1", HttpServletResponse.SC_NOT_FOUND, "Patient not found"),
+    PATIENT_UNSUPPORTED_OPERATION("E4P2", HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Unsupported operation for URI /patient."),
 
     MEDICINE_NOT_CREATED("E5M1", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to create medicine"),
     MEDICINE_NOT_FOUND("E5M2", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to search medicine"),

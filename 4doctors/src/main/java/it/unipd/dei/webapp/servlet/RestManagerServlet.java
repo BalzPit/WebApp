@@ -16,10 +16,6 @@ import java.io.OutputStream;
 
 /**
  * Manages the REST API for the different REST resources.
- *
- * @author Nicola Ferro (ferro@dei.unipd.it)
- * @version 1.00
- * @since 1.00
  */
 public final class RestManagerServlet extends AbstractDatabaseServlet {
 
@@ -68,11 +64,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
         }
 
         // if none of the above process methods succeeds, it means an unknow resource has been requested
-        ErrorCode ec = ErrorCode.UNKNOWN_OPERATION;
-        res.setStatus(ec.getHTTPCode());
-        //res.setContentType("application/json");
-        res.getWriter().write(ec.toJSON().toString());
-
+        writeError(res, ErrorCode.UNKNOWN_OPERATION);
     }
 
     /**
@@ -94,18 +86,12 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
         Message m = null;
 
         if (accept == null) {
-            ErrorCode ec = ErrorCode.UNSPECIFIED_MEDIA_TYPE;
-            res.setStatus(ec.getHTTPCode());
-            //res.setContentType("application/json");
-            res.getWriter().write(ec.toJSON().toString());
+            writeError(res, ErrorCode.UNSPECIFIED_MEDIA_TYPE);
             return false;
         }
 
         if (!accept.contains(JSON_MEDIA_TYPE) && !accept.equals(ALL_MEDIA_TYPE)) {
-            ErrorCode ec = ErrorCode.UNSUPPORTED_MEDIA_TYPE;
-            res.setStatus(ec.getHTTPCode());
-            //res.setContentType("application/json");
-            res.getWriter().write(ec.toJSON().toString());
+            writeError(res, ErrorCode.UNSUPPORTED_MEDIA_TYPE);
             return false;
         }
 
@@ -118,27 +104,18 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
             case "POST":
             case "PUT":
                 if (contentType == null) {
-                    ErrorCode ec = ErrorCode.UNSPECIFIED_MEDIA_TYPE;
-                    res.setStatus(ec.getHTTPCode());
-                    //res.setContentType("application/json");
-                    res.getWriter().write(ec.toJSON().toString());
+                    writeError(res, ErrorCode.UNSPECIFIED_MEDIA_TYPE);
                     return false;
                 }
 
                 if (!contentType.contains(JSON_MEDIA_TYPE)) {
-                    ErrorCode ec = ErrorCode.UNSUPPORTED_MEDIA_TYPE;
-                    res.setStatus(ec.getHTTPCode());
-                    //res.setContentType("application/json");
-                    res.getWriter().write(ec.toJSON().toString());
+                    writeError(res, ErrorCode.UNSUPPORTED_MEDIA_TYPE);
                     return false;
                 }
 
                 break;
             default:
-                ErrorCode ec = ErrorCode.METHOD_NOT_ALLOWED;
-                res.setStatus(ec.getHTTPCode());
-                //res.setContentType("application/json");
-                res.getWriter().write(ec.toJSON().toString());
+                writeError(res, ErrorCode.METHOD_NOT_ALLOWED);
                 return false;
         }
 
@@ -184,18 +161,12 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                         new MedicineRestResource(req, res, getDataSource().getConnection()).addMedicine();
                         break;
                     default:
-                        ErrorCode ec = ErrorCode.MEDICINE_UNSUPPORTED_OPERATION;
-                        res.setStatus(ec.getHTTPCode());
-                        //res.setContentType("application/json");
-                        res.getWriter().write(ec.toJSON().toString());
+                        writeError(res, ErrorCode.MEDICINE_UNSUPPORTED_OPERATION);
                 }
             }
 
         } catch(Throwable t) {
-            ErrorCode ec = ErrorCode.SERVER_ERROR;
-            res.setStatus(ec.getHTTPCode());
-            //res.setContentType("application/json");
-            res.getWriter().write(ec.toJSON().toString());
+            writeError(res, ErrorCode.SERVER_ERROR);
         }
 
         return true;
@@ -237,10 +208,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                         new MedicalExaminationRestResource(req, res, getDataSource().getConnection()).createMedicalExamination();
                         break;
                     default:
-                        ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_UNSUPPORTED_OPERATION;
-                        res.setStatus(ec.getHTTPCode());
-                        //res.setContentType("application/json");
-                        res.getWriter().write(ec.toJSON().toString());
+                        writeError(res, ErrorCode.MEDICAL_EXAMINATION_UNSUPPORTED_OPERATION);
                 }
             } else {
                 // the request URI is: /medicalExamination/patient/{patient_cf}
@@ -248,20 +216,14 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                     path = path.substring(path.lastIndexOf("patient") + 7);
 
                     if (path.length() == 0 || path.equals("/")) {
-                        ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_BAD_URI;
-                        res.setStatus(ec.getHTTPCode());
-                        //res.setContentType("application/json");
-                        res.getWriter().write(ec.toJSON().toString());
+                        writeError(res, ErrorCode.MEDICAL_EXAMINATION_BAD_URI);
                     } else {
                         switch (method) {
                             case "GET":
                                 new MedicalExaminationRestResource(req, res, getDataSource().getConnection()).searchMedicalExaminationByPatient();
                                 break;
                             default:
-                                ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_UNSUPPORTED_OPERATION;
-                                res.setStatus(ec.getHTTPCode());
-                                //res.setContentType("application/json");
-                                res.getWriter().write(ec.toJSON().toString());
+                                writeError(res, ErrorCode.MEDICAL_EXAMINATION_UNSUPPORTED_OPERATION);
                         }
                     }
                 } else {
@@ -277,18 +239,12 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                             new MedicalExaminationRestResource(req, res, getDataSource().getConnection()).deleteMedicalExamination();
                             break;
                         default:
-                            ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_UNSUPPORTED_OPERATION;
-                            res.setStatus(ec.getHTTPCode());
-                            //res.setContentType("application/json");
-                            res.getWriter().write(ec.toJSON().toString());
+                            writeError(res, ErrorCode.MEDICAL_EXAMINATION_UNSUPPORTED_OPERATION);
                     }
                 }
             }
         } catch(Throwable t) {
-            ErrorCode ec = ErrorCode.SERVER_ERROR;
-            res.setStatus(ec.getHTTPCode());
-            //res.setContentType("application/json");
-            res.getWriter().write(ec.toJSON().toString());
+            writeError(res, ErrorCode.SERVER_ERROR);
         }
 
         return true;
@@ -321,6 +277,8 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                 case "GET":
                     new PatientRestResource(req, res).getAllPatients();
                     break;
+                default:
+                    writeError(res, ErrorCode.PATIENT_UNSUPPORTED_OPERATION);
             }
         } else if(tokens.length == 5 && tokens[3].equals("patient")){
             switch (req.getMethod()) {
@@ -333,8 +291,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                     new PatientRestResource(req, res).deletePatient();
                     break;
                 default:
-                    res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                    res.getWriter().write(new JSONObject().put("result", "error").toString());
+                    writeError(res, ErrorCode.PATIENT_UNSUPPORTED_OPERATION);
             }
         }
         else {
@@ -370,6 +327,8 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                 case "GET":
                     new DoctorRestResource(req, res).getAllActiveDoctors();
                     break;
+                default:
+                    writeError(res, ErrorCode.DOCTOR_UNSUPPORTED_OPERATION);
             }
         } else if(tokens.length == 5 && tokens[3].equals("doctor")){
             switch (req.getMethod()) {
@@ -386,8 +345,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                     new DoctorRestResource(req, res).deleteDoctor();
                     break;
                 default:
-                    res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                    res.getWriter().write(new JSONObject().put("result", "error").toString());
+                    writeError(res, ErrorCode.DOCTOR_UNSUPPORTED_OPERATION);
             }
         } else if(tokens.length == 4 && tokens[3].equals("doctor")){
             switch (req.getMethod()) {
@@ -396,8 +354,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                     new DoctorRestResource(req, res).createDoctor();
                     break;
                 default:
-                    res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-                    res.getWriter().write(new JSONObject().put("result", "error").toString());
+                    writeError(res, ErrorCode.DOCTOR_UNSUPPORTED_OPERATION);
             }
         }
         else {

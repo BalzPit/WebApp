@@ -1,11 +1,15 @@
 package it.unipd.dei.webapp.servlet;
 
+import it.unipd.dei.webapp.utils.ErrorCode;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+import java.io.IOException;
 
 /**
  * Gets the {@code DataSource} for managing the connection pool to the database.
@@ -58,6 +62,12 @@ public abstract class AbstractDatabaseServlet extends HttpServlet {
      */
     protected final DataSource getDataSource() {
         return ds;
+    }
+
+    public void writeError(HttpServletResponse res, ErrorCode ec) throws IOException {
+        res.setStatus(ec.getHTTPCode());
+        res.setContentType("application/json; charset=utf-8");
+        res.getWriter().write(ec.toJSON().toString());
     }
 
 }

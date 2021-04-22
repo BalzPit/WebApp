@@ -56,7 +56,6 @@ public final class MedicineRestResource extends RestResource {
         } catch (Throwable t) {
             ErrorCode ec = ErrorCode.MEDICINE_NOT_FOUND;
             res.setStatus(ec.getHTTPCode());
-            //res.setContentType("application/json");
             res.getWriter().write(ec.toJSON().toString());
         }
     }
@@ -77,20 +76,17 @@ public final class MedicineRestResource extends RestResource {
             } else {
                 ErrorCode ec = ErrorCode.MEDICINE_NOT_CREATED;
                 res.setStatus(ec.getHTTPCode());
-                //res.setContentType("application/json");
                 res.getWriter().write(ec.toJSON().toString());
             }
         } catch (Throwable t) {
             if (t instanceof SQLException && ((SQLException) t).getSQLState().equals("23505")) {
                 ErrorCode ec = ErrorCode.MEDICINE_CONFLICT;
                 res.setStatus(ec.getHTTPCode());
-                //res.setContentType("application/json");
                 res.getWriter().write(ec.toJSON().toString());
             }
             else {
                 ErrorCode ec = ErrorCode.SERVER_ERROR;
                 res.setStatus(ec.getHTTPCode());
-                //res.setContentType("application/json");
                 res.getWriter().write(ec.toJSON().toString());
             }
         }

@@ -36,12 +36,10 @@ public class PatientRestResource extends RestResource {
             JSONObject resJSON = new JSONObject();
             resJSON.put("patients-list", patients);
             res.setStatus(HttpServletResponse.SC_OK);
-            res.setContentType("application/json");
             res.getWriter().write((new JSONObject()).put("data", resJSON).toString());
         } catch (SQLException | NamingException e){
             ErrorCode ec = ErrorCode.SERVER_ERROR;
             res.setStatus(ec.getHTTPCode());
-            res.setContentType("application/json");
             res.getWriter().write(ec.toJSON().toString());
         }
     }
@@ -60,7 +58,6 @@ public class PatientRestResource extends RestResource {
             if(patient == null){
                 ErrorCode ec = ErrorCode.PATIENT_NOT_FOUND;
                 res.setStatus(ec.getHTTPCode());
-                res.setContentType("application/json");
                 res.getWriter().write(ec.toJSON().toString());
             } else {
                 JSONObject resJSON = new JSONObject();
@@ -68,13 +65,11 @@ public class PatientRestResource extends RestResource {
                 patientJSON.put("patient", patient.toJson());
                 resJSON.put("data", patientJSON);
                 res.setStatus(HttpServletResponse.SC_OK);
-                res.setContentType("application/json");
                 res.getWriter().write(resJSON.toString());
             }
         } catch (NamingException | SQLException e){
             ErrorCode ec = ErrorCode.SERVER_ERROR;
             res.setStatus(ec.getHTTPCode());
-            res.setContentType("application/json");
             res.getWriter().write(ec.toJSON().toString());
         }
     }
@@ -93,17 +88,15 @@ public class PatientRestResource extends RestResource {
 
             if(result == 0){
                 res.setStatus(HttpServletResponse.SC_OK);
-                res.setContentType("application/json");
                 res.getWriter().write(new JSONObject().put("result", "successful").toString());
             } else if(result ==-1){
-                res.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                res.setContentType("application/json");
-                res.getWriter().write(new JSONObject().put("result", "error").toString());
+                ErrorCode ec = ErrorCode.PATIENT_NOT_FOUND;
+                res.setStatus(ec.getHTTPCode());
+                res.getWriter().write(ec.toJSON().toString());
             }
         } catch (SQLException | NamingException e){
             ErrorCode ec = ErrorCode.SERVER_ERROR;
             res.setStatus(ec.getHTTPCode());
-            res.setContentType("application/json");
             res.getWriter().write(ec.toJSON().toString());
         }
     }

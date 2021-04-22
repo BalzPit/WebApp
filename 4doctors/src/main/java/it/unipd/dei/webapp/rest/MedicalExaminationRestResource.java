@@ -59,7 +59,6 @@ public class MedicalExaminationRestResource extends RestResource{
                     ||  bookingTime.getHour() == null) {
                 ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_INVALID_PARAMETERS;
                 res.setStatus(ec.getHTTPCode());
-                //res.setContentType("application/json");
                 res.getWriter().write(ec.toJSON().toString());
                 return;
             }
@@ -73,19 +72,16 @@ public class MedicalExaminationRestResource extends RestResource{
             } else {
                 ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_NOT_CREATED;
                 res.setStatus(ec.getHTTPCode());
-                //res.setContentType("application/json");
                 res.getWriter().write(ec.toJSON().toString());
             }
         } catch (Throwable t) {
             if (t instanceof SQLException && ((SQLException) t).getSQLState().equals("23505")) {
                 ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_CONFLICT;
                 res.setStatus(ec.getHTTPCode());
-                //res.setContentType("application/json");
                 res.getWriter().write(ec.toJSON().toString());
             } else {
                 ErrorCode ec = ErrorCode.SERVER_ERROR;
                 res.setStatus(ec.getHTTPCode());
-                //res.setContentType("application/json");
                 res.getWriter().write(ec.toJSON().toString());
             }
         }
@@ -119,7 +115,6 @@ public class MedicalExaminationRestResource extends RestResource{
                 //failed to split
                 ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_BAD_URI;
                 res.setStatus(ec.getHTTPCode());
-                //res.setContentType("application/json");
                 res.getWriter().write(ec.toJSON().toString());
                 return;
             }
@@ -139,13 +134,11 @@ public class MedicalExaminationRestResource extends RestResource{
             } else {
                 ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_NOT_FOUND;
                 res.setStatus(ec.getHTTPCode());
-                //res.setContentType("application/json");
                 res.getWriter().write(ec.toJSON().toString());
             }
         } catch (Throwable t) {
             ErrorCode ec = ErrorCode.SERVER_ERROR;
             res.setStatus(ec.getHTTPCode());
-            //res.setContentType("application/json");
             res.getWriter().write(ec.toJSON().toString());
         }
     }
@@ -177,9 +170,9 @@ public class MedicalExaminationRestResource extends RestResource{
 
             if(params.length != 3){
                 //failed to split
-                m = new Message("Cannot read examination to update: error while parsing URI.", "E5A7", "wrong parameters structure");
-                res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                m.toJSON(res.getOutputStream());
+                ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_BAD_URI;
+                res.setStatus(ec.getHTTPCode());
+                res.getWriter().write(ec.toJSON().toString());
                 return;
             }
 
@@ -201,13 +194,11 @@ public class MedicalExaminationRestResource extends RestResource{
             } else {
                 ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_NOT_FOUND;
                 res.setStatus(ec.getHTTPCode());
-                //res.setContentType("application/json");
                 res.getWriter().write(ec.toJSON().toString());
             }
         } catch (Throwable t) {
             ErrorCode ec = ErrorCode.SERVER_ERROR;
             res.setStatus(ec.getHTTPCode());
-            //res.setContentType("application/json");
             res.getWriter().write(ec.toJSON().toString());
         }
     }
@@ -247,7 +238,6 @@ public class MedicalExaminationRestResource extends RestResource{
         } catch (Throwable t) {
             ErrorCode ec = ErrorCode.SERVER_ERROR;
             res.setStatus(ec.getHTTPCode());
-            //res.setContentType("application/json");
             res.getWriter().write(ec.toJSON().toString());
         }
     }
@@ -281,7 +271,6 @@ public class MedicalExaminationRestResource extends RestResource{
                 //failed to split
                 ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_INVALID_PARAMETERS;
                 res.setStatus(ec.getHTTPCode());
-                //res.setContentType("application/json");
                 res.getWriter().write(ec.toJSON().toString());
                 return;
             }
@@ -302,13 +291,11 @@ public class MedicalExaminationRestResource extends RestResource{
             } else {
                 ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_NOT_FOUND;
                 res.setStatus(ec.getHTTPCode());
-                //res.setContentType("application/json");
                 res.getWriter().write(ec.toJSON().toString());
             }
         } catch (Throwable t) {
             ErrorCode ec = ErrorCode.SERVER_ERROR;
             res.setStatus(ec.getHTTPCode());
-            //res.setContentType("application/json");
             res.getWriter().write(ec.toJSON().toString());
         }
     }

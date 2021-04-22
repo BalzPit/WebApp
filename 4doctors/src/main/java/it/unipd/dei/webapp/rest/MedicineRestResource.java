@@ -95,4 +95,25 @@ public final class MedicineRestResource extends RestResource {
             }
         }
     }
+    public void userMedicines(String patient_cf) throws IOException {
+
+        List<Medicine> medicineList  = null;
+        Message m = null;
+
+        try{
+
+            // creates a new object for accessing the database and lists all the employees
+            medicineList = new MedicineDAO(con).userMedicines(patient_cf);
+
+
+            res.setStatus(HttpServletResponse.SC_OK);
+            new ResourceList(medicineList).toJSON(res.getOutputStream());
+
+        } catch (Throwable t) {
+            ErrorCode ec = ErrorCode.MEDICINE_NOT_FOUND;
+            res.setStatus(ec.getHTTPCode());
+            //res.setContentType("application/json");
+            res.getWriter().write(ec.toJSON().toString());
+        }
+    }
 }

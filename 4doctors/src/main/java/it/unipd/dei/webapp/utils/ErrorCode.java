@@ -20,6 +20,7 @@ public enum ErrorCode {
     MEDICINE_NOT_FOUND("E5M2", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to search medicine"),
     MEDICINE_CONFLICT("E5M3", HttpServletResponse.SC_CONFLICT,"Cannot create the medicine: it already exists."),
     MEDICINE_UNSUPPORTED_OPERATION("E4M4", HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Unsupported operation for URI /medicine."),
+    MEDICINE_INVALID_PARAMETERS("E4M5", HttpServletResponse.SC_BAD_REQUEST, "Cannot serve the request: invalid cf"),
 
     MEDICAL_EXAMINATION_NOT_CREATED("E5V1", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Cannot create the medical examination"),
     MEDICAL_EXAMINATION_INVALID_PARAMETERS("E4V2", HttpServletResponse.SC_BAD_REQUEST, "Cannot create the examination: date or time are not valid."),

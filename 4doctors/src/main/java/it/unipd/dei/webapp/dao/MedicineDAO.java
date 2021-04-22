@@ -100,4 +100,44 @@ public class MedicineDAO {
         return result;  //if no exeptions has been thrown
     }
 
+    /**
+     * Get the list of all medicines
+     *
+     * @throws SQLException : if any error occurs while accessing the database.
+     */
+    public List<Medicine> userMedicines(String patien_cf) throws SQLException {
+
+        final String MEDICINE_STATEMENT = "SELECT DISTINCT medicine.codice, medicine.nome, medicine.classe, medicine.azienda, medicine.descrizione FROM doctors.ricetta AS r\n" +
+                "                INNER JOIN ( SELECT * FROM doctors.farmaciricetta AS fr\n" +
+                "                INNER JOIN doctors.farmaco AS f\n" +
+                "                ON fr.farmaco = f.codice) AS medicine\n" +
+                "                ON r.id = medicine.ricetta AND r.paziente = ?\n" +
+                "\t\t\t\tWHERE r.status = 'APPROVED'";
+        PreparedStatement pstmt = null;
+        ResultSet result = null;
+        List<Medicine> medicines = new ArrayList<>();
+
+
+        try {
+            pstmt = con.prepareStatement(MEDICINE_STATEMENT);
+            pstmt.setString(1, patien_cf);
+            result = pstmt.executeQuery();
+
+            while (result.next()){
+                medicines.add(new Medicine(result.getString("codice"), result.getString("nome"), result.getString("classe"), result.getString("azienda"), result.getString("descrizione")));
+            }
+
+        } finally {
+            if (pstmt != null) {
+                pstmt.close();
+            }
+            if(result != null){
+                result.close();
+            }
+
+            con.close();
+        }
+        return medicines;
+    }
+
 }

@@ -32,6 +32,30 @@
             <name>Marcello Bullo</name>
             <email>marcello.bullo@studenti.unipd.it</email>
         </developer>
+
+        <developer>
+            <id>mb2</id>
+            <name>Manuel Bettin</name>
+            <email>manuel.bettin@studenti.unipd.it</email>
+        </developer>
+
+        <developer>
+            <id>gp</id>
+            <name>Giovanni Piva</name>
+            <email>giovanni.piva@studenti.unipd.it</email>
+        </developer>
+
+        <developer>
+            <id>pb</id>
+            <name>Pietro Balzan</name>
+            <email>pietro.balzan@studenti.unipd.it</email>
+        </developer>
+
+        <developer>
+            <id>ws</id>
+            <name>Wiliam Scicchitano</name>
+            <email>wiliam.scicchitano@studenti.unipd.it</email>
+        </developer>
     </developers>
 
     <licenses>

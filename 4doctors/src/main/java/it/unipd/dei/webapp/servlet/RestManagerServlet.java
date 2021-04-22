@@ -171,9 +171,6 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
             // strip everyhing until after the /medicine
             path = path.substring(path.lastIndexOf("medicine") + 8);
 
-            // the request URI is: /employee
-            // if method GET, list employees
-            // if method POST, create employee
             if (path.length() == 0 || path.equals("/")) {
 
                 switch (method) {
@@ -189,6 +186,25 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                         //res.setContentType("application/json");
                         res.getWriter().write(ec.toJSON().toString());
                 }
+            }else if(path.length() == 17){ // case: path == /cf
+
+                String cf = path.substring(1,17); //remove the '/'
+
+                switch (method){
+                    case "GET":
+                        new MedicineRestResource(req, res, getDataSource().getConnection()).userMedicines(cf);
+                        break;
+                    default:
+                        ErrorCode ec = ErrorCode.MEDICINE_UNSUPPORTED_OPERATION;
+                        res.setStatus(ec.getHTTPCode());
+                        //res.setContentType("application/json");
+                        res.getWriter().write(ec.toJSON().toString());
+                }
+            } else {
+                ErrorCode ec = ErrorCode.MEDICINE_INVALID_PARAMETERS;
+                res.setStatus(ec.getHTTPCode());
+                //res.setContentType("application/json");
+                res.getWriter().write(ec.toJSON().toString());
             }
 
         } catch(Throwable t) {

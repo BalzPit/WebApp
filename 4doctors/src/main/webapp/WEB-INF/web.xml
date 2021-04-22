@@ -152,6 +152,21 @@
     <servlet-mapping>
         <servlet-name>UpdatePrescriptionStatusServlet</servlet-name>
         <url-pattern>/prescription-update</url-pattern>
+        <servlet-name>PatientManager</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.PatientManagerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PatientManager</servlet-name>
+        <url-pattern>/list-my-patients</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddMyPatient</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.AddMyPatientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddMyPatient</servlet-name>
+        <url-pattern>/add-my-patient</url-pattern>
     </servlet-mapping>
 
     <!-- FILTERS -->

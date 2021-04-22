@@ -1,9 +1,10 @@
 package it.unipd.dei.webapp.servlet;
 
+import it.unipd.dei.webapp.resource.Gender;
+
 import it.unipd.dei.webapp.dao.PatientDAO;
 import it.unipd.dei.webapp.resource.Message;
 import it.unipd.dei.webapp.resource.Patient;
-import it.unipd.dei.webapp.resource.Gender;
 import it.unipd.dei.webapp.utils.InputFormatException;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;

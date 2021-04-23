@@ -5,12 +5,12 @@
 
 AUTHORS:
 
-- **Balzan Pietro**, ID: 1241795
-- **Bettin Manuel**, ID: 1242413
-- **Bullo Marcello**, ID: 1204533
-- **Levorato Nicola**, ID: 
-- **Piva Giovanni**, ID: 
-- **Scicchitano Wiliam**, ID: 
+- **Balzan Pietro**, ID: `1241795`
+- **Bettin Manuel**, ID: `1242413`
+- **Bullo Marcello**, ID: `1204533`
+- **Levorato Nicola**, ID: `1241689`
+- **Piva Giovanni**, ID: `2019282`
+- **Scicchitano Wiliam**, ID: `1241980`
 
 ---------------------
 

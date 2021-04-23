@@ -269,7 +269,7 @@ public class MedicalExaminationRestResource extends RestResource{
 
             if(params.length != 3){
                 //failed to split
-                ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_INVALID_PARAMETERS;
+                ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_BAD_URI;
                 res.setStatus(ec.getHTTPCode());
                 res.getWriter().write(ec.toJSON().toString());
                 return;

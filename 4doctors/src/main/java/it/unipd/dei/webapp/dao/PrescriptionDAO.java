@@ -28,8 +28,11 @@ public class PrescriptionDAO {
 
     /**
      * Make a new request of a prescription to a doctor
-     *
-     * @throws SQLException if any error occurs while executing the query through JDBC
+     * @param prescription The prescription to be forwarded
+     * @param email The doctor's email
+     * @param code The code of the medicine required
+     * @param qnt The quantity required
+     * @throws SQLException : if any error occurs while executing the query through JDBC
      */
     public void prescriptionRequest(final Prescription prescription, final String email, final String code, final int qnt) throws SQLException {
         /**
@@ -93,9 +96,9 @@ public class PrescriptionDAO {
     }
 
     /**
-     *
-     * @param cf
-     * @param statusReq
+     * Get the list of all the prescriptions referred to an user
+     * @param cf The user identifier
+     * @param statusReq It can
      * @return
      * @throws SQLException if any error occurs while executing the query through JDBC
      */

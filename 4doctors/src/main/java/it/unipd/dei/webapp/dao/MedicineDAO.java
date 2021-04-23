@@ -1,7 +1,6 @@
 package it.unipd.dei.webapp.dao;
 
 import it.unipd.dei.webapp.resource.Medicine;
-import it.unipd.dei.webapp.resource.Prescription;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -28,8 +27,8 @@ public class MedicineDAO {
     }
 
     /**
-     * Get the list of all medicines
-     *
+     * Get the list of all medicines available in the database
+     * @return The list of all medicines
      * @throws SQLException : if any error occurs while accessing the database.
      */
     public List<Medicine> getListMedicines() throws SQLException {
@@ -64,7 +63,8 @@ public class MedicineDAO {
 
     /**
      * Insert new medicine in the database
-     *
+     * @param medicine : represent the medicine to be insert
+     * @return true if the insertion successfully end, false otherwise.
      * @throws SQLException : if any error occurs while accessing the database.
      */
     public Boolean addMedicine(Medicine medicine) throws SQLException {
@@ -101,8 +101,9 @@ public class MedicineDAO {
     }
 
     /**
-     * Get the list of all medicines
-     *
+     * Get the list of all medicines requested by a patient identified by the fiscal code
+     * @param patien_cf : the fiscal code which uniquely identify a patient
+     * @return A list of all medicines required by the patient and accepted by doctors
      * @throws SQLException : if any error occurs while accessing the database.
      */
     public List<Medicine> userMedicines(String patien_cf) throws SQLException {

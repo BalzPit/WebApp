@@ -1,11 +1,9 @@
 package it.unipd.dei.webapp.servlet;
 
-import it.unipd.dei.webapp.dao.MedicalExaminationDAO;
 import it.unipd.dei.webapp.dao.ProfileDAO;
 import it.unipd.dei.webapp.resource.Patient;
 import it.unipd.dei.webapp.resource.Doctor;
 import it.unipd.dei.webapp.resource.Message;
-import it.unipd.dei.webapp.resource.MedicalExamination;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
- * Collect medical examinations of the logged patient and show them as a reminder
+ * Collect personal information of the logged patient
  */
 public final class ProfileServlet extends AbstractDatabaseServlet {
 

@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Class containing all the useful operations to handle Medical Examination resources in the database
  *
- * @author Pietro Balzan
+ * @author 4Doctors
  */
 public class MedExDAO {
 
@@ -118,7 +118,7 @@ public class MedExDAO {
      * Updates a medical examination from the database
      *
      * @throws SQLException
-     *             if any error occurs while storing the examination.
+     *             if any error occurs while updating the outcome of the medical examination.
      */
     public static MedicalExamination updateMedicalExaminationOutcome(MedicalExamination examination) throws NamingException, SQLException {
 
@@ -168,7 +168,7 @@ public class MedExDAO {
      * Get ALL the medical examinations of the patient
      *
      * @throws SQLException
-     *             if any error occurs while storing the medical examination
+     *             if any error occurs while getting the medical examination
      */
     public static ArrayList<MedicalExamination> getMedicalExaminations(String patientCf) throws SQLException, NamingException {
 
@@ -225,7 +225,7 @@ public class MedExDAO {
      * Deletes a medical examination from the database
      *
      * @throws SQLException
-     *             if any error occurs while storing the examination.
+     *             if any error occurs while deleting the medical examination.
      */
     public static MedicalExamination deleteMedicalExamination(String doctor_cf, Date date, Time time) throws NamingException, SQLException {
 

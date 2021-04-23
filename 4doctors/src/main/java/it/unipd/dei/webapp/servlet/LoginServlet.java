@@ -101,7 +101,7 @@ public final class LoginServlet extends AbstractDatabaseServlet {
         } catch (InputFormatException ex) {
             ErrorCode ec = ErrorCode.INVALID_INPUT_PARAMETERS;
             res.setStatus(ec.getHTTPCode());
-            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Cannot log in the user. Invalid input parameters");
+            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), ex.getMessage());
         } catch (SQLException | NamingException ex) {
             ErrorCode ec = ErrorCode.SERVER_ERROR;
             res.setStatus(ec.getHTTPCode());

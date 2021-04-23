@@ -42,7 +42,7 @@ public enum ErrorCode {
     UNSPECIFIED_MEDIA_TYPE("E4G5", HttpServletResponse.SC_BAD_REQUEST, "Media type not specified."),
     UNSUPPORTED_MEDIA_TYPE("E4G6", HttpServletResponse.SC_NOT_ACCEPTABLE, "Unsupported media type. Resources are represented only in application/json."),
     WRONG_CREDENTIAL("E4G7", HttpServletResponse.SC_BAD_REQUEST, "Submitted credentials are wrong"),
-    INVALID_INPUT_PARAMETERS("E4G8", HttpServletResponse.SC_BAD_REQUEST, "Submitted parameters are null or empty"),
+    INVALID_INPUT_PARAMETERS("E4G8", HttpServletResponse.SC_BAD_REQUEST, "Invalid input parameters"),
     EMAIL_NOT_SENT("E5G9", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error while sending an email"),
     WRONG_VERIFICATION_CODE("E4G10", HttpServletResponse.SC_BAD_REQUEST, "Wrong verification code"),
     VALIDATION_ERROR("E5G11", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error while validating the user"),

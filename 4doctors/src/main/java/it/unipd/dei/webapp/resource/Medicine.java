@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * Class for representing the information about a medicine
+ */
 public class Medicine extends Resource {
 
     private final String code;
@@ -16,6 +19,14 @@ public class Medicine extends Resource {
     private final String producer;
     private final String description;
 
+    /**
+     *
+     * @param code
+     * @param name
+     * @param medicine_class
+     * @param producer
+     * @param description
+     */
     public Medicine(final String code, final String name, final String medicine_class, final String producer, final String description){
 
         this.code = code;
@@ -26,22 +37,42 @@ public class Medicine extends Resource {
 
     }
 
+    /**
+     *
+     * @return the pharmaceutical company name that produce the medicine
+     */
     public final String getProducer() {
         return producer;
     }
 
+    /**
+     *
+     * @return The medicine class: "SOP", "OTC", "ETICI"
+     */
     public final String getMedicine_class() {
         return medicine_class;
     }
 
+    /**
+     *
+     * @return The coded which uniquely identify the medicine in the dataset
+     */
     public final String getCode() {
         return code;
     }
 
+    /**
+     *
+     * @return A brief description of the medicine or the active principles
+     */
     public final String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @return The name of the medicine
+     */
     public final String getName() {
         return name;
     }

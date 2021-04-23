@@ -60,6 +60,10 @@ public final class MedicineRestResource extends RestResource {
         }
     }
 
+    /**
+     *  Add a new medicine
+     * @throws IOException
+     */
     public void addMedicine() throws IOException{
 
         Message m = null;
@@ -91,6 +95,12 @@ public final class MedicineRestResource extends RestResource {
             }
         }
     }
+
+    /**
+     * Get the list of all medicines required by a patients (specified by the parameter) and accepted by any doctors
+     * @param patient_cf
+     * @throws IOException
+     */
     public void userMedicines(String patient_cf) throws IOException {
 
         List<Medicine> medicineList  = null;

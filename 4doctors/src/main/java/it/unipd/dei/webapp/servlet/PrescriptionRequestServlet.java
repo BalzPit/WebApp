@@ -19,7 +19,7 @@ import java.util.*;
 
 
 /**
- * Creates a new patient into the database.
+ * Creates a new prescription into the database.
  */
 public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
 

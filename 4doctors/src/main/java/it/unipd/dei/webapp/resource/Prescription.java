@@ -11,7 +11,9 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-// Represents the data about a presecription
+/**
+ * Represents the data about a presecription
+ */
 public class Prescription extends Resource {
 
 

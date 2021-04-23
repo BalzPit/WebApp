@@ -15,7 +15,9 @@ import java.sql.SQLException;
 
 import java.util.List;
 
-
+/**
+ * Servlet for getting the list of all medicines in the dataset
+ */
 public final class ListMedicinesServlet extends AbstractDatabaseServlet {
 
     /**

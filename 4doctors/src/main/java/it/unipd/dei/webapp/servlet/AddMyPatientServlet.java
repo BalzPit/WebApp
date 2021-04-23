@@ -21,6 +21,20 @@ import java.util.List;
 
 public final class AddMyPatientServlet extends AbstractDatabaseServlet {
 
+    /**
+     * Add a patient to the followed list by the logged doctor
+     *
+     * @param req
+     *            the HTTP request from the client.
+     * @param resp
+     *            the HTTP response from the server.
+     *
+     * @throws ServletException
+     *             if any error occurs while executing the servlet.
+     * @throws IOException
+     *             if any error occurs in the client/server communication.
+     */
+
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(false);

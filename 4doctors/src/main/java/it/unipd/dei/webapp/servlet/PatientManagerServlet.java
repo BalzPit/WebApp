@@ -23,7 +23,7 @@ import java.util.List;
 public final class PatientManagerServlet extends AbstractDatabaseServlet {
 
     /**
-     * Show all medicines available
+     * Show all patients followed by the logged doctor
      *
      * @param req
      *            the HTTP request from the client.

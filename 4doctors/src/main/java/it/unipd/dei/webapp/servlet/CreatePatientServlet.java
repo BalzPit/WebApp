@@ -5,6 +5,7 @@ import it.unipd.dei.webapp.resource.Gender;
 import it.unipd.dei.webapp.dao.PatientDAO;
 import it.unipd.dei.webapp.resource.Message;
 import it.unipd.dei.webapp.resource.Patient;
+import it.unipd.dei.webapp.utils.ErrorCode;
 import it.unipd.dei.webapp.utils.InputFormatException;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
@@ -13,7 +14,6 @@ import org.apache.commons.mail.SimpleEmail;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,7 +27,7 @@ import java.util.Random;
 /**
  * Creates a new patient into the database.
  */
-public final class CreatePatientServlet extends HttpServlet {
+public final class CreatePatientServlet extends AbstractDatabaseServlet {
 
     /**
      * Creates a new patient into the database.
@@ -114,7 +114,9 @@ public final class CreatePatientServlet extends HttpServlet {
 
             // Check if a patient with cf is already stored in database before sending email
             if(PatientDAO.searchPatientByCf(cf) != null){
-                message = new Message("Patient already stored in database", "E202", String.format("Duplicate patient with cf=%s", cf));
+                ErrorCode ec = ErrorCode.PATIENT_CONFLICT;
+                res.setStatus(ec.getHTTPCode());
+                message = new Message(ec.getErrorMessage(), ec.getErrorCode(), String.format("Duplicate patient with cf=%s", cf));
                 req.setAttribute("message", message);
                 req.getRequestDispatcher("/jsp/patient_registration.jsp").forward(req, res);
                 return;
@@ -122,7 +124,9 @@ public final class CreatePatientServlet extends HttpServlet {
 
             // Check if a patient with email is already stored in database before sending email
             if(PatientDAO.searchPatientByEmail(email) != null){
-                message = new Message("Patient already stored in database", "E203", String.format("Duplicate patient with email=%s", email));
+                ErrorCode ec = ErrorCode.PATIENT_CONFLICT;
+                res.setStatus(ec.getHTTPCode());
+                message = new Message(ec.getErrorMessage(), ec.getErrorCode(), String.format("Duplicate patient with email=%s", email));
                 req.setAttribute("message", message);
                 req.getRequestDispatcher("/jsp/patient_registration.jsp").forward(req, res);
                 return;
@@ -149,23 +153,25 @@ public final class CreatePatientServlet extends HttpServlet {
             return;
 
         } catch (InputFormatException ex) {
-            message = new Message("Cannot create the patient. Invalid input parameters",
-                    "E100", ex.getMessage());
+            ErrorCode ec = ErrorCode.INVALID_INPUT_PARAMETERS;
+            res.setStatus(ec.getHTTPCode());
+            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Cannot create the patient: "+ex.getMessage());
         } catch (ParseException ex) {
-            message = new Message("Cannot create the patient: error while parsing the data of the birthday.",
-                    "E101", ex.getMessage());
+            ErrorCode ec = ErrorCode.INVALID_INPUT_PARAMETERS;
+            res.setStatus(ec.getHTTPCode());
+            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Cannot create the patient: error while parsing the data of the birthday.");
         } catch (IllegalArgumentException ex){
-            message = new Message("Cannot create the patient: gender type is wrong.",
-                    "E102", ex.getMessage());
+            ErrorCode ec = ErrorCode.INVALID_INPUT_PARAMETERS;
+            res.setStatus(ec.getHTTPCode());
+            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Cannot create the patient: gender type is wrong.");
         } catch (EmailException ex) {
-           message = new Message(String.format("Error while sending verification code to %s.", email),
-                    "E300", ex.getMessage());
-        } catch (SQLException ex) {
-            message = new Message(("Unexpected error while accessing the database."),
-                    "E200", ex.getMessage());
-        } catch (NamingException ex) {
-            message = new Message("Impossible to access the connection pool to the database.",
-                    "E203", ex.getMessage());
+            ErrorCode ec = ErrorCode.EMAIL_NOT_SENT;
+            res.setStatus(ec.getHTTPCode());
+            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), String.format("Error while sending verification code to %s.", email));
+        } catch (SQLException | NamingException ex) {
+            ErrorCode ec = ErrorCode.SERVER_ERROR;
+            res.setStatus(ec.getHTTPCode());
+            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Unexpected error while accessing the database.");
         }
 
         // stores the message as a request attribute

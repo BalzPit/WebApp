@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 public enum ErrorCode {
 
     // List of all the errors
+
     DOCTOR_NOT_FOUND("E4D1", HttpServletResponse.SC_NOT_FOUND, "Doctor not found"),
     DOCTOR_NOT_CREATED("E5D2", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to create doctor"),
     DOCTOR_CONFLICT("E5D3", HttpServletResponse.SC_CONFLICT,"Cannot create the doctor: it already exists."),
@@ -17,7 +18,9 @@ public enum ErrorCode {
     DOCTOR_UNSUPPORTED_OPERATION("E4D5", HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Unsupported operation for URI /doctor."),
 
     PATIENT_NOT_FOUND("E4P1", HttpServletResponse.SC_NOT_FOUND, "Patient not found"),
-    PATIENT_UNSUPPORTED_OPERATION("E4P2", HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Unsupported operation for URI /patient."),
+    PATIENT_NOT_CREATED("E5P2", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to create patient"),
+    PATIENT_CONFLICT("E5P3", HttpServletResponse.SC_CONFLICT, "Cannot create the patient: it already exists."),
+    PATIENT_UNSUPPORTED_OPERATION("E4P4", HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Unsupported operation for URI /patient."),
 
     MEDICINE_NOT_CREATED("E5M1", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to create medicine"),
     MEDICINE_NOT_FOUND("E5M2", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Failed to search medicine"),
@@ -38,8 +41,13 @@ public enum ErrorCode {
     METHOD_NOT_ALLOWED("E4G4", HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Method requested not implemented"),
     UNSPECIFIED_MEDIA_TYPE("E4G5", HttpServletResponse.SC_BAD_REQUEST, "Media type not specified."),
     UNSUPPORTED_MEDIA_TYPE("E4G6", HttpServletResponse.SC_NOT_ACCEPTABLE, "Unsupported media type. Resources are represented only in application/json."),
+    WRONG_CREDENTIAL("E4G7", HttpServletResponse.SC_BAD_REQUEST, "Submitted credentials are wrong"),
+    INVALID_INPUT_PARAMETERS("E4G8", HttpServletResponse.SC_BAD_REQUEST, "Submitted parameters are null or empty"),
+    EMAIL_NOT_SENT("E5G9", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error while sending an email"),
+    WRONG_VERIFICATION_CODE("E4G10", HttpServletResponse.SC_BAD_REQUEST, "Wrong verification code"),
+    VALIDATION_ERROR("E5G11", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error while validating the user"),
 
-    SERVER_ERROR("E5G7", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+    SERVER_ERROR("E5G12", HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
 
     /**
      * The error code in the webapp

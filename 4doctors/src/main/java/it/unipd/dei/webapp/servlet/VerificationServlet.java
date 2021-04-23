@@ -3,10 +3,10 @@ package it.unipd.dei.webapp.servlet;
 import it.unipd.dei.webapp.dao.PatientDAO;
 import it.unipd.dei.webapp.resource.Message;
 import it.unipd.dei.webapp.resource.Patient;
+import it.unipd.dei.webapp.utils.ErrorCode;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,7 +16,7 @@ import java.sql.SQLException;
 /**
  * Verify if the code inserted by the user is the same code sent in the email
  */
-public final class VerificationServlet extends HttpServlet {
+public final class VerificationServlet extends AbstractDatabaseServlet {
 
     /**
      * Verify if the code inserted by the user is the same code sent in the email
@@ -39,7 +39,9 @@ public final class VerificationServlet extends HttpServlet {
 
         // If session is null the control is back to the registration page
         if(session == null){
-            message = new Message("Error while validating the new user.");
+            ErrorCode ec = ErrorCode.VALIDATION_ERROR;
+            res.setStatus(ec.getHTTPCode());
+            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Error while validating the new user.");
             req.setAttribute("message", message);
             req.getRequestDispatcher("/jsp/patient_registration.jsp").forward(req, res);
 
@@ -52,7 +54,9 @@ public final class VerificationServlet extends HttpServlet {
 
         // If code or patient are null the control is back to the registration page
         if(code == null || code.isEmpty() || patient == null){
-            message = new Message("Error while validating the new user.");
+            ErrorCode ec = ErrorCode.VALIDATION_ERROR;
+            res.setStatus(ec.getHTTPCode());
+            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Error while validating the new user.");
             req.setAttribute("message", message);
             req.getRequestDispatcher("/jsp/patient_registration.jsp").forward(req, res);
 
@@ -77,16 +81,19 @@ public final class VerificationServlet extends HttpServlet {
                 return;
             } catch (SQLException ex) {
                 if (ex.getSQLState().equals("23505")) {
-                    message = new Message(String.format("Cannot create the patient: patient with cf=%s or email=%s already exists.",
-                            patient.getCf(), patient.getEmail()),
-                            "E201", ex.getMessage());
+                    ErrorCode ec = ErrorCode.PATIENT_CONFLICT;
+                    res.setStatus(ec.getHTTPCode());
+                    message = new Message(ec.getErrorMessage(), ec.getErrorCode(), String.format("Cannot create the patient: patient with cf=%s or email=%s already exists.",
+                            patient.getCf(), patient.getEmail()));
                 } else {
-                    message = new Message("Cannot create the patient: unexpected error while accessing the database.",
-                            "E200", ex.getMessage());
+                    ErrorCode ec = ErrorCode.PATIENT_NOT_CREATED;
+                    res.setStatus(ec.getHTTPCode());
+                    message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Cannot create the patient: unexpected error while accessing the database.");
                 }
             } catch (NamingException ex){
-                message = new Message("Impossible to access the connection pool to the database.",
-                        "E203", ex.getMessage());
+                ErrorCode ec = ErrorCode.SERVER_ERROR;
+                res.setStatus(ec.getHTTPCode());
+                message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Unexpected error while accessing the database.");
             }
 
             req.setAttribute("message", message);
@@ -95,7 +102,9 @@ public final class VerificationServlet extends HttpServlet {
         }
         else {
             // If the code is incorrect return to verify page
-            message = new Message("Incorrect verification code. Please rewrite the code.");
+            ErrorCode ec = ErrorCode.WRONG_VERIFICATION_CODE;
+            res.setStatus(ec.getHTTPCode());
+            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Incorrect verification code. Please rewrite the code.");
             req.setAttribute("message", message);
             req.getRequestDispatcher("/jsp/verify.jsp").forward(req, res);
         }

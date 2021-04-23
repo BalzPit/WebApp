@@ -58,10 +58,10 @@ public class DoctorDAO {
     /**
      * Get the Doctor specified by the cf from the database
      *
-     * @param cf
-     * @return
-     * @throws SQLException
-     * @throws NamingException
+     * @param cf of the doctor
+     * @return doctor object requested
+     * @throws SQLException if any error occurs while storing the doctor.
+     * @throws NamingException if any error occurs while storing the doctor.
      */
     public static Doctor searchDoctorByCF(String cf) throws SQLException, NamingException {
         final String SINGLE_DOCTOR_STATEMENT = "SELECT * FROM doctors.Medico Where cf = ?";

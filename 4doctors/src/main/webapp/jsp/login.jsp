@@ -30,7 +30,7 @@
     <input type="radio" id="patient" name="role" value="patient">
     <label for="patient">Patient</label>
     <input type="radio" id="doctor" name="role" value="doctor">
-    <label for="doctor">Medic</label><br><br>
+    <label for="doctor">Doctor</label><br><br>
 
     <button type="submit">Log in</button><br>
     <button type="reset">Reset</button>

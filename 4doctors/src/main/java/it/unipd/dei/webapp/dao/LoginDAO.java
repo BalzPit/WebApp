@@ -44,6 +44,7 @@ public class LoginDAO {
         try {
             con = DataSourceProvider.getDataSource().getConnection();
 
+            // Select the statement based on the role
             if(role.equals("patient")){
                 pstmt = con.prepareStatement(PATIENT_STATEMENT);
             }
@@ -51,7 +52,9 @@ public class LoginDAO {
                 pstmt = con.prepareStatement(MEDIC_STATEMENT);
             }
             else {
-                con.close();
+                if(con!=null){
+                    con.close();
+                }
                 return false;
             }
 

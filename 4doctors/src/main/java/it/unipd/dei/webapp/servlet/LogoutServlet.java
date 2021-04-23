@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Log out the user from the webapp
  */
-public final class LogoutServlet extends HttpServlet {
+public final class LogoutServlet extends AbstractDatabaseServlet {
 
     /**
      * Log out a user
@@ -27,11 +27,17 @@ public final class LogoutServlet extends HttpServlet {
         HttpSession session = req.getSession(false); // Fetch session object
 
         if(session!=null) {
+            String role = (String) session.getAttribute("role");
             session.invalidate(); // Removes all session attributes bound to the session
             Message message = new Message("You have logged out successfully");
             req.setAttribute("message", message);
             // forwards the control back to the login
-            req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
+            if(role != null && role.equals("admin")){
+                req.getRequestDispatcher("/jsp/admin-login.jsp").forward(req, res);
+            }
+            else {
+                req.getRequestDispatcher("/jsp/login.jsp").forward(req, res);
+            }
         }
     }
 }

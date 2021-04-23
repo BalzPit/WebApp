@@ -58,10 +58,10 @@ public class DoctorDAO {
     /**
      * Get the Doctor specified by the cf from the database
      *
-     * @param cf
-     * @return
-     * @throws SQLException
-     * @throws NamingException
+     * @param cf of the doctor
+     * @return doctor object requested
+     * @throws SQLException if any error occurs while storing the doctor.
+     * @throws NamingException if any error occurs while storing the doctor.
      */
     public static Doctor searchDoctorByCF(String cf) throws SQLException, NamingException {
         final String SINGLE_DOCTOR_STATEMENT = "SELECT * FROM doctors.Medico Where cf = ?";
@@ -137,7 +137,7 @@ public class DoctorDAO {
             rs_list = pstmt_list.executeQuery();
 
             while (rs_list.next()){
-                //get the doctor from te server
+                //get the doctor from the server
                 Doctor doc = DoctorDAO.searchDoctorByCF(rs_list.getString("medico"));
 
                 doctors.add(doc);
@@ -282,6 +282,7 @@ public class DoctorDAO {
         try(Connection con = DataSourceProvider.getDataSource().getConnection();
             PreparedStatement pstmt = con.prepareStatement(STATEMENT)) {
 
+            // If doctor to update is not found return
             if(searchDoctorByCF(doctor_cf) == null){
                 return -2;
             }

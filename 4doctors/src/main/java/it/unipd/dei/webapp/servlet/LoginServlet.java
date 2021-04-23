@@ -2,11 +2,11 @@ package it.unipd.dei.webapp.servlet;
 
 import it.unipd.dei.webapp.dao.LoginDAO;
 import it.unipd.dei.webapp.resource.Message;
+import it.unipd.dei.webapp.utils.ErrorCode;
 import it.unipd.dei.webapp.utils.InputFormatException;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,7 +16,7 @@ import java.sql.SQLException;
 /**
  * Log the user in the webapp
  */
-public final class LoginServlet extends HttpServlet {
+public final class LoginServlet extends AbstractDatabaseServlet {
 
     /**
      * Log a user into the webapp.
@@ -87,7 +87,9 @@ public final class LoginServlet extends HttpServlet {
                 }
             }
             else {
-                message = new Message("Error while authenticating the user");
+                ErrorCode ec = ErrorCode.WRONG_CREDENTIAL;
+                res.setStatus(ec.getHTTPCode());
+                message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Error while authenticating the user");
                 req.setAttribute("message", message);
 
                 // forwards the control to the login
@@ -97,14 +99,13 @@ public final class LoginServlet extends HttpServlet {
             return;
 
         } catch (InputFormatException ex) {
-            message = new Message("Cannot log in the user. Invalid input parameters",
-                    "E100", ex.getMessage());
-        } catch (SQLException ex) {
-            message = new Message("Cannot log in the user: unexpected error while accessing the database.",
-                        "E200", ex.getMessage());
-        } catch (NamingException ex) {
-            message = new Message("Impossible to access the connection pool to the database.",
-                    "E203", ex.getMessage());
+            ErrorCode ec = ErrorCode.INVALID_INPUT_PARAMETERS;
+            res.setStatus(ec.getHTTPCode());
+            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Cannot log in the user. Invalid input parameters");
+        } catch (SQLException | NamingException ex) {
+            ErrorCode ec = ErrorCode.SERVER_ERROR;
+            res.setStatus(ec.getHTTPCode());
+            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Unexpected error while accessing the database.");
         }
 
         req.setAttribute("message", message);

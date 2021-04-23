@@ -7,6 +7,7 @@ import it.unipd.dei.webapp.utils.DataSourceProvider;
 import javax.naming.NamingException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -216,6 +217,7 @@ public class DoctorDAO {
         PreparedStatement pstmt = null;
         ResultSet result = null;
         List<Doctor> doctors = new ArrayList<>();
+        HashSet<String> doctors_cf_set = new HashSet<>();
 
         try {
             con = DataSourceProvider.getDataSource().getConnection();
@@ -224,8 +226,13 @@ public class DoctorDAO {
 
             while(result.next()){
                 String doctor_cf = result.getString("medico");
-                Doctor doctor = searchDoctorByCF(doctor_cf);
-                doctors.add(doctor);
+                // Avoid to retrieve the same doctor
+                if(!doctors_cf_set.contains(doctor_cf)){
+                    doctors_cf_set.add(doctor_cf);
+                    Doctor doctor = searchDoctorByCF(doctor_cf);
+                    doctors.add(doctor);
+                }
+
             }
 
             return doctors;

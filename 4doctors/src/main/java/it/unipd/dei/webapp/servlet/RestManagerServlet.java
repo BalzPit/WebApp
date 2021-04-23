@@ -128,7 +128,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
      *
      * @param req the HTTP request.
      * @param res the HTTP response.
-     * @return {@code true} if the request was for an {@code Employee}; {@code false} otherwise.
+     * @return {@code true} if the request was for an {@code Medicine; {@code false} otherwise.
      *
      * @throws IOException if any error occurs in the client/server communication.
      */
@@ -139,7 +139,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
         String path = req.getRequestURI();
         Message m = null;
 
-        // the requested resource was not an employee
+
         if(path.lastIndexOf("rest/medicine") <= 0) {
             return false;
         }

@@ -50,7 +50,7 @@ public class ProfileDAO {
      * Get the medical examinations of the patient
      *
      * @throws SQLException
-     *             if any error occurs while storing the employee.
+     *             if any error occurs while storing patient
      */
     public Patient getPatient() throws SQLException {
 

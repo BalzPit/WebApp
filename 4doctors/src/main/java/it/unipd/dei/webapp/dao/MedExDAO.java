@@ -168,7 +168,7 @@ public class MedExDAO {
      * Get ALL the medical examinations of the patient
      *
      * @throws SQLException
-     *             if any error occurs while storing the employee.
+     *             if any error occurs while storing the medical examination
      */
     public static ArrayList<MedicalExamination> getMedicalExaminations(String patientCf) throws SQLException, NamingException {
 

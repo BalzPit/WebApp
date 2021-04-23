@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public final class ProfileServlet extends AbstractDatabaseServlet {
 
     /**
-     * Searches employees by their salary.
+     *
      *
      * @param req
      *            the HTTP request from the client.

@@ -62,7 +62,7 @@
 	    <!-- display the message -->
         <c:import url="/jsp/include/show-message.jsp"/>
 
-	    <!-- display the list of found employees, if any -->
+	    <!-- display the list of found prescriptions if any -->
         <div class="prescription-header">Pending prescriptions</div>
         <div class="prescription-box">
             <c:if test='${not empty pending}'>

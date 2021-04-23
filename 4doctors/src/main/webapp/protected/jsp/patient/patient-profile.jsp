@@ -19,7 +19,7 @@
             <c:import url="/jsp/include/show-message.jsp"/>
         </c:if>
 
-        <!-- display the list of found employees, if any -->
+        <!-- display the list of found patients, if any -->
         <c:if test='${not empty personalInfo}'>
             <ul>
                 <li>CF: <c:out value="${personalInfo.getCf()}"/></li>

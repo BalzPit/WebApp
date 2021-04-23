@@ -66,7 +66,7 @@ public final class ListUserPrescriptionsServlet extends AbstractDatabaseServlet 
             message = new Message("Prescriptions succesfully searched into the database!");
 
         } catch (SQLException | InputFormatException ex) {
-            message = new Message("Cannot search for employees: unexpected error while accessing the database.",
+            message = new Message("Cannot search for prescriptions: unexpected error while accessing the database.",
                     "E200", ex.getMessage());
         }
 

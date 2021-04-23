@@ -166,7 +166,7 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
             message = new Message("Medicine succesfully searched!");
 
         } catch (SQLException ex) {
-            message = new Message("Cannot search for employees: unexpected error while accessing the database.",
+            message = new Message("Cannot search for Medicine: unexpected error while accessing the database.",
                     "E200", ex.getMessage());
         }
 

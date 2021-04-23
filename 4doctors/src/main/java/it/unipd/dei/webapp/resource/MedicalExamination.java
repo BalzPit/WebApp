@@ -139,7 +139,7 @@ public class MedicalExamination extends Resource {
      *
      * @param in the input stream containing the JSON document.
      *
-     * @return the {@code Employee} created from the JSON representation.
+     * @return the {@code Medical Examination} created from the JSON representation.
      *
      * @throws IOException if something goes wrong while parsing.
      */

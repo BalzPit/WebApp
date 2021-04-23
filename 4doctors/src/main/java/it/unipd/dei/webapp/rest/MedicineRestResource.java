@@ -47,7 +47,7 @@ public final class MedicineRestResource extends RestResource {
         Message m = null;
 
         try{
-            // creates a new object for accessing the database and lists all the employees
+            // creates a new object for accessing the database and lists all the medicines
             medicineList = new MedicineDAO(con).getListMedicines();
 
             res.setStatus(HttpServletResponse.SC_OK);
@@ -98,7 +98,7 @@ public final class MedicineRestResource extends RestResource {
 
         try{
 
-            // creates a new object for accessing the database and lists all the employees
+            // creates a new object for accessing the database and lists all the medicines
             medicineList = new MedicineDAO(con).userMedicines(patient_cf);
 
 

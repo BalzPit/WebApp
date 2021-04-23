@@ -42,6 +42,7 @@ To create the database see `./4doctors/src/main/database/dbMed.sql` and to popul
 
 ### Login admin
 Go manually to `/jsp/admin-login`
+
 - **Username**: `nico9779`
 - **password**:`password`
 

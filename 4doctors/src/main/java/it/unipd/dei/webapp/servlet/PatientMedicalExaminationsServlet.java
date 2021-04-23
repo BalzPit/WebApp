@@ -7,6 +7,7 @@ import it.unipd.dei.webapp.resource.Doctor;
 import it.unipd.dei.webapp.resource.MedicalExamination;
 import it.unipd.dei.webapp.resource.Message;
 import it.unipd.dei.webapp.resource.BookingTime;
+import it.unipd.dei.webapp.utils.ErrorCode;
 import it.unipd.dei.webapp.utils.InputFormatException;
 
 import javax.naming.NamingException;
@@ -78,11 +79,12 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
             pastExaminations = examinations.get(0);
             futureExaminations = examinations.get(1);
 
-            m = new Message(String.format("Examinations successfully retrieved."));
+            m = new Message("Examinations successfully retrieved.");
         }
         catch (SQLException | NamingException ex) {
-            m = new Message("Failed to load examinations page: unexpected error while accessing the database.",
-                    "E200", ex.getMessage());
+            ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_NOT_FOUND;
+            res.setStatus(ec.getHTTPCode());
+            m = new Message(ec.getErrorMessage(), ec.getErrorCode(), ex.getMessage());
         }
 
         // return JSP page as result
@@ -158,21 +160,22 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
             m = new Message("Examination successfully added to the database.");
 
         }
-        catch (ParseException ex){
-            m = new Message("Cannot create the new medical examination. Date or Time parsing failed.",
-                    "E100", ex.getMessage());
+        catch (ParseException | InputFormatException ex){
+            ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_INVALID_PARAMETERS;
+            res.setStatus(ec.getHTTPCode());
+            m = new Message(ec.getErrorMessage(), ec.getErrorCode(), ex.getMessage());
         }
         catch (SQLException ex) {
-                m = new Message("Cannot create the new medical examination: unexpected error while accessing the database.",
-                        "E200", ex.getMessage());
-        }
-        catch (InputFormatException ex){
-            m = new Message("Cannot reserve medical examination. Invalid input parameters",
-                    "E100", ex.getMessage());
-        } catch (NamingException e) {
-            e.printStackTrace();
+            ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_NOT_CREATED;
+            res.setStatus(ec.getHTTPCode());
+            m = new Message(ec.getErrorMessage(), ec.getErrorCode(), ex.getMessage());
+        } catch (NamingException ex) {
+            ErrorCode ec = ErrorCode.SERVER_ERROR;
+            res.setStatus(ec.getHTTPCode());
+            m = new Message(ec.getErrorMessage(), ec.getErrorCode(), ex.getMessage());
         }
 
+        req.setAttribute("message", m);
         //return JSP page with all examinations lists
         doGet(req, res);
     }

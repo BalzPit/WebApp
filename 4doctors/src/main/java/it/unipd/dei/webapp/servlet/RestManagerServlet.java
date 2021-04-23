@@ -266,8 +266,6 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
     }
 
 
-    // rest/patient/list
-    // GET or DELETE patient/{patient_cf}
     /**
      * Checks whether the request if for a {@link Patient} resource and, in case, processes it.
      *
@@ -285,6 +283,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
             return false;
         }
 
+        // rest/patient/list
         if(tokens.length == 5 && tokens[3].equals("patient") && tokens[4].equals("list")){
             switch (req.getMethod()) {
                 // Get a list of all patients
@@ -294,7 +293,9 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                 default:
                     writeError(res, ErrorCode.PATIENT_UNSUPPORTED_OPERATION);
             }
-        } else if(tokens.length == 5 && tokens[3].equals("patient")){
+        }
+        // GET or DELETE patient/{patient_cf}
+        else if(tokens.length == 5 && tokens[3].equals("patient")){
             switch (req.getMethod()) {
                 case "GET":
                     // Get a single patient by CF
@@ -315,9 +316,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
         return true;
     }
 
-    // doctor/list
-    // GET or PUT or DELETE doctor/{doctor_cf}
-    // doctor/
+
     /**
      * Checks whether the request if for a {@link Doctor} resource and, in case, processes it.
      *
@@ -335,6 +334,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
             return false;
         }
 
+        // doctor/list
         if(tokens.length == 5 && tokens[3].equals("doctor") && tokens[4].equals("list")){
             switch (req.getMethod()) {
                 // Get a list of all active doctors
@@ -344,7 +344,9 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                 default:
                     writeError(res, ErrorCode.DOCTOR_UNSUPPORTED_OPERATION);
             }
-        } else if(tokens.length == 5 && tokens[3].equals("doctor")){
+        }
+        // GET or PUT or DELETE doctor/{doctor_cf}
+        else if(tokens.length == 5 && tokens[3].equals("doctor")){
             switch (req.getMethod()) {
                 case "GET":
                     // Get a single doctor by CF
@@ -361,7 +363,9 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                 default:
                     writeError(res, ErrorCode.DOCTOR_UNSUPPORTED_OPERATION);
             }
-        } else if(tokens.length == 4 && tokens[3].equals("doctor")){
+        }
+        // doctor/
+        else if(tokens.length == 4 && tokens[3].equals("doctor")){
             switch (req.getMethod()) {
                 case "POST":
                     // Insert a new doctor in the database

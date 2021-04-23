@@ -13,6 +13,10 @@ import java.io.IOException;
  */
 public class DoctorFilter extends HttpFilter {
 
+    /**
+     * Redirect the user into login page if he is not logged in
+     * and try to access protected resources
+     */
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
 

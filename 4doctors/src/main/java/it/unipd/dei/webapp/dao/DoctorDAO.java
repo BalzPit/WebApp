@@ -137,7 +137,7 @@ public class DoctorDAO {
             rs_list = pstmt_list.executeQuery();
 
             while (rs_list.next()){
-                //get the doctor from te server
+                //get the doctor from the server
                 Doctor doc = DoctorDAO.searchDoctorByCF(rs_list.getString("medico"));
 
                 doctors.add(doc);
@@ -282,6 +282,7 @@ public class DoctorDAO {
         try(Connection con = DataSourceProvider.getDataSource().getConnection();
             PreparedStatement pstmt = con.prepareStatement(STATEMENT)) {
 
+            // If doctor to update is not found return
             if(searchDoctorByCF(doctor_cf) == null){
                 return -2;
             }

@@ -24,7 +24,7 @@ public class PatientRestResource extends RestResource {
         super(req, res, null);
     }
 
-    // patient/list/
+    // URI: patient/list/
 
     /**
      * Get a list of all patients in the database
@@ -44,7 +44,7 @@ public class PatientRestResource extends RestResource {
         }
     }
 
-    // patient/{patient_cf}
+    // URI: patient/{patient_cf}
     /**
      * Search a patient in the database by CF
      */
@@ -74,7 +74,7 @@ public class PatientRestResource extends RestResource {
         }
     }
 
-    // patient/{patient_cf}
+    // URI: patient/{patient_cf}
     /**
      * Delete a patient from the database
      */

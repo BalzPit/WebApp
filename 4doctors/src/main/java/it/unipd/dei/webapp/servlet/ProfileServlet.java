@@ -4,6 +4,7 @@ import it.unipd.dei.webapp.dao.ProfileDAO;
 import it.unipd.dei.webapp.resource.Patient;
 import it.unipd.dei.webapp.resource.Doctor;
 import it.unipd.dei.webapp.resource.Message;
+import it.unipd.dei.webapp.utils.ErrorCode;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -61,9 +62,9 @@ public final class ProfileServlet extends AbstractDatabaseServlet {
 
                         m = new Message("Profile successfully entered.\n Request type: " + requestType);
                     } catch (SQLException ex) {
-
-                        m = new Message("Cannot search for personal information: unexpected error while accessing the database.\n The query which will be performed is "+query+ ", Request type: " + requestType,
-                                "E200", ex.getMessage());
+                        ErrorCode ec = ErrorCode.SERVER_ERROR;
+                        res.setStatus(ec.getHTTPCode());
+                        m = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Cannot search for personal information: unexpected error while accessing the database.\n The query which will be performed is "+query+ ", Request type: " + requestType);
                     }
 
                     req.setAttribute("personalInfo", patient);
@@ -80,9 +81,10 @@ public final class ProfileServlet extends AbstractDatabaseServlet {
 
                         m = new Message("Profile successfully entered.\n Request type: " + requestType);
                     } catch (SQLException ex) {
+                        ErrorCode ec = ErrorCode.SERVER_ERROR;
+                        res.setStatus(ec.getHTTPCode());
+                        m = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Cannot search for personal information: unexpected error while accessing the database.\n The query which will be performed is "+query+ ", Request type: " + requestType);
 
-                        m = new Message("Cannot search for personal information: unexpected error while accessing the database.\n The query which will be performed is "+query+ ", Request type: " + requestType,
-                                "E200", ex.getMessage());
                     }
 
                     req.setAttribute("personalInfo", doctor);

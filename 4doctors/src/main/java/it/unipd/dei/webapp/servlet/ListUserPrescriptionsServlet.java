@@ -4,6 +4,7 @@ package it.unipd.dei.webapp.servlet;
 import it.unipd.dei.webapp.dao.PrescriptionDAO;
 import it.unipd.dei.webapp.resource.Message;
 import it.unipd.dei.webapp.resource.Prescription;
+import it.unipd.dei.webapp.utils.ErrorCode;
 import it.unipd.dei.webapp.utils.InputFormatException;
 
 import javax.servlet.ServletException;
@@ -65,9 +66,15 @@ public final class ListUserPrescriptionsServlet extends AbstractDatabaseServlet 
             pres = listPresc.listUserPrescriptions(cf, type);
             message = new Message("Prescriptions succesfully searched into the database!");
 
-        } catch (SQLException | InputFormatException ex) {
-            message = new Message("Cannot search for prescriptions: unexpected error while accessing the database.",
-                    "E200", ex.getMessage());
+        } catch (InputFormatException ex) {
+            ErrorCode ec = ErrorCode.INVALID_INPUT_PARAMETERS;
+            res.setStatus(ec.getHTTPCode());
+            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), ex.getMessage());
+        }
+        catch (SQLException ex) {
+            ErrorCode ec = ErrorCode.SERVER_ERROR;
+            res.setStatus(ec.getHTTPCode());
+            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Unexpected error while accessing the database.");
         }
 
         req.setAttribute("message", message);

@@ -298,7 +298,7 @@ public class DoctorDAO {
 
             int resultUpdate = pstmt.executeUpdate();
 
-            if (resultUpdate == 1){
+            if (resultUpdate >= 1){
                 return 0;
             } else {
                 return -1;

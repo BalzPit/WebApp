@@ -13,8 +13,23 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Change the user password
+ */
 public class ChangePasswordServlet extends AbstractDatabaseServlet {
-
+    /**
+     *
+     *
+     * @param req
+     *            the HTTP request from the client.
+     * @param res
+     *            the HTTP response from the server.
+     *
+     * @throws ServletException
+     *             if any error occurs while executing the servlet.
+     * @throws IOException
+     *             if any error occurs in the client/server communication.
+     */
     public void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException{
 
@@ -79,6 +94,19 @@ public class ChangePasswordServlet extends AbstractDatabaseServlet {
         req.getRequestDispatcher("/protected/jsp/patient/patient-change-password.jsp").forward(req, res);
     }
 
+    /**
+     *
+     *
+     * @param req
+     *            the HTTP request from the client.
+     * @param res
+     *            the HTTP response from the server.
+     *
+     * @throws ServletException
+     *             if any error occurs while executing the servlet.
+     * @throws IOException
+     *             if any error occurs in the client/server communication.
+     */
     public void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException{
         doGet(req,res);

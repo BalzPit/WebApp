@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class PasswordDAO {
 
     /**
-     * The SQL statement to be executed to retrieve the user password
+     * The SQL statement to be executed to set the user password
      */
 
     public static final String SET_PATIENT_PASSWORD_STATEMENT = "UPDATE doctors.paziente " +
@@ -25,12 +25,12 @@ public class PasswordDAO {
     private final Connection con;
 
     /**
-     * The patient to which the medical exainations are displayed
+     * The patient to which the the password is canged
      */
     private final String cf;
 
     /**
-     * Creates a new object for storing a patient into the database.
+     * Creates a new object for changing the password of the logged patient.
      *
      * @param con
      *            the connection to the database.
@@ -42,6 +42,12 @@ public class PasswordDAO {
         this.cf = cf;
     }
 
+    /**
+     * Set the new password to the logged user
+     *
+     * @throws SQLException
+     *             if any error occurs while setting the password
+     */
     public void setPassword (String new_psw, String role) throws SQLException {
         PreparedStatement pstmt = null;
         ResultSet rs = null;

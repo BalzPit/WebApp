@@ -89,7 +89,7 @@ public class DoctorRestResource extends RestResource {
             if(result == 0) {
                 JSONObject resJSON = new JSONObject();
                 resJSON.put("result", "successful");
-                res.setStatus(HttpServletResponse.SC_OK);
+                res.setStatus(HttpServletResponse.SC_CREATED);
                 res.getWriter().write(resJSON.toString());
             }
             // Error while creating the doctor

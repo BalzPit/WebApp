@@ -23,13 +23,14 @@ public class LoginFilter extends HttpFilter {
 
         HttpSession session = req.getSession(false);
         String loginURI = req.getContextPath() + "/jsp/login.jsp";
+        String adminLoginURI = req.getContextPath() + "/jsp/admin-login.jsp";
         String patient_homepageURI = req.getContextPath() + "/protected/jsp/patient/patient-homepage.jsp";
         String doctor_homepageURI = req.getContextPath() + "/protected/jsp/doctor/doctor-homepage.jsp";
         String admin_homepageURI = req.getContextPath() + "/protected/jsp/admin/admin-homepage.jsp";
 
         boolean isLoggedIn = (session != null && (session.getAttribute("cf") != null || session.getAttribute("username") != null));
 
-        boolean isLoginRequest = req.getRequestURI().equals(loginURI);
+        boolean isLoginRequest = (req.getRequestURI().equals(loginURI) || req.getRequestURI().equals(adminLoginURI));
 
         if(isLoggedIn && isLoginRequest && session.getAttribute("role") != null){
             res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.

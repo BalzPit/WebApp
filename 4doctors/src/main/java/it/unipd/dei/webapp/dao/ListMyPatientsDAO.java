@@ -20,10 +20,10 @@ public class ListMyPatientsDAO{
 
 
     /**
-     * Creates a new object for checking a user into the database.
+     * Creates a new object for searching followed patients in the db
      *
-     * @param con
-     *            the connection to the database.
+     * @param con the connection to the database.
+     * @param cf the cf of the olgged doctor
      */
     public ListMyPatientsDAO(final Connection con, final String cf) {
         this.con = con;
@@ -31,7 +31,7 @@ public class ListMyPatientsDAO{
     }
 
     /**
-     * Get the list of the prescriptions of a patient
+     * Get the list of the followed patients
      *
      * @throws SQLException
      *             if any error occurs while accessing the database.
@@ -93,6 +93,13 @@ public class ListMyPatientsDAO{
         }
         return patients;
     }
+
+    /**
+     * Creates a new object to add followed patients in the db
+     *
+     * @param doctor_cf  the cf of the logged doctor
+     * @param patient_cf the cf of the patient to add
+     */
 
     public void addMyPatient(final String doctor_cf, final String patient_cf) throws SQLException {
         /**

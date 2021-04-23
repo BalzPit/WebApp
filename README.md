@@ -1,7 +1,8 @@
 ![alt text](mockup/top.png)
-<img src="mockup/logo.png" alt="drawing" width="300"/><br>
+![alt text](mockup/logo.png)
 
 # Web Applications Project 20/21
+
 AUTHORS:
 - **Balzan Pietro**, ID: 1241795
 - **Bettin Manuel**, ID: 1242413

@@ -171,13 +171,11 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
                     default:
                         ErrorCode ec = ErrorCode.MEDICINE_UNSUPPORTED_OPERATION;
                         res.setStatus(ec.getHTTPCode());
-                        //res.setContentType("application/json");
                         res.getWriter().write(ec.toJSON().toString());
                 }
             } else {
                 ErrorCode ec = ErrorCode.MEDICINE_INVALID_PARAMETERS;
                 res.setStatus(ec.getHTTPCode());
-                //res.setContentType("application/json");
                 res.getWriter().write(ec.toJSON().toString());
             }
 

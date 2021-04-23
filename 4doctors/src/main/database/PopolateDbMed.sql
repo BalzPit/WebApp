@@ -76,4 +76,4 @@ INSERT INTO doctors.Segue VALUES ('SON01MED1C0G1UR0', 'GVNPVAG4RE44S3D9', true);
 INSERT INTO doctors.Segue VALUES ('F345MED1K0283759', 'VCNRRT96S13I775M', true);
 INSERT INTO doctors.Segue VALUES ('SON01MED1C0G1UR0', 'VCNRRT96S13I775M', true);
 
-INSERT INTO doctors.Admin VALUES ('nico9779', 'Nicola', 'Levorato', 'nicola.levorato.2@studenti.unipd.it', md5('password'));
+INSERT INTO doctors.Admin VALUES ('nico9779', 'Nicola', 'Levorato', 'nicola.levorato.2@studenti.unipd.it', MD5('password'));

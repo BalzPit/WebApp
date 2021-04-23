@@ -140,7 +140,7 @@ public class DoctorRestResource extends RestResource {
                 res.getWriter().write(resJSON.toString());
             }
             else if(result == -1){
-                ErrorCode ec = ErrorCode.SERVER_ERROR;
+                ErrorCode ec = ErrorCode.DOCTOR_ALREADY_NON_ACTIVE;
                 res.setStatus(ec.getHTTPCode());
                 res.getWriter().write(ec.toJSON().toString());
             }

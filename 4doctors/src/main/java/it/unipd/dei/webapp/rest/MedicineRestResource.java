@@ -108,7 +108,6 @@ public final class MedicineRestResource extends RestResource {
         } catch (Throwable t) {
             ErrorCode ec = ErrorCode.MEDICINE_NOT_FOUND;
             res.setStatus(ec.getHTTPCode());
-            //res.setContentType("application/json");
             res.getWriter().write(ec.toJSON().toString());
         }
     }

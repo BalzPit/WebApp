@@ -216,8 +216,10 @@ public class Doctor {
      */
     public static Doctor fromJSON(InputStream inputStream) throws IOException, ParseException, JSONException {
 
-        String doctorString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-        JSONObject doctorJson = new JSONObject(doctorString);
+        String jsonString = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+        JSONObject json = new JSONObject(jsonString);
+
+        JSONObject doctorJson = json.getJSONObject("doctor");
 
         String cf = doctorJson.getString("cf");
         String name = doctorJson.getString("name");

@@ -4,6 +4,7 @@
 # Web Applications Project 20/21
 
 AUTHORS:
+
 - **Balzan Pietro**, ID: 1241795
 - **Bettin Manuel**, ID: 1242413
 - **Bullo Marcello**, ID: 1204533
@@ -11,6 +12,7 @@ AUTHORS:
 - **Piva Giovanni**, ID: 
 - **Scicchitano Wiliam**, ID: 
 
+---------------------
 
 
 ## Introduction
@@ -18,11 +20,12 @@ Our goal for this project is to implement a web application where both patients 
 
 ## Mockup
 In the report provided we show the mockup of only some pages. To visulize all the mockups see `./mockup/4doctors-mockup.pdf`
-
+ 
 ## Demo test
 
 ### Data source
 To create the database see `./4doctors/src/main/database/dbMed.sql` and to populate it see `./4doctors/src/main/database/PopolateDbMed.sql`
+
 - **Name**: `4Doctors`
 - **Port**: `5432`
 - **Database**: `doctors`

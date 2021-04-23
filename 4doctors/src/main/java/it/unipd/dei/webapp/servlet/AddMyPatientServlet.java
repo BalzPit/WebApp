@@ -4,6 +4,7 @@ package it.unipd.dei.webapp.servlet;
 import it.unipd.dei.webapp.dao.ListMyPatientsDAO;
 import it.unipd.dei.webapp.resource.Message;
 import it.unipd.dei.webapp.resource.Patient;
+import it.unipd.dei.webapp.utils.ErrorCode;
 import it.unipd.dei.webapp.utils.InputFormatException;
 
 import javax.servlet.ServletException;
@@ -49,26 +50,26 @@ public final class AddMyPatientServlet extends AbstractDatabaseServlet {
             patient_cf = req.getParameter("patient_cf");
 
             if (patient_cf == null) {
-                throw new InputFormatException("One or more input parameters are empty");
+                throw new InputFormatException("One or more input parameters are null");
             }
 
             new ListMyPatientsDAO(getDataSource().getConnection(), doctor_cf).addMyPatient(doctor_cf, patient_cf);
 
         } catch (InputFormatException ex) {
-            message = new Message("Cannot forward the request. Invalid input parameters",
-                    "E100", ex.getMessage());
+            ErrorCode err = ErrorCode.INVALID_INPUT_PARAMETERS;
+            resp.setStatus(err.getHTTPCode());
+            message = new Message(err.getErrorMessage(), err.getErrorCode(), ex.getMessage());
         } catch (IllegalArgumentException ex) {
-            message = new Message("Cannot forward the request: gender type is wrong.",
-                    "E102", ex.getMessage());
+            ErrorCode ec = ErrorCode.INVALID_INPUT_PARAMETERS;
+            resp.setStatus(ec.getHTTPCode());
+            message = new Message(ec.getErrorMessage(), ec.getErrorCode(), "Cannot forward the request: gender type is wrong.");
         } catch (SQLException ex) {
-            if (ex.getSQLState().equals("23505")) {
-                message = new Message("Cannot forward the request: SQLException", "E300", ex.getMessage());
-            } else {
-                message = new Message("Cannot forward the request: unexpected error while accessing the database.",
-                        "E200", ex.getMessage());
-            }
+            ErrorCode err = ErrorCode.SERVER_ERROR;
+            resp.setStatus(err.getHTTPCode());
+            message = new Message(err.getErrorMessage(), err.getErrorCode(), ex.getMessage());
         }
 
+        req.setAttribute("message", message);
         req.getRequestDispatcher("/list-my-patients").forward(req, resp);
 
     }

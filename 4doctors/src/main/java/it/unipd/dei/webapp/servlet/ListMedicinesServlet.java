@@ -4,6 +4,7 @@ package it.unipd.dei.webapp.servlet;
 import it.unipd.dei.webapp.dao.MedicineDAO;
 import it.unipd.dei.webapp.resource.Medicine;
 import it.unipd.dei.webapp.resource.Message;
+import it.unipd.dei.webapp.utils.ErrorCode;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -47,8 +48,9 @@ public final class ListMedicinesServlet extends AbstractDatabaseServlet {
             message = new Message("Medicine succesfully searched!");
 
         } catch (SQLException ex) {
-            message = new Message("Cannot search for medicines: unexpected error while accessing the database.",
-                    "E200", ex.getMessage());
+            ErrorCode err = ErrorCode.SERVER_ERROR;
+            res.setStatus(err.getHTTPCode());
+            message = new Message(err.getErrorMessage(), err.getErrorCode(), "Cannot search for medicines: unexpected error while accessing the database.");
         }
 
         req.setAttribute("medicineList", medicineList);

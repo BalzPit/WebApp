@@ -3,6 +3,7 @@ package it.unipd.dei.webapp.servlet;
 import it.unipd.dei.webapp.dao.LoginDAO;
 import it.unipd.dei.webapp.dao.PasswordDAO;
 import it.unipd.dei.webapp.resource.Message;
+import it.unipd.dei.webapp.utils.ErrorCode;
 import it.unipd.dei.webapp.utils.InputFormatException;
 
 import javax.naming.NamingException;
@@ -83,11 +84,13 @@ public class ChangePasswordServlet extends AbstractDatabaseServlet {
             }
 
         } catch (InputFormatException ex){
-            message = new Message("Cannot change password. Invalid input parameters",
-                    "E100", ex.getMessage());
+            ErrorCode err = ErrorCode.INVALID_INPUT_PARAMETERS;
+            res.setStatus(err.getHTTPCode());
+            message = new Message(err.getErrorMessage(), err.getErrorCode(), ex.getMessage());
         } catch (SQLException | NamingException ex){
-            message = new Message("Cannot change password: unexpected error while accessing the database.",
-                    "E200", ex.getMessage());
+            ErrorCode err = ErrorCode.SERVER_ERROR;
+            res.setStatus(err.getHTTPCode());
+            message = new Message(err.getErrorMessage(), err.getErrorCode(), "Cannot change password: unexpected error while accessing the database.");
         }
 
         req.setAttribute("message", message);

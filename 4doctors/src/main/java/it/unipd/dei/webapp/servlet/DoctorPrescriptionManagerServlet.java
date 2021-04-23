@@ -4,6 +4,8 @@ import it.unipd.dei.webapp.dao.PrescriptionDAO;
 import it.unipd.dei.webapp.resource.Prescription;
 import it.unipd.dei.webapp.resource.Prescription.Status;
 import it.unipd.dei.webapp.resource.Message;
+import it.unipd.dei.webapp.utils.ErrorCode;
+import it.unipd.dei.webapp.utils.InputFormatException;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -33,7 +35,7 @@ public class DoctorPrescriptionManagerServlet extends AbstractDatabaseServlet {
             HttpSession session = req.getSession(false);
             String doctor = (String) session.getAttribute("cf");
 
-            if(doctor == null) throw new IllegalArgumentException("Session doctor cf is null");
+            if(doctor == null) throw new InputFormatException("Session doctor cf is null");
 
             // retrieve all pending prescriptions related to the current doctor
             pending = new PrescriptionDAO(getDataSource().getConnection()).searchDoctorPrescriptionByStatus(doctor, Status.PENDING);
@@ -51,9 +53,13 @@ public class DoctorPrescriptionManagerServlet extends AbstractDatabaseServlet {
             });
 
         } catch (SQLException ex) {
-            m = new Message("Cannot search for prescriptions: unexpected error while accessing the database.", "E100", ex.getMessage());
-        } catch (IllegalArgumentException ex) {
-            m = new Message("Error retrieving session, doctor cf parameter is missing.", "E200", ex.getMessage());
+            ErrorCode err = ErrorCode.SERVER_ERROR;
+            res.setStatus(err.getHTTPCode());
+            m = new Message(err.getErrorMessage(), err.getErrorCode(), "Cannot search for prescriptions: unexpected error while accessing the database.");
+        } catch (InputFormatException ex) {
+            ErrorCode err = ErrorCode.INVALID_INPUT_PARAMETERS;
+            res.setStatus(err.getHTTPCode());
+            m = new Message(err.getErrorMessage(), err.getErrorCode(), ex.getMessage());
         }
 
         // stores the pending, approved and rejected prescriptions list and the message as a request attribute

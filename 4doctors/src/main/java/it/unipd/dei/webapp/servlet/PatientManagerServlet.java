@@ -4,6 +4,7 @@ package it.unipd.dei.webapp.servlet;
 import it.unipd.dei.webapp.dao.ListMyPatientsDAO;
 import it.unipd.dei.webapp.resource.Message;
 import it.unipd.dei.webapp.resource.Patient;
+import it.unipd.dei.webapp.utils.ErrorCode;
 import it.unipd.dei.webapp.utils.InputFormatException;
 
 import javax.servlet.ServletException;
@@ -70,8 +71,9 @@ public final class PatientManagerServlet extends AbstractDatabaseServlet {
             message = new Message("Patients succesfully searched into the database!");
 
         } catch (SQLException | InputFormatException ex) {
-            message = new Message("Cannot search for patients: unexpected error while accessing the database.",
-                    "E200", ex.getMessage());
+            ErrorCode err = ErrorCode.SERVER_ERROR;
+            res.setStatus(err.getHTTPCode());
+            message = new Message(err.getErrorMessage(), err.getErrorCode(), ex.getMessage());
         }
 
         req.setAttribute("message", message);

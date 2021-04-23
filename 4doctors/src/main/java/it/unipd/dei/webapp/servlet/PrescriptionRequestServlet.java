@@ -5,6 +5,7 @@ import it.unipd.dei.webapp.dao.PrescriptionDAO;
 import it.unipd.dei.webapp.resource.Medicine;
 import it.unipd.dei.webapp.resource.Message;
 import it.unipd.dei.webapp.resource.Prescription;
+import it.unipd.dei.webapp.utils.ErrorCode;
 import it.unipd.dei.webapp.utils.InputFormatException;
 
 import javax.servlet.ServletException;
@@ -129,19 +130,14 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
 
             message = new Message("Prescription successfully forwarded to the doctor.");
 
-        } catch (InputFormatException ex) {
-            message = new Message("Cannot forward the request. Invalid input parameters",
-                    "E100", ex.getMessage());
-        } catch (IllegalArgumentException ex){
-            message = new Message("Cannot forward the request: gender type is wrong.",
-                    "E102", ex.getMessage());
+        } catch (InputFormatException | IllegalArgumentException ex) {
+            ErrorCode err = ErrorCode.INVALID_INPUT_PARAMETERS;
+            res.setStatus(err.getHTTPCode());
+            message = new Message(err.getErrorMessage(), err.getErrorCode(), ex.getMessage());
         } catch (SQLException ex) {
-            if (ex.getSQLState().equals("23505")) {
-                message = new Message("Cannot forward the request: SQLException", "E300", ex.getMessage());
-            } else {
-                message = new Message("Cannot forward the request: unexpected error while accessing the database.",
-                        "E200", ex.getMessage());
-            }
+            ErrorCode err = ErrorCode.SERVER_ERROR;
+            res.setStatus(err.getHTTPCode());
+            message = new Message(err.getErrorMessage(), err.getErrorCode(), ex.getMessage());
         }
 
         req.setAttribute("message", message);
@@ -166,8 +162,9 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
             message = new Message("Medicine succesfully searched!");
 
         } catch (SQLException ex) {
-            message = new Message("Cannot search for Medicine: unexpected error while accessing the database.",
-                    "E200", ex.getMessage());
+            ErrorCode err = ErrorCode.SERVER_ERROR;
+            res.setStatus(err.getHTTPCode());
+            message = new Message(err.getErrorMessage(), err.getErrorCode(), "Cannot search for Medicine: unexpected error while accessing the database.");
         }
 
         req.setAttribute("medicineList", medicineList);

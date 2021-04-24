@@ -11,9 +11,6 @@
 <body>
 <c:import url="/protected/jsp/doctor/doctor-header.jsp"/>
 
-<h3> test cf <c:out value="${cf}"/></h3>
-<h3> test role<c:out value="${role}"/></h3>
-
 <%-- Profile Overview --%>
   <h2>Profile</h2>
   <p>You are logged as <c:out value="${cf}"/>.</p>

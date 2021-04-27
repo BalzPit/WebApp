@@ -80,6 +80,8 @@ public final class AdminLoginServlet extends AbstractDatabaseServlet {
                 req.getRequestDispatcher("/jsp/admin-login.jsp").forward(req, res);
             }
 
+            return;
+
         } catch (InputFormatException e) {
             ErrorCode ec = ErrorCode.INVALID_INPUT_PARAMETERS;
             res.setStatus(ec.getHTTPCode());

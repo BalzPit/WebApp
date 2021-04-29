@@ -1,0 +1,10 @@
+"Score: 10/10   
+
+-A very well written and well documented report, with good mock-ups and UMLS for an easy understanding of the functionalities and characteristics of the app. There are some sentences in the Sequence Diagram section that could have used some English review, e.g. ""accesses the database by means instantiating a MedicineDAO"". 
+-The provided curl instructions  all work properly.
+- From the Bitbucket repository it is possible to see that all participants worked on the project.
+-Good use of filters for the login.
+-In real applications, strings won't be hardocded in the code, but contained, for example, in a property file.
+-You may want to return a confirmation message in JSON when you correctly delete a doctor/patient/etc., both in case of success or in case of failure.
+-Very good the use of a verification code via mail.
+-Complessively, a very good homework."

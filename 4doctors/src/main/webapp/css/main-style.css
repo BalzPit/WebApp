@@ -155,7 +155,7 @@ a:hover {
 .button, button, input[type=submit], input[type=reset] {
 	min-width: 150px;
 	margin: 5px;
-	padding: 12px 24px;
+	padding: 9px 24px;
 	border: none;
 	border-radius: 50px;
 	background-color: #01b050;

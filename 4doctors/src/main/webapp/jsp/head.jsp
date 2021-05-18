@@ -34,3 +34,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="<c:url value="/js/menu-mobile.js"/>"></script>
+<script>
+    // triggers at the very beginning when the document is loaded
+    $(function() {
+
+        setSiteHeight();
+
+    });
+
+    // triggers each time the window is resized
+    $(window).resize(setSiteHeight);
+
+    // set the #site height to avoid overflow (and consequent scrollbars) out of the body
+    function setSiteHeight() {
+        $("#site").css("height", $(window).height() - $("header").outerHeight() - $("footer").outerHeight());
+    }
+</script>

@@ -7,34 +7,46 @@ body {
 	background: linear-gradient(-45deg, rgba(255,153,0,1) 0%, rgba(255,255,255,1) 50%, rgba(255,153,0,1) 100%);
 }
 
-#box {
+.form-box {
 	width: 100%;
 	max-width: 400px;
 	height: fit-content;
-	margin: 15px auto;    
+	margin: auto;
 	padding: 25px;
 	border-radius: 30px;
 	box-shadow: 12px 6px 13px 0px #000;
 	background-color: rgba(0, 0, 0, 0.5);
 	text-align: center;
 }
-form {
+.form-box form {
 	text-align: center;
 }
 
-h2 {
+.form-box h2 {
 	font-weight: bold;
 }
 
-label {
+.form-box label {
 	margin: 10px;
 }
 
-img {
+.form-box img {
 	width: 80%;
+	max-width: 320px;
 	margin: 10px 20px;
 }
 
-.radio-box {
+.form-box .radio-box {
 	margin: 15px 0;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .form-box {
+        max-width: initial !important;
+        margin: auto !important;
+        border-radius: initial;
+        box-shadow: initial;
+    }
+
 }

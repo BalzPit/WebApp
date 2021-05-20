@@ -6,35 +6,11 @@
 <head>
 	<title>Login</title>
 	<c:import url="/jsp/head.jsp"/>
-	<link type="text/css" rel="stylesheet" href="<c:url value="/css/login-style.css"/>">
-
-	<script>
-		$(function() {
-
-			if($(window).height() > $("body").height()) $("body").css("height", $(window).height());
-
-		});
-	</script>
-	<style>
-		input[type="text"], input[type="password"] {
-			background-size: auto 20px;
-			background-position: 10px center;
-			background-repeat: no-repeat;
-		}
-		#box {
-			height: 450px;
-			margin: auto;
-		}
-		input[name=user] {
-			background-image: url(user.png);
-		}
-		input[name=psw] {
-			background-image: url(key.png);
-		}
-	</style>
+	<link type="text/css" rel="stylesheet" href="<c:url value="/css/login-registration-style.css"/>">
+	<script src="<c:url value="/js/login-registration-centralizer.js"/>"></script>
 </head>
 <body>
-	<div id="box">
+	<div class="form-box">
 		<img src="<c:url value="/media/logo.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
 		<form method="POST" action="<c:url value="/user/login"/>">
 			<input id="user" name="cf" type="text" placeholder="Username" required><br>

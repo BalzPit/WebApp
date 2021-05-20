@@ -6,24 +6,24 @@
 
     <%-- HEAD --%>
     <head>
-        <meta charset="UTF-8">
         <title>Homepage</title>
+        <c:import url="/jsp/head.jsp"/>
     </head>
-
     <%-- BODY --%>
     <body>
-
-        <c:import url="/protected/jsp/patient/patient-header.jsp"/>
-
-        <c:if test='${not empty cf}'>
-            <h1>Welcome, <c:out value="${cf}"/></h1>
-        </c:if>
-
-        <!-- display the message -->
-        <c:if test='${not empty message}'>
-            <c:import url="/jsp/include/show-message.jsp"/>
-        </c:if>
-
+        <c:import url="/jsp/header.jsp"/>
+        <div id="site">
+            <c:import url="/jsp/patient-nav.jsp"/><!--
+            --><section>
+                <c:if test='${not empty cf}'>
+                    <h2>Welcome, <c:out value="${cf}"/></h2>
+                </c:if>
+                <!-- display the message -->
+                <c:if test='${not empty message}'>
+                    <c:import url="/jsp/include/show-message.jsp"/>
+                </c:if>
+                </section>
+        </div>
+        <c:import url="/jsp/footer.jsp"/>
     </body>
-
 </html>

@@ -18,26 +18,39 @@
 	<div class="form-box">
 		<img src="<c:url value="/media/logo.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
 		<h2>Registration</h2>
-		<form method="POST" action="<c:url value="/patient"/>">
-			<input name="cf" type="text" placeholder="Fiscal Code" required pattern="[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}">
-			<input name="name" type="text" placeholder="Name" required pattern="[A-Za-z ]+">
-			<input name="surname" type="text" placeholder="Surname" required pattern="[A-Za-z ]+">
-			<input name="email" type="text" placeholder="Email" required pattern=".*@.*\..+">
+		<form id="registration_form" method="POST" action="<c:url value="/patient"/>">
+			<input id="cf" name="cf" type="text" placeholder="Fiscal Code" required pattern="[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}">
+			<div class="error"></div>
+			<input id="name" name="name" type="text" placeholder="Name" required pattern="[A-Za-z ]+">
+			<div class="error"></div>
+			<input id="surname" name="surname" type="text" placeholder="Surname" required pattern="[A-Za-z ]+">
+			<div class="error"></div>
+			<input id="email" name="email" type="email" placeholder="Email" required pattern=".*@.*\..+">
+			<div class="error"></div>
 			<br>
 			<label>Date of birth</label>
 			<br>
-			<input name="birthday" type="date" placeholder="Birth date" required>
-			<input name="birthplace" type="text" placeholder="Place of birth" required pattern="[\w/ ]+">
-			<input name="address" type="text" placeholder="Residence Address" required pattern="[\w/ ]+">
+			<input id="birthday" name="birthday" type="date" placeholder="Birth date" required>
+			<div class="error"></div>
+			<input id="birthplace" name="birthplace" type="text" placeholder="Place of birth" required pattern="[\w/ ]+">
+			<div class="error"></div>
+			<input id="address" name="address" type="text" placeholder="Residence Address" required pattern="[\w/ ]+">
+			<div class="error"></div>
 			<div>
-				<label><input type="radio" name="gender" value="M" required> Male </label>
-				<label><input type="radio" name="gender" value="F" required> Female</label>
+				<label><input id="male" type="radio" name="gender" value="M" required> Male </label>
+				<label><input id="female" type="radio" name="gender" value="F" required> Female</label>
+				<div class="error"></div>
 			</div>
-			<input name="password" type="password" placeholder="Password" required pattern=".{6,}">
-			<input name="retype_password" type="password" placeholder="Retype Password" required pattern=".{6,}">
+			<input id="password" name="password" type="password" placeholder="Password" required pattern=".{6,}">
+			<div id="password_strength" class="badge badge-pill"></div>
+			<div class="error"></div>
+			<input id="retype_password" name="retype_password" type="password" placeholder="Retype Password" required pattern=".{6,}">
+			<div class="error"></div>
 			<br><br>
 			<input name="submit" type="submit" value="Create account">
 		</form>
 	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous"></script>
+	<script src="${pageContext.request.contextPath}/js/registration.js"></script>
 </body>
 </html>

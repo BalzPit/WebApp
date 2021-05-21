@@ -53,12 +53,12 @@ nav > a {
 }
 nav > a:hover {
 	box-shadow: 0 0 8px #000;
-	background-color: #00b050; 
+	background-color: #00b050;
 }
 
 nav > a:active {
 	box-shadow: inset 0 0 8px #000;
-	background-color: #00b050; 
+	background-color: #00b050;
 }
 
 #toggle-menu-button {
@@ -177,7 +177,7 @@ a:hover {
 }
 
 /* ------------------------------------ FORM INPUT ------------------------------------ */
-input[type="text"], input[type="password"], input[type="date"], select {
+input[type="text"], input[type="password"], input[type="date"], input[type="email"], select {
 	width: 100%;
 	max-width: 300px;
 	height: 40px;
@@ -189,18 +189,18 @@ input[type="text"], input[type="password"], input[type="date"], select {
 	color: #444;
 }
 
-input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, select:focus {
+input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="email"]:focus, select:focus {
 	outline: none;
-    border: 3px solid #01b050;
-    padding: 4px 4px 4px 40px;
-    color: #01b050;
-}
-
-input[type="text"]:focus::placeholder, input[type="password"]:focus::placeholder, input[type="date"]:focus::placeholder, select:focus::placeholder {
+	border: 3px solid #01b050;
+	padding: 4px 4px 4px 40px;
 	color: #01b050;
 }
 
-input:not([type=date]):invalid:not(:placeholder-shown):not(:focus) {
+input[type="text"]:focus::placeholder, input[type="password"]:focus::placeholder, input[type="date"]:focus::placeholder, input[type="email"]:focus::placeholder, select:focus::placeholder {
+	color: #01b050;
+}
+
+input:not([type=date]):invalid:not(:placeholder-shown):not(:focus), input.invalid {
 	border: 3px solid #d00 !important;
 	color: #d00 !important;
 	background-color: #ffcbcb;

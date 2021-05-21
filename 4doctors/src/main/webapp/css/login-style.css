@@ -38,3 +38,16 @@ img {
 .radio-box {
 	margin: 15px 0;
 }
+
+.error {
+	color: #d00;
+	font-weight: bold;
+}
+
+#password_strength {
+	width: 100%;
+	max-width: 300px;
+	padding: 7px;
+	margin: 10px auto;
+	border: none;
+}

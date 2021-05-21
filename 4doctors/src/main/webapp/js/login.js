@@ -4,18 +4,10 @@ var radio_patient = document.getElementById("patient");
 var radio_doctor = document.getElementById("doctor");
 var login_form = document.getElementById("login_form");
 var errors = document.getElementsByClassName("error");
-var message = document.getElementById("message");
+
+const cf_regex = /[A-Za-z]{6}[0-9]{2}[A-Za-z][0-9]{2}[A-Za-z][0-9]{3}[A-Za-z]/;
 
 login_form.addEventListener("submit", function (event) {
-
-    message.innerHTML = "";
-    Array.from(errors).forEach(function (error) {
-        error.innerHTML = "";
-    });
-    cf.classList.remove("invalid");
-    password.classList.remove("invalid");
-    radio_patient.classList.remove("invalid");
-    radio_doctor.classList.remove("invalid");
 
     if(cf.value == null){
         cf.className = "invalid";
@@ -39,7 +31,7 @@ login_form.addEventListener("submit", function (event) {
         errors[0].innerHTML = "The fiscal code can't be empty!";
         event.preventDefault();
         return false;
-    } else if(cf_value.length !== 16 || cf_value.includes(" ")) {
+    } else if(!cf_regex.test(cf_value)) {
         cf.className = "invalid";
         errors[0].innerHTML = "The format of the fiscal code is wrong!";
         event.preventDefault();
@@ -70,4 +62,24 @@ login_form.addEventListener("submit", function (event) {
 
     cf.value = cf_value;
     password.value = CryptoJS.SHA3(pwd_value).toString();
+});
+
+cf.addEventListener("focus", function () {
+    cf.classList.remove("invalid");
+    errors[0].innerHTML = "";
+});
+
+password.addEventListener("focus", function () {
+    password.classList.remove("invalid");
+    errors[1].innerHTML = "";
+});
+
+radio_male.addEventListener("focus", function () {
+    radio_male.classList.remove("invalid");
+    errors[2].innerHTML = "";
+});
+
+radio_female.addEventListener("focus", function () {
+    radio_female.classList.remove("invalid");
+    errors[2].innerHTML = "";
 });

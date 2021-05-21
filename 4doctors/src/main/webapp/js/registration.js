@@ -11,7 +11,6 @@ var address = $("#address");
 var radio_male = $("#male");
 var radio_female = $("#female");
 var errors = $("div.error");
-var message = $("#message");
 var password_strength = $("#password_strength");
 
 
@@ -21,11 +20,6 @@ const strong_password = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
 const medium_password = /(?=.*[a-z])(?=.*[0-9])(?=.{6,})/;
 
 registration_form.submit(function (event) {
-
-    message.html("");
-    errors.html("");
-
-    $("input").removeClass("invalid");
 
     if(cf.val() == null){
         cf.addClass("invalid");
@@ -231,6 +225,11 @@ registration_form.submit(function (event) {
     address.val(address_value);
 });
 
+$("input").focus(function () {
+    $(this).removeClass("invalid");
+    errors.html("");
+});
+
 password.on("input", function (event) {
 
     if($(this).val().length === 0) {
@@ -258,14 +257,14 @@ function strengthChecker(password){
 
     if(strong_password.test(password)) {
         errors.eq(8).html("");
-        password_strength.css("background-color", "green");
+        password_strength.css("background-color", "#01b050");
         password_strength.html("Strong");
     } else if(medium_password.test(password)){
         errors.eq(8).html("");
         password_strength.css("background-color", "blue");
         password_strength.html("Medium");
     } else{
-        password_strength.css("background-color", "red");
+        password_strength.css("background-color", "#d00");
         password_strength.html("Weak");
     }
 }

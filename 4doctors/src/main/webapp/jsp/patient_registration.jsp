@@ -20,13 +20,6 @@
 			<img src="<c:url value="/media/logo.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
 			<h2>Registration</h2>
 
-			<!-- display the message -->
-			<div id="message">
-				<c:if test='${not empty message}'>
-					<c:import url="/jsp/include/show-message.jsp"/>
-				</c:if>
-			</div>
-
 			<form id="registration_form" method="POST" action="<c:url value="/patient"/>">
 				<input id="cf" name="cf" type="text" placeholder="Fiscal Code">
 				<div class="error"></div>
@@ -50,7 +43,7 @@
 					<div class="error"></div>
 				</div>
 				<input id="password" name="password" type="password" placeholder="Password">
-				<div id="password_strength"></div>
+				<div id="password_strength" class="badge badge-pill"></div>
 				<div class="error"></div>
 				<input id="retype_password" name="retype_password" type="password" placeholder="Retype Password">
 				<div class="error"></div>

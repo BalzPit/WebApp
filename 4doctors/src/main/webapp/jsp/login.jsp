@@ -34,16 +34,6 @@
 		</style>
 	</head>
 	<body>
-		<!-- display the message -->
-		<div id="message">
-			<c:if test='${not empty message}'>
-				<c:import url="/jsp/include/show-message.jsp"/>
-			</c:if>
-
-			<c:if test='${not empty patient}'>
-				<p>Patient <c:out value="${patient.cf}"/> successfully registered</p>
-			</c:if>
-		</div>
 		<div id="box">
 			<img src="<c:url value="/media/logo.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
 			<form id="login_form" method="POST" action="<c:url value="/user/login"/>">

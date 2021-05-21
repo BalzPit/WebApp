@@ -6,51 +6,55 @@
 
     <%-- HEAD --%>
     <head>
-        <meta charset="UTF-8">
         <title>Prescriptions List</title>
+        <c:import url="/jsp/head.jsp"/>
     </head>
 
     <%-- BODY --%>
     <body>
 
-        <c:import url="/protected/jsp/patient/patient-header.jsp"/>
+        <c:import url="/jsp/header.jsp"/>
+        <div id="site">
+            <c:import url="/jsp/patient-nav.jsp"/><!--
+            --><section>
+                <c:if test='${not empty cf}'>
+                    <h1>List of all prescriptions of <c:out value="${cf}"/></h1>
+                </c:if>
 
-        <c:if test='${not empty cf}'>
-            <h1>List of all prescriptions of <c:out value="${cf}"/></h1>
-        </c:if>
+                <!-- display the message -->
+                <c:if test='${not empty message}'>
+                    <c:import url="/jsp/include/show-message.jsp"/>
+                </c:if>
 
-        <!-- display the message -->
-        <c:if test='${not empty message}'>
-            <c:import url="/jsp/include/show-message.jsp"/>
-        </c:if>
-
-        <!-- display the list of all prescriptions, if any -->
-        <c:if test='${not empty prescriptionsList}'>
-        <h3>Prescriptions</h3>
-        <table>
-            <thead>
-                <tr>
-                    <td>Id</td><td>Doctor</td><td>Patient</td><td>Date</td><td>Description</td><td>Duration</td><td>Type</td><td>Status</td>
-                </tr>
-            </thead>
-
-            <tbody>
-                    <c:forEach var="prescription" items="${prescriptionsList}">
-                        <!-- print all the rows -->
+                <!-- display the list of all prescriptions, if any -->
+                <c:if test='${not empty prescriptionsList}'>
+                    <h3>Prescriptions</h3>
+                    <table>
+                        <thead>
                         <tr>
-                            <td><c:out value="${prescription.getId()}"/></td>
-                            <td><c:out value="${prescription.getDoctor()}"/></td>
-                            <td><c:out value="${prescription.getPatient()}"/></td>
-                            <td><c:out value="${prescription.getDate()}"/></td>
-                            <td><c:out value="${prescription.getDescription()}"/></td>
-                            <td><c:out value="${prescription.getDuration()}"/></td>
-                            <td><c:out value="${prescription.getType()}"/></td>
-                            <td><c:out value="${prescription.getStatus()}"/></td>
+                            <td>Id</td><td>Doctor</td><td>Patient</td><td>Date</td><td>Description</td><td>Duration</td><td>Type</td><td>Status</td>
                         </tr>
-                    </c:forEach>
-            </tbody>
-        </table>
-        </c:if>
+                        </thead>
 
+                        <tbody>
+                        <c:forEach var="prescription" items="${prescriptionsList}">
+                            <!-- print all the rows -->
+                            <tr>
+                                <td><c:out value="${prescription.getId()}"/></td>
+                                <td><c:out value="${prescription.getDoctor()}"/></td>
+                                <td><c:out value="${prescription.getPatient()}"/></td>
+                                <td><c:out value="${prescription.getDate()}"/></td>
+                                <td><c:out value="${prescription.getDescription()}"/></td>
+                                <td><c:out value="${prescription.getDuration()}"/></td>
+                                <td><c:out value="${prescription.getType()}"/></td>
+                                <td><c:out value="${prescription.getStatus()}"/></td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </c:if>
+                </section>
+        </div>
+        <c:import url="/jsp/footer.jsp"/>
     </body>
 </html>

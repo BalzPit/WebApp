@@ -1,0 +1,37 @@
+@import "main-style.css";
+
+
+/*.personal-info {*/
+/*    background-color: yellow;*/
+/*}*/
+
+/*@media only screen and (min-width: 320px) {*/
+
+
+
+h3 {
+    color: #01b050;
+    width: 80%;
+    text-transform: uppercase;
+    font-size: 1em;
+    letter-spacing: 0.1em;
+}
+
+p {
+    border-width: 1px; /* thickness of border line*/
+    border-style: solid; /* type of border line*/
+    /*border-image: linear-gradient(to right, $aqua, rgba($green,.5)) 1 0%;*/
+    border-color: #ff9900;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    width: 50%;
+    font-size: 1em;
+    padding: 7px 0;
+}
+
+a.button{
+    float: right;
+    border: none;
+    font-weight: normal;
+}

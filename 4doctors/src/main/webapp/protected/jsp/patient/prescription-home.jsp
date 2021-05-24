@@ -8,11 +8,15 @@
     <head>
         <meta charset="UTF-8">
         <title>Prescriptions</title>
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/main-style.css"/>">
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/main-style-medium.css"/>">
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/main-style-small.css"/>">
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/prescription-style.css"/>">
+
     </head>
 
     <%-- BODY --%>
     <body>
-
         <c:import url="/protected/jsp/patient/patient-header.jsp"/>
 
         <c:if test='${not empty cf}'>
@@ -20,15 +24,12 @@
         </c:if>
 
         <%-- List the prescriptions --%>
-        <h2>List of your prescriptions</h2>
-        <form method="GET" action="<c:url value="/list-user-prescriptions"/>">
-            <input name="typeReq" type="submit" value="all" />
-            <input name="typeReq" type="submit" value="pending" />
-            <input name="typeReq" type="submit" value="rejected" />
-            <input name="typeReq" type="submit" value="approved" />
-        </form>
+        <section>
+
+
 
         <%-- Request --%>
+        <span id="request">
         <h2>Prescription request</h2>
         <form method="POST" action="<c:url value="/prescription-request"/>">
             <div>
@@ -62,12 +63,29 @@
             <button type="reset">Reset</button>
 
         </form>
+        </span>
+
+        <span class="listP">
+            <h2>List of your prescriptions</h2>
+                <form method="GET" action="<c:url value="/list-user-prescriptions"/>">
+                    <div>
+                    <input name="typeReq" type="submit" value="all" />
+                    <input name="typeReq" type="submit" value="pending" />
+                    <input name="typeReq" type="submit" value="rejected" />
+                    <input name="typeReq" type="submit" value="approved" />
+                    </div>
+                </form>
+        </span>
+
+        </section>
 
         <%-- Available medicines in the database --%>
+        <div id="medicine">
         <h2>Medicine List</h2>
         <form method="GET" action="<c:url value="/list-medicines"/>">
             <input name="type" type="submit" value="list medicines" />
         </form>
+        </div>
 
     </body>
 

@@ -1,0 +1,25 @@
+.listP {
+
+    float: left;
+    width: 30%;
+    background: #ccc;
+    padding: 20px;
+
+}
+
+
+#request {
+
+    float: left;
+    width: 30%;
+    background: #ccc;
+    padding: 20px;
+
+}
+
+#medicine {
+
+    float: left;
+    background: #ccc;
+
+}

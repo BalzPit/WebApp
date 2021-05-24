@@ -74,12 +74,12 @@ password.addEventListener("focus", function () {
     errors[1].innerHTML = "";
 });
 
-radio_male.addEventListener("focus", function () {
-    radio_male.classList.remove("invalid");
+radio_patient.addEventListener("focus", function () {
+    radio_patient.classList.remove("invalid");
     errors[2].innerHTML = "";
 });
 
-radio_female.addEventListener("focus", function () {
-    radio_female.classList.remove("invalid");
+radio_doctor.addEventListener("focus", function () {
+    radio_doctor.classList.remove("invalid");
     errors[2].innerHTML = "";
 });

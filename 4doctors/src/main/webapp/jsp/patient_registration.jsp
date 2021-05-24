@@ -27,9 +27,7 @@
 			<div class="error"></div>
 			<input id="email" name="email" type="email" placeholder="Email" required pattern=".*@.*\..+">
 			<div class="error"></div>
-			<br>
-			<label>Date of birth</label>
-			<br>
+			<label>Birth date</label>
 			<input id="birthday" name="birthday" type="date" placeholder="Birth date" required>
 			<div class="error"></div>
 			<input id="birthplace" name="birthplace" type="text" placeholder="Place of birth" required pattern="[\w/ ]+">
@@ -46,7 +44,7 @@
 			<div class="error"></div>
 			<input id="retype_password" name="retype_password" type="password" placeholder="Retype Password" required pattern=".{6,}">
 			<div class="error"></div>
-			<br><br>
+			<br>
 			<input name="submit" type="submit" value="Create account">
 		</form>
 	</div>

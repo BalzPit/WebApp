@@ -105,9 +105,10 @@ nav > a:active {
 	transform: rotate(-45deg);
 }
 
-#overlay {
+.overlay {
 	opacity: 0;
 	z-index: 2;
+	display: flex;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -232,4 +233,26 @@ input[name=username], input[name=cf] {
 
 input[type=password] {
     background-image: url('../media/key.png') !important;
+}
+
+/* ------------------------------- ERROR MESSAGE ALERT  --------------------------------- */
+.overlay {
+    opacity: 1;
+    cursor: initial;
+}
+
+#error-message-box {
+    width: 100%;
+    margin: auto;
+    padding: 15px;
+    background-color: #000;
+    text-align: center;
+}
+
+#error-message-box h1.error {
+    color: #d00;
+}
+
+#error-message-box h1.message {
+    color: #01b050;
 }

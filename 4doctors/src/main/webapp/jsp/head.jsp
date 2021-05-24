@@ -35,6 +35,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="<c:url value="/js/menu-mobile.js"/>"></script>
+<script src="<c:url value="/js/error-message.js"/>"></script>
 <script>
     // triggers at the very beginning when the document is loaded
     $(function() {

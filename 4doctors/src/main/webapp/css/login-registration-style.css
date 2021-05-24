@@ -41,7 +41,7 @@ body {
 }
 
 .form-box .error {
-	color: #d00;
+	color: var(--error-red-light);
 	font-weight: bold;
 }
 

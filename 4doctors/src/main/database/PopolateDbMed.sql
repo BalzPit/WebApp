@@ -1,12 +1,14 @@
-INSERT INTO doctors.Paziente VALUES ('MLNMTT96E16H816G','mattia','molinaro','email1',MD5('test'),'M','1996-05-16','San Daniele Del Fr.','Via zef,9,Forgaria Nel Friuli(UD),33030');
-INSERT INTO doctors.Paziente VALUES ('GVNPVAG4RE44S3D9', 'giovanni','piva','email4',MD5('test'), 'M', '1997-01-23' ,'Padova', 'Via Cesare Battisti, 124 (PD), 35121');
-INSERT INTO doctors.Paziente VALUES ('VCNRRT96S13I775M','roberto', 'piva','email2',MD5('test'),'M', '1996-11-13', 'Soave', 'Via degli alpini, 29 (VR), 37030');
-INSERT INTO doctors.Paziente VALUES ('MTTRSO97E67L781I','rosa', 'miotto','email3',MD5('test'),'F', '1998-07-23', 'Verona', 'Via degli boh, 33 (VR), 34876');
-INSERT INTO doctors.Paziente VALUES ('BLLMCL94B14L736U','Marcello','Bullo','bullo.marcello@gmail.com',MD5('test'),'M','2021-04-08','Padova','via Sografi');
-INSERT INTO doctors.Paziente VALUES ('SCCWLM97P23A001U', 'wiliam', 'scicchitano','wiliam.scicchitano@gmail.com', MD5('test'), 'M', '1997-09-23' ,'Abano Terme', 'Via Trespole, 124 (PD), 35121');
+INSERT INTO doctors.Paziente VALUES ('MLNMTT96E16H816G','mattia','molinaro','email1',MD5('1e2e9fc2002b002d75198b7503210c05a1baac4560916a3c6d93bcce3a50d7f00fd395bf1647b9abb8d1afcc9c76c289b0c9383ba386a956da4b38934417789e'),'M','1996-05-16','San Daniele Del Fr.','Via zef,9,Forgaria Nel Friuli(UD),33030');
+INSERT INTO doctors.Paziente VALUES ('GVNPVAG4RE44S3D9', 'giovanni','piva','email4',MD5('1e2e9fc2002b002d75198b7503210c05a1baac4560916a3c6d93bcce3a50d7f00fd395bf1647b9abb8d1afcc9c76c289b0c9383ba386a956da4b38934417789e'), 'M', '1997-01-23' ,'Padova', 'Via Cesare Battisti, 124 (PD), 35121');
+INSERT INTO doctors.Paziente VALUES ('VCNRRT96S13I775M','roberto', 'piva','email2',MD5('1e2e9fc2002b002d75198b7503210c05a1baac4560916a3c6d93bcce3a50d7f00fd395bf1647b9abb8d1afcc9c76c289b0c9383ba386a956da4b38934417789e'),'M', '1996-11-13', 'Soave', 'Via degli alpini, 29 (VR), 37030');
+INSERT INTO doctors.Paziente VALUES ('MTTRSO97E67L781I','rosa', 'miotto','email3',MD5('1e2e9fc2002b002d75198b7503210c05a1baac4560916a3c6d93bcce3a50d7f00fd395bf1647b9abb8d1afcc9c76c289b0c9383ba386a956da4b38934417789e'),'F', '1998-07-23', 'Verona', 'Via degli boh, 33 (VR), 34876');
+INSERT INTO doctors.Paziente VALUES ('BLLMCL94B14L736U','Marcello','Bullo','bullo.marcello@gmail.com',MD5('1e2e9fc2002b002d75198b7503210c05a1baac4560916a3c6d93bcce3a50d7f00fd395bf1647b9abb8d1afcc9c76c289b0c9383ba386a956da4b38934417789e'),'M','2021-04-08','Padova','via Sografi');
+INSERT INTO doctors.Paziente VALUES ('SCCWLM97P23A001U', 'wiliam', 'scicchitano','wiliam.scicchitano@gmail.com', MD5('1e2e9fc2002b002d75198b7503210c05a1baac4560916a3c6d93bcce3a50d7f00fd395bf1647b9abb8d1afcc9c76c289b0c9383ba386a956da4b38934417789e'), 'M', '1997-09-23' ,'Abano Terme', 'Via Trespole, 124 (PD), 35121');
 
-INSERT INTO doctors.Medico VALUES ('SON01MED1C0G1UR0', 'andrea', 'rossi','andrea.rossi@gmail.com',MD5('test'), 'M', '1965-06-11', 'Venezia', 'A34VE', 'Via dei medici, 118 (VE), 34761');
-INSERT INTO doctors.Medico VALUES ('F345MED1K0283759', 'giulia', 'bianchi','giulia.bianchi@gmail.com',MD5('test'), 'F', '1979-04-06', 'Milano', 'A34VE', 'Via del corto, 143 (VE), 35676');
+INSERT INTO doctors.Medico VALUES ('SON01MED1C0G1UR0', 'andrea', 'rossi','andrea.rossi@gmail.com',MD5('1e2e9fc2002b002d75198b7503210c05a1baac4560916a3c6d93bcce3a50d7f00fd395bf1647b9abb8d1afcc9c76c289b0c9383ba386a956da4b38934417789e'), 'M', '1965-06-11', 'Venezia', 'A34VE', 'Via dei medici, 118 (VE), 34761');
+INSERT INTO doctors.Medico VALUES ('F345MED1K0283759', 'giulia', 'bianchi','giulia.bianchi@gmail.com',MD5('1e2e9fc2002b002d75198b7503210c05a1baac4560916a3c6d93bcce3a50d7f00fd395bf1647b9abb8d1afcc9c76c289b0c9383ba386a956da4b38934417789e'), 'F', '1979-04-06', 'Milano', 'A34VE', 'Via del corto, 143 (VE), 35676');
+
+INSERT INTO doctors.Admin VALUES ('nico9779', 'Nicola', 'Levorato', 'nicola.levorato.2@studenti.unipd.it', MD5('a6818b8188b36c44d17784c5551f63accc5deaf8786f9d0ad1ae3cd8d887cbab4f777286dbb315fb14854c8774dc0d10b5567e4a705536cc2a1d61ec0a16a7a6'));
 
 INSERT INTO doctors.Farmaco VALUES ('1322AB0001', 'Tachipirina', 'OTC', 'Angelini', 'gocce');
 INSERT INTO doctors.Farmaco VALUES ('234DF21345', 'Broncovaleas', 'SOP', 'Valeant', 'compresse 100mg');
@@ -75,5 +77,3 @@ INSERT INTO doctors.RicettaEsame (esame, ricetta, data) VALUES ('RADGF1', 'cbc4b
 INSERT INTO doctors.Segue VALUES ('SON01MED1C0G1UR0', 'GVNPVAG4RE44S3D9', true);
 INSERT INTO doctors.Segue VALUES ('F345MED1K0283759', 'VCNRRT96S13I775M', true);
 INSERT INTO doctors.Segue VALUES ('SON01MED1C0G1UR0', 'VCNRRT96S13I775M', true);
-
-INSERT INTO doctors.Admin VALUES ('nico9779', 'Nicola', 'Levorato', 'nicola.levorato.2@studenti.unipd.it', MD5('password'));

@@ -128,15 +128,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>AdminHome</servlet-name>
-        <servlet-class>it.unipd.dei.webapp.servlet.AdminHomeServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminHome</servlet-name>
-        <url-pattern>/admin/homepage</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>DoctorPrescriptionManager</servlet-name>
         <servlet-class>it.unipd.dei.webapp.servlet.DoctorPrescriptionManagerServlet</servlet-class>
     </servlet>

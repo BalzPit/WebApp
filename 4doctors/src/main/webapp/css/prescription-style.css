@@ -1,25 +1,90 @@
-.listP {
 
-    float: left;
-    width: 30%;
-    background: #ccc;
-    padding: 20px;
-
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-
-#request {
-
-    float: left;
-    width: 30%;
-    background: #ccc;
-    padding: 20px;
-
+body{
+	background-color: rgb(255, 255, 255);
+	color: rgb(0, 0, 0);
+	font-weight: 300;
+	height: 100%;
 }
-
-#medicine {
-
-    float: left;
-    background: #ccc;
-
+h1{
+	font-weight: 100;
+	text-align: center;
+	margin: 30px;
+}
+h1 span{
+	font-size: 18px;
+	font-weight: 300;
+}
+.sideWrap{
+	min-height: 80%;
+	min-height: calc(100% - 200px);
+	margin: 10%;
+	margin: 100px;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+.sideWrap:after{
+	display: block;
+	content: '';
+	clear: both;
+}
+h2{
+	font-weight: 100;
+}
+.side{
+	float: left;
+	height: auto;
+	width: 50%;
+	padding: 50px 50px 50px 0;
+	text-align: right;
+	position: relative;
+}
+._right{
+	padding: 50px 0 50px 50px;
+	border-left: 1px solid rgba(0, 0, 0, .3);
+	text-align: left;
+}
+.bl{
+    padding: 10px 0 10px 10px;
+    display: block;
+}
+.p_list{
+    padding: 10px 10px 10px 10px;
+    display: block;
+}
+@media screen and (max-width: 940px){
+	.sideWrap{
+		margin: 0px;
+		display: block;
+	}
+	.side{
+		float: none;
+		width: 70%;
+		height: auto;
+		margin: auto;
+		padding: 50px 30px;
+		text-align: left;
+	}
+	._right{
+		border: none;
+		border-top: 1px solid rgba(0, 0, 0, .3);
+	}
+}
+@media screen and (max-width: 550px){
+	.side{
+		width: calc(100% - 40px);
+		margin: 30px 20px;
+		padding: 0;
+	}
+	._right{
+		border-top: 2px solid rgba(0, 0, 0, 1);
+		padding-top: 30px;
+	}
 }

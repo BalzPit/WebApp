@@ -128,7 +128,7 @@ nav > a:active {
 section {
 	width: 85%;
 	height: 100%;
-	padding: 16px;
+	padding: 30px 50px 30px 50px;
 	background-color: #ff990047;
 	overflow-y: scroll;
 }

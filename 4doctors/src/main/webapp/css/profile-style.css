@@ -8,9 +8,8 @@
 /*@media only screen and (min-width: 320px) {*/
 
 
-
 h3 {
-    color: #01b050;
+    color: var(--main-green);
     width: 80%;
     text-transform: uppercase;
     font-size: 1em;
@@ -20,18 +19,42 @@ h3 {
 p {
     border-width: 1px; /* thickness of border line*/
     border-style: solid; /* type of border line*/
-    /*border-image: linear-gradient(to right, $aqua, rgba($green,.5)) 1 0%;*/
-    border-color: #ff9900;
+    border-color: var(--main-yellow);
     border-top: 0;
     border-right: 0;
     border-left: 0;
     width: 50%;
     font-size: 1em;
     padding: 7px 0;
+    display: inline-block;
 }
 
+
 a.button{
-    float: right;
     border: none;
     font-weight: normal;
 }
+
+.btn {
+    margin-top:  7px;
+    margin-right: 0;
+    text-transform: uppercase;
+    font-size: 1em;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    color: var(--main-green);
+}
+
+.pinfo-block {
+    display:flex;
+    justify-content:space-between;
+    /*outline: 2px dashed blue;*/
+}
+
+.roundpic {
+    width: 150px;
+    border-radius: 100%;
+    display: block;
+}
+

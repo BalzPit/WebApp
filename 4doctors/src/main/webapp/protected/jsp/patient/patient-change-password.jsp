@@ -21,12 +21,10 @@
           </c:if>
 
           <form method="POST" action="<c:url value="/change-password"/>">
-            <table>
-              <tr><td>Current Password</td><td><input type="password" name="current" ></td></tr>
-              <tr><td>New Password</td><td><input type="password" name="new"></td></tr>
-              <tr><td>Confirm Password</td><td><input type="password" name="confirm"></td></tr>
-              <tr><td><input type="submit" value="Change Password"></td></tr>
-            </table>
+              <input type="password" name="current" placeholder="Current password"><br>
+              <input type="password" name="new" placeholder="New password"><br>
+              <input type="password" name="confirm" placeholder="Confirm password"><br>
+              <input type="submit" value="Change Password">
           </form>
           </section>
     </div>

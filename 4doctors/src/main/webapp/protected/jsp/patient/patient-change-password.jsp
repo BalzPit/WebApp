@@ -20,15 +20,20 @@
             <c:import url="/jsp/include/show-message.jsp"/>
           </c:if>
 
-          <form method="POST" action="<c:url value="/change-password"/>">
+          <form id="change_password_form" method="POST" action="<c:url value="/change-password"/>">
               <input type="password" name="current" placeholder="Current password"><br>
+              <div class="error"></div>
               <input type="password" name="new" placeholder="New password"><br>
+              <div class="error"></div>
               <input type="password" name="confirm" placeholder="Confirm password"><br>
+              <div class="error"></div>
               <input type="submit" value="Change Password">
           </form>
           </section>
     </div>
     <c:import url="/jsp/footer.jsp"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous"></script>
+    <script src="${pageContext.request.contextPath}/js/change-password.js"></script>
   </body>
 
 

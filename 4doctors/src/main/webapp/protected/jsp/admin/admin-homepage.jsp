@@ -21,24 +21,26 @@
                     <c:if test='${not empty sessionScope.username}'>
                         <h1>Welcome, admin <c:out value="${sessionScope.username}"/></h1>
                     </c:if>
-
-                    <table id="doctors_table">
-                        <tr>
-                            <th scope="col">Doctor</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Surname</th>
-                            <th scope="col">Options</th>
-                        </tr>
-                    </table>
-                    <br>
-                    <table id="patients_table">
-                        <tr>
-                            <th scope="col">Patient</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Surname</th>
-                            <th scope="col">Options</th>
-                        </tr>
-                    </table>
+                    <div id="doctors_wrapper">
+                        <table id="doctors_table">
+                            <tr>
+                                <th scope="col">Doctor</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Surname</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="patients_wrapper">
+                        <table id="patients_table">
+                            <tr>
+                                <th scope="col">Patient</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Surname</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                        </table>
+                    </div>
                 </section>
         </div>
 

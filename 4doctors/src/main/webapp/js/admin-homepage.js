@@ -1,5 +1,7 @@
 var doctors_table = $("#doctors_table");
 var patients_table = $("#patients_table");
+var doctors_wrapper = $("#doctors_wrapper");
+var patients_wrapper = $("#patients_wrapper");
 
 const contextPath = "http://localhost:8080/4Doctors-1.00";
 
@@ -8,15 +10,20 @@ $(document).ready(function (){
         if(status == "success") {
             var doctors_list = data["data"]["doctors-list"];
 
-            $.each(doctors_list, function (index, element){
-                var cf_html = $(document.createElement("td")).text(element["cf"]);
-                var name_html = $(document.createElement("td")).text(element["name"]);
-                var surname_html = $(document.createElement("td")).text(element["surname"]);
-                var buttons = $(document.createElement("td")).html("<button class='info' type='button'>INFO</button><button class='update' type='button'>UPDATE</button>");
-                doctors_table.append($(document.createElement("tr")).append(cf_html).append(name_html).append(surname_html).append(buttons));
-            });
+            if(doctors_list.length !== 0){
+                $.each(doctors_list, function (index, element){
+                    var cf_html = $(document.createElement("td")).text(element["cf"]);
+                    var name_html = $(document.createElement("td")).text(element["name"]);
+                    var surname_html = $(document.createElement("td")).text(element["surname"]);
+                    var buttons = $(document.createElement("td")).html("<button class='info' type='button'>INFO</button><button class='update' type='button'>UPDATE</button>");
+                    doctors_table.append($(document.createElement("tr")).append(cf_html).append(name_html).append(surname_html).append(buttons));
+                });
 
-            doctors_table.css("display", "block");
+                doctors_table.css("display", "block");
+            }
+            else {
+                doctors_wrapper.text("There are no active doctors in the database.");
+            }
         } else {
             console.log(data);
             console.log(status);
@@ -28,15 +35,19 @@ $(document).ready(function (){
         if(status == "success") {
             var patients_list = data["data"]["patients-list"];
 
-            $.each(patients_list, function (index, element){
-                var cf_html = $(document.createElement("td")).text(element["cf"]);
-                var name_html = $(document.createElement("td")).text(element["name"]);
-                var surname_html = $(document.createElement("td")).text(element["surname"]);
-                var buttons = $(document.createElement("td")).html("<button class='info' type='button'>INFO</button><button class='delete' type='button'>DELETE</button>");
-                patients_table.append($(document.createElement("tr")).append(cf_html).append(name_html).append(surname_html).append(buttons));
-            });
+            if(patients_list.length !== 0) {
+                $.each(patients_list, function (index, element){
+                    var cf_html = $(document.createElement("td")).text(element["cf"]);
+                    var name_html = $(document.createElement("td")).text(element["name"]);
+                    var surname_html = $(document.createElement("td")).text(element["surname"]);
+                    var buttons = $(document.createElement("td")).html("<button class='info' type='button'>INFO</button><button class='delete' type='button'>DELETE</button>");
+                    patients_table.append($(document.createElement("tr")).append(cf_html).append(name_html).append(surname_html).append(buttons));
+                });
 
-            patients_table.css("display", "block");
+                patients_table.css("display", "block");
+            } else {
+                patients_wrapper.text("There are no patients in the database.");
+            }
         } else {
             console.log(data);
             console.log(status);
@@ -110,6 +121,7 @@ patients_table.on("click", "button.info", function (){
 doctors_table.on("click", "button.update", function (){
     var cf = $(this).parent().siblings("td:first").text();
     var row = $(this).parent().parent();
+    var next_row = row.next();
 
     $.ajax({
         url: contextPath + "/rest/doctor/" + cf,
@@ -117,6 +129,12 @@ doctors_table.on("click", "button.update", function (){
         contentType: "application/json",
         success: function(result) {
             row.remove();
+            if(next_row.attr("class") == "info_row") {
+                next_row.remove();
+            }
+            if($("#doctors_table tr").length === 1) {
+                doctors_wrapper.text("There are no active doctors in the database.");
+            }
         },
         error: function(result) {
             console.log(result);
@@ -128,12 +146,19 @@ doctors_table.on("click", "button.update", function (){
 patients_table.on("click", "button.delete", function (){
     var cf = $(this).parent().siblings("td:first").text();
     var row = $(this).parent().parent();
+    var next_row = row.next();
 
     $.ajax({
         url: contextPath + "/rest/patient/" + cf,
         method: "DELETE",
         success: function(result) {
             row.remove();
+            if(next_row.attr("class") == "info_row") {
+                next_row.remove();
+            }
+            if($("#patients_table tr").length === 1) {
+                patients_wrapper.text("There are no patients in the database.");
+            }
         },
         error: function(result) {
             console.log(result);

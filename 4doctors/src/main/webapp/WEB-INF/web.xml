@@ -83,6 +83,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>ChangeEmail</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.ChangeEmailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeEmail</servlet-name>
+        <url-pattern>/change-email</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ListMedicines</servlet-name>
         <servlet-class>it.unipd.dei.webapp.servlet.ListMedicinesServlet</servlet-class>
     </servlet>

@@ -3,21 +3,46 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Homepage</title>
-</head>
-<body>
-  <c:if test='${not empty message}'>
-    <c:import url="/jsp/include/show-message.jsp"/>
-  </c:if>
+    <head>
+        <meta charset="UTF-8">
+        <title>Homepage</title>
+        <c:import url="/jsp/head.jsp"/>
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/admin-homepage-style.css"/>">
+    </head>
+    <body>
+        <c:import url="/jsp/header.jsp"/>
+        <div id="site">
+            <c:import url="/jsp/admin-nav.jsp"/><!--
+              --><section>
+                    <c:if test='${not empty message}'>
+                        <c:import url="/jsp/include/show-message.jsp"/>
+                    </c:if>
 
-  <c:if test='${not empty sessionScope.username}'>
-    <h1>Welcome, admin <c:out value="${sessionScope.username}"/></h1>
-  </c:if>
+                    <c:if test='${not empty sessionScope.username}'>
+                        <h1>Welcome, admin <c:out value="${sessionScope.username}"/></h1>
+                    </c:if>
 
-  <form method="GET" action="<c:url value="/user/logout"/>">
-    <input type="submit" value="Logout" />
-  </form>
-</body>
+                    <table id="doctors_table">
+                        <tr>
+                            <th scope="col">Doctor</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">Options</th>
+                        </tr>
+                    </table>
+                    <br>
+                    <table id="patients_table">
+                        <tr>
+                            <th scope="col">Patient</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">Options</th>
+                        </tr>
+                    </table>
+                </section>
+        </div>
+
+        <c:import url="/jsp/footer.jsp"/>
+        <script src="${pageContext.request.contextPath}/js/admin-homepage.js"></script>
+    </body>
 </html>

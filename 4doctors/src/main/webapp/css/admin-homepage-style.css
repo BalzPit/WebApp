@@ -1,0 +1,8 @@
+#doctors_table, #patients_table {
+    display: none;
+}
+
+.info_row {
+    text-align: center;
+    vertical-align: middle;
+}

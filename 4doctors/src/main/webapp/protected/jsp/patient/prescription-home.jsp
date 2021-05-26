@@ -49,7 +49,7 @@
                     <label for="doctor">Medicine</label><br>
 
                     <label>Medicine:</label>
-                    <select name="med" id="med_select"></select><br>
+                    <select name="code" id="med_select"></select><br>
 
                     <%-- <label>code: </label>
                     <input name="code" type="text"><br> --%>

@@ -1,34 +1,27 @@
-/*
-var array_paesi = ['Belgio','Francia','Inghilterra','Italia','Olanda','Spagna'],
-esempio_select_1 = document.getElementById('esempio_select_1');
 
-for( paesi in array_paesi ) {
-    esempio_select_1.add( new Option( array_paesi[paesi] ) );
-};
-*/
-/*
+(function() {
 var xhr = new XMLHttpRequest();
-xhr.open('GET', '/rest/medicine');
+var url = 'http://localhost:8080/4Doctors-1.00/rest/medicine';
+xhr.onreadystatechange = alertContents;
+xhr.open('GET', url);
 xhr.send();
-xhr.onload = function() {
+
+function alertContents() {
+
+    if(xhr.readyState === XMLHttpRequest.DONE){
 
     if(xhr.status === 200){
 
-        responseObject = JSON.parse(xhr.responseText);
-        med = document.getElementById('esempio_select_1');
+        var responseObject = JSON.parse(xhr.responseText);
+        var resource = responseObject['resourceList'];
+        var med = document.getElementById('med_select');
 
-        for (var i = 0; i < responseObject.resourceList.length; i++){
+        for (var i = 0; i < resource.length; i++){
 
-            med.add(new Option(responseObject.resourceList[i].medicine.name))
+            med.add(new Option(resource[i].medicine.name, resource[i].medicine.code));
 
         }
     }
+    }
 }
-*/
-
-$.getJSON("/rest/medicine", function(data) {
-    var items = [];
-    $.each(data, function(key, val) {   <option value="ipod">iPod</option>
-        items.push( "<option value='" + key + "'>" + val + "</option>" );
-        });
-    $("<ul/>", {    "class": "my-new-list",    html: items.join( "" )  }).appendTo( "body" );});
+})();

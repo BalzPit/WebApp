@@ -8,6 +8,11 @@
     <head>
         <meta charset="UTF-8">
         <title>Prescriptions List</title>
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/main-style.css"/>">
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/main-style-medium.css"/>">
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/main-style-small.css"/>">
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/prescription-list-style.css"/>">
+
     </head>
 
     <%-- BODY --%>

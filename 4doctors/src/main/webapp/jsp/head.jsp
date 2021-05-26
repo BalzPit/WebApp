@@ -37,6 +37,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="<c:url value="/js/main.js"/>"></script>
 <script src="<c:url value="/js/menu-mobile.js"/>"></script>
-<script>
-
-</script>
+<script src="<c:url value="/js/error-message.js"/>"></script>

@@ -1,0 +1,58 @@
+.row {
+    height: calc(100% - 80px);
+}
+
+.row > div {
+    max-height: 100%;
+}
+
+.prescription-header {
+    padding: 5px;
+    background-color: var(--main-yellow);
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.prescription-box {
+    max-height: calc(100% - 50px);
+    margin-bottom: 10px;
+    overflow-y: auto;
+}
+
+.prescription-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.prescription-item > div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.prescription-item > div:nth-child(1) {
+    width: calc(100% - 170px);
+    height: 100%;
+}
+
+.prescription-item > div:nth-child(2) {
+    width: 150px;
+    height: 100%;
+    text-align: center;
+}
+
+.prescription-item.APPROVED {
+    background-color: #9bff98;
+}
+
+.prescription-item.REJECTED {
+    background-color: var(--error-red-light);
+}
+
+@media only screen and (max-width: 992px) {
+
+    .prescription-box {
+        max-height: 300px;
+    }
+}

@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
         <title>Add new doctor</title>
         <c:import url="/jsp/head.jsp"/>
         <link rel="stylesheet" type="text/css" href="<c:url value="/css/admin-add-doctor-style.css"/>">

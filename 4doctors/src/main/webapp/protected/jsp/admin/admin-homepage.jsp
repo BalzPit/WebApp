@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
     <title>Homepage</title>
     <c:import url="/jsp/head.jsp"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/css/admin-homepage-style.css"/>">

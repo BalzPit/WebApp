@@ -38,6 +38,3 @@
 <script src="<c:url value="/js/main.js"/>"></script>
 <script src="<c:url value="/js/menu-mobile.js"/>"></script>
 <script src="<c:url value="/js/error-message.js"/>"></script>
-<script>
-
-</script>

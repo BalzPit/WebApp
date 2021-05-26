@@ -16,7 +16,7 @@
             <c:import url="/jsp/patient-nav.jsp"/><!--
             --><section>
                 <c:if test='${not empty cf}'>
-                    <h2>Welcome, <c:out value="${cf}"/></h2>
+                    <h2 class="welcome-title">Welcome, </h2>
                 </c:if>
                 <!-- display the message -->
                 <c:if test='${not empty message}'>
@@ -24,6 +24,9 @@
                 </c:if>
                 </section>
         </div>
+        <script>var cf="${cf}"</script>
+        <script>var contexPath="${pageContext.request.contextPath}"</script>
+        <script src="${pageContext.request.contextPath}/js/getPatientName.js"></script>
         <c:import url="/jsp/footer.jsp"/>
     </body>
 </html>

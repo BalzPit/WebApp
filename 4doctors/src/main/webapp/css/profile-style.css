@@ -1,13 +1,5 @@
 @import "main-style.css";
 
-
-/*.personal-info {*/
-/*    background-color: yellow;*/
-/*}*/
-
-/*@media only screen and (min-width: 320px) {*/
-
-
 h3 {
     color: var(--main-green);
     width: 80%;

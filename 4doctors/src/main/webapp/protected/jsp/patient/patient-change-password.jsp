@@ -15,11 +15,6 @@
       --><section>
           <h1>Change Password</h1>
 
-          <!-- display the message -->
-          <c:if test='${not empty message}'>
-            <c:import url="/jsp/include/show-message.jsp"/>
-          </c:if>
-
           <form id="change_password_form" method="POST" action="<c:url value="/change-password"/>">
               <input type="password" name="current" placeholder="Current password"><br>
               <div class="error"></div>

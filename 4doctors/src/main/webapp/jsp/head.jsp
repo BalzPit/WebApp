@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="Balzan Pietro, Bettin Manuel, Bullo Marcello, Levorato Nicola, Piva Giovanni, Scicchitano Wiliam">
+<meta name="description" content="4Doctors is the web application used by patients their doctors to manage their medical records and requests">
 
 <!-- FAVICON -->
 <link rel="apple-touch-icon" sizes="57x57" href="<c:url value="/media/favicon/apple-icon-57x57.png"/>">
@@ -34,21 +35,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="<c:url value="/js/main.js"/>"></script>
 <script src="<c:url value="/js/menu-mobile.js"/>"></script>
 <script src="<c:url value="/js/error-message.js"/>"></script>
 <script>
-    // triggers at the very beginning when the document is loaded
-    $(function() {
 
-        setSiteHeight();
-
-    });
-
-    // triggers each time the window is resized
-    $(window).resize(setSiteHeight);
-
-    // set the #site height to avoid overflow (and consequent scrollbars) out of the body
-    function setSiteHeight() {
-        $("#site").css("height", $(window).height() - $("header").outerHeight() - $("footer").outerHeight());
-    }
 </script>

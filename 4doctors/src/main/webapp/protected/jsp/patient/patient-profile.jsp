@@ -5,8 +5,9 @@
 <html lang="en">
     <head>
         <title>Home</title>
-        <link type="text/css" rel="stylesheet" href="<c:url value="/css/profile-style.css"/>">
+
         <c:import url="/jsp/head.jsp"/>
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/profile-style.css"/>">
     </head>
 
     <body>
@@ -17,13 +18,7 @@
                 <div class="personal-info">
                     <h2>Personal Information</h2>
                     <br>
-<%--                        <p>You are logged as <c:out value="${cf}"/>.</p>--%>
-
-                    <!-- display the message -->
-<%--                        <c:if test='${not empty message}'>--%>
-<%--                            <c:import url="/jsp/include/show-message.jsp"/>--%>
-<%--                        </c:if>--%>
-                    <img class="roundpic" src="media/image-profile.png" alt="image-profile" />
+                    <img class="roundpic" src="${pageContext.request.contextPath}/media/image-profile.png" alt="image-profile" />
                     <br>
                     <br>
 

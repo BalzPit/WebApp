@@ -44,8 +44,6 @@
 
                 <hr/>
 
-                <c:import url="/jsp/include/show-message.jsp"/>
-
                 <!-- display the list of FUTURE medical examinations -->
 
                 <c:if test='${not empty futureExaminationsList && !message.error}'>

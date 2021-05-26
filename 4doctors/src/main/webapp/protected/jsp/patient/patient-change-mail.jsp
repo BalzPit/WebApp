@@ -14,12 +14,6 @@
     <c:import url="/jsp/patient-nav.jsp"/><!--
         --><section>
     <h2>Change E-mail</h2>
-
-    <!-- display the message -->
-    <c:if test='${not empty message}'>
-      <c:import url="/jsp/include/show-message.jsp"/>
-    </c:if>
-
     <form id="update_email_form" method="POST" action="<c:url value="/change-email"/>">
       <input id="email-current" type="text" name="current" placeholder="Current e-mail"><br>
       <div class="error"></div>

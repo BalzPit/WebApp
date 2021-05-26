@@ -245,6 +245,11 @@ input[type=password] {
     background-image: url('../media/key.png') !important;
 }
 
+.error {
+	font-weight: bold;
+	color: var(--error-red-light);
+}
+
 /* ------------------------------- ERROR MESSAGE ALERT  --------------------------------- */
 .overlay {
     opacity: 1;
@@ -257,6 +262,10 @@ input[type=password] {
     padding: 15px;
     background-color: #000;
     text-align: center;
+}
+
+#error-message-box p {
+	color: #fff;
 }
 
 #error-message-box h1.error {

@@ -7,6 +7,7 @@
     <%-- HEAD --%>
     <head>
         <title>Homepage</title>
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/patient-homepage.css"/>">
         <c:import url="/jsp/head.jsp"/>
     </head>
     <%-- BODY --%>
@@ -18,10 +19,15 @@
                 <c:if test='${not empty cf}'>
                     <h2 class="welcome-title">Welcome, </h2>
                 </c:if>
-                <!-- display the message -->
-                <c:if test='${not empty message}'>
-                    <c:import url="/jsp/include/show-message.jsp"/>
-                </c:if>
+
+<%--                <div class="card">--%>
+<%--                    <img src="${pageContext.request.contextPath}/media/image-profile.png" alt="Avatar" style="width:100%">--%>
+<%--                    <div class="container">--%>
+<%--                        <h4><b>John Doe</b></h4>--%>
+<%--                        <p>Architect & Engineer</p>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+
                 </section>
         </div>
         <script>var cf="${cf}"</script>

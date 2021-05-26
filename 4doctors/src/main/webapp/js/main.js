@@ -12,7 +12,8 @@ $(window).resize(setSiteHeight);
 function setSiteHeight() {
 
     //set height always except for mobile version
-    if(($(document).height() < $(window).height()) || ($(window).width() > 768))
+    // if(($(document).height() <= $(window).height()) || ( ($(window).width() > 768) && ($(document).height() >= $(window).height()) ))
+    if( ($(window).width() > 768)  || ( ($(window).width() <= 768) && ($(document).height() < $(window).height()) ))
         $("#site").css("height", $(window).height() - $("header").outerHeight() - $("footer").outerHeight());
     else
          $("#site").css("height", "auto");

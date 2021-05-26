@@ -43,7 +43,9 @@
 }
 
 .roundpic {
-    width: 150px;
+    width: 100%;
+    max-width: 150px;
+    min-width: 30px;
     border-radius: 100%;
     display: block;
 }

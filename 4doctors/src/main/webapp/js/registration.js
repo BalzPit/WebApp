@@ -178,14 +178,14 @@ registration_form.submit(function (event) {
     }
 
     if(!radio_male.is(":checked") && !radio_female.is(":checked")){
-        radio_male.className = "invalid";
-        radio_female.className = "invalid";
+        radio_male.addClass("invalid");
+        radio_female.addClass("invalid");
         errors.eq(7).html("A gender must be selected!");
         event.preventDefault();
         return false;
     } else {
-        radio_male.className = "valid";
-        radio_female.className = "valid";
+        radio_male.addClass("valid");
+        radio_female.addClass("valid");
     }
 
     if(pwd_value.length === 0) {

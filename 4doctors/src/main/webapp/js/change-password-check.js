@@ -4,10 +4,10 @@ var errors = document.getElementsByClassName("error");
 
 change_password_form.addEventListener("submit", function (event) {
 
-    passwords.forEach(function (element) {
+    passwords.forEach(function (element, i) {
         if(element.value == null){
             element.className = "invalid";
-            errors[1].innerHTML = "The password can't be null!";
+            errors[i].innerHTML = "The password can't be null!";
             event.preventDefault();
             return false;
         }
@@ -15,7 +15,7 @@ change_password_form.addEventListener("submit", function (event) {
 
         if(pwd_value.length === 0) {
             element.className = "invalid";
-            errors[1].innerHTML = "The password can't be empty!";
+            errors[i].innerHTML = "The password can't be empty!";
             event.preventDefault();
             return false;
         } else {
@@ -27,10 +27,10 @@ change_password_form.addEventListener("submit", function (event) {
     });
 });
 
-passwords.forEach(function (element) {
+passwords.forEach(function (element, i) {
         element.addEventListener("focus", function () {
             element.classList.remove("invalid");
-            errors[1].innerHTML = "";
+            errors[i].innerHTML = "";
         });
 });
 

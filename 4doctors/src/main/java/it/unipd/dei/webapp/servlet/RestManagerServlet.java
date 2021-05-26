@@ -124,7 +124,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
 
 
     /**
-     * Checks whether the request if for an {@link Medicine} resource and, in case, processes it.
+     * Checks whether the request is for an {@link Medicine} resource and, in case, processes it.
      *
      * @param req the HTTP request.
      * @param res the HTTP response.
@@ -189,7 +189,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
 
      
     /**
-     * Checks whether the request if for an {@link MedicalExamination} resource and, in case, processes it.
+     * Checks whether the request is for an {@link MedicalExamination} resource and, in case, processes it.
      *
      * @param req the HTTP request.
      * @param res the HTTP response.
@@ -267,7 +267,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
 
 
     /**
-     * Checks whether the request if for a {@link Patient} resource and, in case, processes it.
+     * Checks whether the request is     for a {@link Patient} resource and, in case, processes it.
      *
      * @param req the HTTP request.
      * @param res the HTTP response.

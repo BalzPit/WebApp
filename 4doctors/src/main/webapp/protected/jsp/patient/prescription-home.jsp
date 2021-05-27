@@ -31,37 +31,45 @@
 
                 <%-- Request --%>
                 <h2>Prescription request</h2>
-                <form method="POST" action="<c:url value="/prescription-request"/>">
+                <form method="POST" id="p_form" action="<c:url value="/prescription-request"/>">
                     <div>
                         <label>Doctor email</label>
-                        <input name="doctor_email" type="text"/><br>
-
+                        <input class="req" name="doctor_email" type="text" /><br>
+                        <div class="error"></div>
                         <label>Description:</label>
-                        <input name="description" type="text"/><br>
+                        <input class="req" name="description" type="text" /><br>
+                        <div class="error"></div>
                         <label>Times of validity (max. 10)</label>
-                        <input type="number" id="quantity" name="numeroprestazioni" min="1" max="10"/><br>
-
-                        <input type="radio" id="exam" name="type" value="ESAME">
-                        <label for="exam">Exam</label>
-                        <input type="radio" id="medicine" name="type" value="FARMACO">
-                        <label for="medicine">Medicine</label><br><br>
+                        <input class="req" type="number" id="quantity" name="numeroprestazioni" min="1" max="10" /><br>
+                        <div class="error"></div>
+                        <div id="radioB">
+                            <input class="req" type="radio" id="exam" name="type" value="ESAME" >
+                            <label for="exam">Exam</label>
+                            <input class="req" type="radio" id="medicine" name="type" value="FARMACO">
+                            <label for="medicine">Medicine</label>
+                        </div><br>
+                        <div class="error"></div>
                         <div id="medicine_select">
                             <label>Choose a medicine</label>
-                            <select name="codeM" id="med_select"></select>
+                            <select class="reqM" name="codeM" id="med_select" ></select>
                         </div>
+                        <div class="error"></div>
                         <div id="exam_select">
                              <label>Choose an exam</label>
-                             <select name="codeE" id="ex_select"></select>
+                             <select class="reqE" name="codeE" id="ex_select" required></select>
                         </div>
+                        <div class="error"></div>
                         <br>
                         <div id="quant">
                             <label>Quantity</label>
-                            <input type="number" id="qnt" name="qnt"/>
+                            <input class="reqM" type="number" id="qnt" name="qnt" />
                         </div><br>
+                        <div class="error"></div>
                     </div>
-
-                    <button type="submit">Submit</button><br>
-                    <button type="reset">Reset</button>
+                    <div>
+                        <button id="request" type="submit">Submit</button>
+                        <button type="reset">Reset</button>
+                    </div>
 
                 </form>
 

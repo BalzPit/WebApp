@@ -47,7 +47,7 @@
                     <input id="retype_password" name="retype_password" type="password" placeholder="Retype Password" required pattern=".{6,}">
                     <div class="error"></div>
                     <br><br>
-                    <input name="submit" type="submit" value="Add new doctor"><br>
+                    <input name="submit" type="submit" value="Add new doctor">
                     <div id="add_doctor_message"></div>
                 </form>
             </div>

@@ -40,8 +40,8 @@
                 </tr>
               </table>
             </div>
-      </section>
-    </div>
+      </section><!--
+    --></div>
 
     <c:import url="/jsp/footer.jsp"/>
     <script src="${pageContext.request.contextPath}/js/admin-homepage.js"></script>

@@ -7,6 +7,7 @@
 	<head>
 		<title>Medical Examination</title>
         <c:import url="/jsp/head.jsp"/>
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/patient-section.css"/>">
 	</head>
 
     <body>

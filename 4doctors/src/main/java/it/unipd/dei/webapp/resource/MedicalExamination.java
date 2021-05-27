@@ -184,7 +184,7 @@ public class MedicalExamination extends Resource {
                         break;
                     case "time":
                         jp.nextToken();
-                        java.util.Date utilTime = new SimpleDateFormat("hh:mm").parse(jp.getText());
+                        java.util.Date utilTime = new SimpleDateFormat("HH:mm").parse(jp.getText());
                         jTime = new java.sql.Time(utilTime.getTime());
                         break;
                     case "outcome":

@@ -48,6 +48,10 @@
     border: none;
 }
 
+.form-box #add_doctor_message {
+    margin-top: 20px;
+}
+
 @media only screen and (max-width: 600px) {
 
     .form-box {

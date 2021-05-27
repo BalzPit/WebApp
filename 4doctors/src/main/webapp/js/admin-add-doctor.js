@@ -265,13 +265,11 @@ add_doctor_form.submit(function (event) {
         dataType: "json",
         data: JSON.stringify(doctor_json),
         success: function(result) {
-            add_doctor_message.addClass("alert alert-success").attr("role", "alert").text("New doctor added");
-            //alert("New doctor added");
+            add_doctor_message.removeClass().addClass("alert alert-success").attr("role", "alert").text("New doctor added");
         },
         error: function(result) {
-            console.log(result);
-            add_doctor_message.addClass("alert alert-danger").attr("role", "alert").text("Problem occurred while adding new doctor");
-            //alert("Problem occurred while processing the request");
+            var error_message = result.responseJSON["error"]["message"];
+            add_doctor_message.removeClass().addClass("alert alert-danger").attr("role", "alert").text("Problem occurred while adding new doctor. "+error_message);
         }
     });
 });
@@ -279,6 +277,7 @@ add_doctor_form.submit(function (event) {
 $("input").focus(function () {
     $(this).removeClass("invalid");
     errors.html("");
+    add_doctor_message.removeClass().text("");
 });
 
 password.on("input", function (event) {

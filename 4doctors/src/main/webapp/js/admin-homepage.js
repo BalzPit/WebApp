@@ -19,7 +19,7 @@ $(document).ready(function (){
                     doctors_table.append($(document.createElement("tr")).append(cf_html).append(name_html).append(surname_html).append(buttons));
                 });
 
-                doctors_table.css("display", "block");
+                doctors_table.css("display", "inline-block");
             }
             else {
                 doctors_wrapper.html("<p class='table_message'>There are no active doctors in the database.</p>");
@@ -44,7 +44,7 @@ $(document).ready(function (){
                     patients_table.append($(document.createElement("tr")).append(cf_html).append(name_html).append(surname_html).append(buttons));
                 });
 
-                patients_table.css("display", "block");
+                patients_table.css("display", "inline-block");
             } else {
                 patients_wrapper.html("<p class='table_message'>There are no patients in the database.</p>");
             }

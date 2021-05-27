@@ -60,7 +60,7 @@ public final class ProfileServlet extends AbstractDatabaseServlet {
                         ProfileDAO profile = new ProfileDAO(getDataSource().getConnection(), user_cf);
                         patient = profile.getPatient();
 
-                        m = new Message("Profile successfully entered.\n Request type: " + requestType);
+                        //m = new Message("Profile successfully entered.\n Request type: " + requestType);
                     } catch (SQLException ex) {
                         ErrorCode ec = ErrorCode.SERVER_ERROR;
                         res.setStatus(ec.getHTTPCode());
@@ -79,7 +79,7 @@ public final class ProfileServlet extends AbstractDatabaseServlet {
                         ProfileDAO profile = new ProfileDAO(getDataSource().getConnection(), user_cf);
                         doctor = profile.getDoctor();
 
-                        m = new Message("Profile successfully entered.\n Request type: " + requestType);
+                        //m = new Message("Profile successfully entered.\n Request type: " + requestType);
                     } catch (SQLException ex) {
                         ErrorCode ec = ErrorCode.SERVER_ERROR;
                         res.setStatus(ec.getHTTPCode());

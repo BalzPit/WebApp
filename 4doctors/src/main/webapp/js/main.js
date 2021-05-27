@@ -1,4 +1,4 @@
-// triggers at the very beginning when the document is loaded
+// triggers at the very beginning when the "body"" is loaded
 $(function() {
 
     setSiteHeight();
@@ -11,10 +11,13 @@ $(window).resize(setSiteHeight);
 // set the #site height to avoid overflow (and consequent scrollbars) out of the body
 function setSiteHeight() {
 
+    $("#site").css("height", "auto");
+
     //set height always except for mobile version
-    // if(($(document).height() <= $(window).height()) || ( ($(window).width() > 768) && ($(document).height() >= $(window).height()) ))
-    if( ($(window).width() > 768)  || ( ($(window).width() <= 768) && ($(document).height() < $(window).height()) ))
-        $("#site").css("height", $(window).height() - $("header").outerHeight() - $("footer").outerHeight());
-    else
-         $("#site").css("height", "auto");
+    if( ($(window).width() > 768)  || ( ($(window).width() <= 768) && ($("body").height() < $(window).height()) )) {
+        if($("header").css("display") == "none")
+            $("#site").css("height", $(window).height() - $("footer").outerHeight());
+        else
+            $("#site").css("height", $(window).height() - $("header").outerHeight() - $("footer").outerHeight());
+    }
 }

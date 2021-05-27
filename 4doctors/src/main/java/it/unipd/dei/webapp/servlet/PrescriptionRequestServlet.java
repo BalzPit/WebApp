@@ -159,7 +159,7 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
             // creates a new object for accessing the database and stores the patient
             MedicineDAO show = new MedicineDAO(getDataSource().getConnection());
             medicineList = show.getListMedicines();
-            message = new Message("Medicine succesfully searched!");
+            //message = new Message("Medicine succesfully searched!");
 
         } catch (SQLException ex) {
             ErrorCode err = ErrorCode.SERVER_ERROR;

@@ -6,11 +6,10 @@
     <c:import url="/jsp/include/error-message.jsp"/>
 </c:if>
 
-<header>
-    <div id="toggle-menu-button" class="mobile-only">
+<header class="mobile-only">
+    <div id="toggle-menu-button">
         <span></span>
         <span></span>
         <span></span>
     </div>
-    <img src="<c:url value="/media/logo.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
 </header>

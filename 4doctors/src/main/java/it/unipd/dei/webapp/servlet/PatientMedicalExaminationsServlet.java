@@ -60,7 +60,7 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
         List<MedicalExamination> futureExaminations = null;
         List<MedicalExamination> pastExaminations = null;
         List<Doctor> patientDoctors = null;
-        Message m;
+        Message m = null;
 
         //get times (empty arraylist as parameter to get standard list with all times not booked)
         ArrayList<BookingTime> bookingTimeList = BookingTime.TimesList(new ArrayList<>());
@@ -79,7 +79,7 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
             pastExaminations = examinations.get(0);
             futureExaminations = examinations.get(1);
 
-            m = new Message("Examinations successfully retrieved.");
+            //m = new Message("Examinations successfully retrieved.");
         }
         catch (SQLException | NamingException ex) {
             ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_NOT_FOUND;
@@ -157,7 +157,7 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
             MedExDAO.createMedicalExamination(newExamination);
 
 
-            m = new Message("Examination successfully added to the database.");
+            //m = new Message("Examination successfully added to the database.");
 
         }
         catch (ParseException | InputFormatException ex){

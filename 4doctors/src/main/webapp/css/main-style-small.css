@@ -1,14 +1,21 @@
 .mobile-only {
-	display: initial;
+	display: block;
+}
+
+.desktop-only {
+	display: none;
 }
 
 header {
 	height: 70px;
 	padding: 10px;
+	background-color: var(--main-dark);
 }
 
 section {
 	width: 100%;
+	padding: 15px;
+	background-image: none;
 	overflow-y: auto;
 }
 

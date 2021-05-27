@@ -19,7 +19,7 @@
     <c:if test='${not empty message}'>
         <c:import url="/jsp/include/error-message.jsp"/>
     </c:if>
-	<div class="form-box">
+	<div class="form-box white-box">
 		<img src="<c:url value="/media/logo.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
 		<h3>Registration</h3>
 		<form id="registration_form" method="POST" action="<c:url value="/patient"/>">

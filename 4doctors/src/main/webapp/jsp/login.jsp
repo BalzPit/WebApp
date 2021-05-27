@@ -12,13 +12,13 @@
 <body>
 	<div class="hero-text">
 		<img src="<c:url value="/media/logo.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
-add	</div>
+	</div>
 
     <!-- display error/message -->
     <c:if test='${not empty message}'>
         <c:import url="/jsp/include/error-message.jsp"/>
     </c:if>
-	<div class="form-box">
+	<div class="form-box white-box">
 		<img src="<c:url value="/media/logo.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
 		<form id="login_form" method="POST" action="<c:url value="/user/login"/>">
 			<input id="user" name="cf" type="text" placeholder="Username" required pattern="[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}"><br>

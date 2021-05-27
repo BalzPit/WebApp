@@ -25,12 +25,6 @@
     margin: 10px;
 }
 
-.form-box img {
-    width: 80%;
-    max-width: 320px;
-    margin: 10px 20px;
-}
-
 .form-box .radio-box {
     margin: 15px 0;
 }
@@ -38,6 +32,10 @@
 .form-box .error {
     color: var(--error-red-light);
     font-weight: bold;
+}
+
+.form-box #add_medicine_message {
+    margin-top: 20px;
 }
 
 @media only screen and (max-width: 600px) {

@@ -3,13 +3,13 @@ package it.unipd.dei.webapp.rest;
 import it.unipd.dei.webapp.dao.*;
 import it.unipd.dei.webapp.resource.*;
 import it.unipd.dei.webapp.utils.ErrorCode;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -74,8 +74,10 @@ public final class MedicineRestResource extends RestResource {
 
             // creates a new object for accessing the database and stores the medicine
             if(new MedicineDAO(con).addMedicine(medicine)){
-
+                JSONObject resJSON = new JSONObject();
+                resJSON.put("result", "successful");
                 res.setStatus(HttpServletResponse.SC_CREATED);
+                res.getWriter().write(resJSON.toString());
 
             } else {
                 ErrorCode ec = ErrorCode.MEDICINE_NOT_CREATED;

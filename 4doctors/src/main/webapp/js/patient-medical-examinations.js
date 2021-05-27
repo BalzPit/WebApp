@@ -167,9 +167,18 @@ function validate(){
     var selectedDate = document.getElementById("dateselect").value;
     var selectedTime = document.getElementById("timeToSelect").value;
 
+    var errors = document.getElementsByClassName("error");
+
     if(selectedDate.length == 0){
         //no date was selected
-        alert('A date for the examination needs to specified.');
+        //alert('A date for the examination needs to specified.');
+        var dateSelector = document.getElementById("dateselect");
+        dateSelector.className = "invalid";
+        errors[0].innerHTML = "A date for the examination needs to specified.";
+        dateSelector.addEventListener("focus", function () {
+                                                    dateSelector.classList.remove("invalid");
+                                                    errors[0].innerHTML = "";
+                                             });
         return false;
     }
     //check date is not in the past
@@ -181,12 +190,26 @@ function validate(){
            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
            return false;
         }
-        alert('You must select a future date.');
+        //alert('You must select a future date.');
+        var dateSelector = document.getElementById("dateselect");
+        dateSelector.className = "invalid";
+        errors[0].innerHTML = "You must select a future date.";
+        dateSelector.addEventListener("focus", function () {
+                                                    dateSelector.classList.remove("invalid");
+                                                    errors[0].innerHTML = "";
+                                               });
         return false;
     }
     if( findExamination(selectedDate, selectedTime, doctorCF) ){
         //the specified medical examination already exists
-        alert('Time slot already booked on the selected day at the selected doctor');
+        //alert('Time slot already booked on the selected day at the selected doctor');
+        var timeSelector = document.getElementById("timeToSelect");
+        timeSelector.className = "invalid";
+        errors[1].innerHTML = "Time slot already booked on the selected day.";
+        timeSelector.addEventListener("focus", function () {
+                                                    timeSelector.classList.remove("invalid");
+                                                    errors[1].innerHTML = "";
+                                            });
         return false;
     }
 

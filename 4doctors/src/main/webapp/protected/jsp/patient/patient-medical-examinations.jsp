@@ -28,6 +28,7 @@
 
                             <label>Select Date:</label>
                             <input name="dateselect" type="date" id="dateselect"/><br/>
+                            <div class="error"></div>
 
                             <label for="timeToSelect">Select Time:</label>
                             <select name = "timeToSelect" id = "timeToSelect">
@@ -35,6 +36,7 @@
                                     <option ng-disabled="${timeToSelect.booked}" value ="${timeToSelect.hour}:${timeToSelect.min}">${timeToSelect.hour}:${timeToSelect.min}</option>
                                 </c:forEach>
                             </select><br/>
+                            <div class="error"></div>
 
                             <button type="reset">Cancel</button>
                             <button onclick="addMedEx()" style="float: right">Confirm</button><br/>

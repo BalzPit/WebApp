@@ -42,9 +42,9 @@
                         <input type="number" id="quantity" name="numeroprestazioni" min="1" max="10"/><br>
 
                         <input type="radio" id="exam" name="type" value="ESAME">
-                        <label for="patient">Exam</label>
+                        <label for="exam">Exam</label>
                         <input type="radio" id="medicine" name="type" value="FARMACO">
-                        <label for="doctor">Medicine</label><br><br>
+                        <label for="medicine">Medicine</label><br><br>
                         <div id="medicine_select">
                             <label>Choose a medicine</label>
                             <select name="codeM" id="med_select"></select>
@@ -65,11 +65,22 @@
 
                 </form>
 
-                <%-- Available medicines in the database --%>
-                <h2>Medicine List</h2>
-                <form method="GET" action="<c:url value="/list-medicines"/>">
-                    <input name="type" type="submit" value="list medicines" />
-                </form>
+                <%-- Available medicines prescripted to the user --%>
+                <div>
+                <h2>Prescribed medicines</h2>
+                    <button id="pres_med" value=<c:out value="${cf}"/> >List</button>
+                    <div id="medicine_wrapper">
+                         <table id="medicine_table">
+                            <tr>
+                                <th scope="col">Code</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Medicine class</th>
+                                <th scope="col">Producer</th>
+                            </tr>
+                         </table>
+                    </div>
+                </div>
         </section>
         </div>
         <c:import url="/jsp/footer.jsp"/>

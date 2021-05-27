@@ -4,5 +4,6 @@
 <nav>
     <a href="${pageContext.request.contextPath}/protected/jsp/admin/admin-homepage.jsp">Home</a>
     <a href="${pageContext.request.contextPath}/protected/jsp/admin/admin-add-doctor.jsp">Add new doctor</a>
+    <a href="${pageContext.request.contextPath}/protected/jsp/admin/admin-add-medicine.jsp">Add new medicine</a>
     <a href="${pageContext.request.contextPath}/user/logout">Log out</a>
 </nav>

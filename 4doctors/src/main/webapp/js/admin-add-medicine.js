@@ -29,11 +29,11 @@ add_medicine_form.submit(function (event) {
     }
 
     if(description.val() == null){
-            code.addClass("invalid");
-            errors.eq(0).html("The description can't be null!");
-            event.preventDefault();
-            return false;
-        }
+        code.addClass("invalid");
+        errors.eq(4).html("The description can't be null!");
+        event.preventDefault();
+        return false;
+    }
 
     var code_value = code.val().trim().toUpperCase();
     var name_value = _name.val().trim();
@@ -60,7 +60,7 @@ add_medicine_form.submit(function (event) {
 
     if(producer_value.length === 0) {
         producer.addClass("invalid");
-        errors.eq(2).html("The producer can't be empty!");
+        errors.eq(3).html("The producer can't be empty!");
         event.preventDefault();
         return false;
     } else {
@@ -69,7 +69,7 @@ add_medicine_form.submit(function (event) {
 
     if(description_value.length === 0) {
         description.addClass("invalid");
-        errors.eq(3).html("The email can't be empty!");
+        errors.eq(4).html("The description can't be empty!");
         event.preventDefault();
         return false;
     } else {
@@ -80,7 +80,7 @@ add_medicine_form.submit(function (event) {
         radio_etici.addClass("invalid");
         radio_sop.addClass("invalid");
         radio_otc.addClass("invalid");
-        errors.eq(8).html("A type must be selected!");
+        errors.eq(2).html("A type must be selected!");
         event.preventDefault();
         return false;
     } else {
@@ -108,13 +108,11 @@ add_medicine_form.submit(function (event) {
         dataType: "json",
         data: JSON.stringify(medicine_json),
         success: function(result) {
-            add_medicine_message.addClass("alert alert-success").attr("role", "alert").text("New medicine added");
-            //alert("New doctor added");
+            add_medicine_message.removeClass().addClass("alert alert-success").attr("role", "alert").text("New medicine added");
         },
         error: function(result) {
-            console.log(result);
-            add_medicine_message.addClass("alert alert-danger").attr("role", "alert").text("Problem occurred while adding new medicine");
-            //alert("Problem occurred while processing the request");
+            var error_message = result.responseJSON["error"]["message"];
+            add_medicine_message.removeClass().addClass("alert alert-danger").attr("role", "alert").text("Problem occurred while adding new medicine. "+error_message);
         }
     });
 });
@@ -122,4 +120,5 @@ add_medicine_form.submit(function (event) {
 $("input").focus(function () {
     $(this).removeClass("invalid");
     errors.html("");
+    add_medicine_message.removeClass().text("");
 });

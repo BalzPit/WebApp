@@ -1,10 +1,58 @@
+:root {
+	--main-dark: #002060;
+	--main-red: #f06374;
+}
+
 * {
-	color: #fff;
+	color: var(--main-dark);
 }
 
 body {
 	display: flex;
-	background: linear-gradient(-45deg, rgba(255,153,0,1) 0%, rgba(255,255,255,1) 50%, rgba(255,153,0,1) 100%);
+	/*background: linear-gradient(-45deg, rgba(255,153,0,1) 0%, rgba(255,255,255,1) 50%, rgba(255,153,0,1) 100%);*/
+	/*background-color: var(--main-dark);*/
+	background-color: #fff;
+	background-image: url("../media/Medek-Team-Doctor.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	/*	background-size: 1500px;*/
+	/*	background-position: right bottom;*/
+	/*}*/
+}
+
+
+/* Place text in the middle of the image */
+.hero-text {
+	text-align: center;
+	position: absolute;
+	top: 5%;
+	left: 1%;
+	color: var(--main-dark);
+}
+
+.hero-text img {
+	width: 80%;
+	max-width: 500px;
+	margin: 10px 20px 30px;
+}
+
+.button, button, input[type=submit], input[type=reset] {
+	/*min-width: 150px;*/
+	width: 100%;
+	margin: 0px;
+	/*padding: 9px 24px;*/
+	/*border: none;*/
+	/*border-radius: 15px;*/
+	/*background-color: var(--main-red);*/
+	/*letter-spacing: 0.04em;*/
+	/*text-align: center;*/
+	/*!*font-weight: bold;*!*/
+	/*color: #fff;*/
+	/*text-transform: uppercase;*/
+	/*outline: none !important;*/
+	/*cursor: pointer;*/
+	/*transition: background-color 0.3s ease-in-out;*/
 }
 
 .form-box {
@@ -12,15 +60,31 @@ body {
 	max-width: 400px;
 	height: fit-content;
 	margin: auto;
-	padding: 25px;
-	border-radius: 30px;
+	padding: 30px 45px;
+	border-radius: 20px;
 	box-shadow: 12px 6px 13px 0px #000;
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(255, 255, 255, 1);
 	text-align: center;
 }
+
+.form-box input[type="text"], input[type="password"], input[type="date"], input[type="email"], select {
+	width: 100%;
+	height: 40px;
+	padding: 7px 7px 7px 40px;
+	margin: 10px auto;
+	border: none;
+	border-radius: 50px;
+	color: #444;
+	background-color: var(--light-gray);
+}
+
 .form-box form {
 	text-align: center;
 }
+
+/*.form-box a {*/
+/*	color: var(--main-red);*/
+/*}*/
 
 .form-box h2 {
 	font-weight: bold;
@@ -33,7 +97,7 @@ body {
 .form-box img {
 	width: 80%;
 	max-width: 320px;
-	margin: 10px 20px;
+	margin: 10px 20px 30px;
 }
 
 .form-box .radio-box {

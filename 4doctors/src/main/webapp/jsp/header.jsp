@@ -12,5 +12,5 @@
         <span></span>
         <span></span>
     </div>
-    <img src="<c:url value="/media/logo-white.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
+    <img src="<c:url value="/media/logo.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
 </header>

@@ -11,9 +11,10 @@ var add_medicine_message = $("#add_medicine_message");
 
 const contextPath = "http://localhost:8080/4Doctors-1.00";
 
-
+// Listener on form to validate data on submit
 add_medicine_form.submit(function (event) {
 
+    // Check if parameters are null
     if(code.val() == null){
         code.addClass("invalid");
         errors.eq(0).html("The medicine code can't be null!");
@@ -35,11 +36,13 @@ add_medicine_form.submit(function (event) {
         return false;
     }
 
+    // Remove leading and trailing whitespace
     var code_value = code.val().trim().toUpperCase();
     var name_value = _name.val().trim();
     var producer_value = producer.val().trim();
     var description_value = description.val().trim();
 
+    // Check if parameters value are valid or not
     if(code_value.length === 0) {
         code.addClass("invalid");
         errors.eq(0).html("The medicine code can't be empty!");
@@ -89,8 +92,10 @@ add_medicine_form.submit(function (event) {
         radio_otc.addClass("valid");
     }
 
+    // Prevent to submit form since the action to perform is an AJAX call
     event.preventDefault();
 
+    // Build JSON with medicine fields
     var medicine_json = {
         medicine: {
             code: code_value,
@@ -101,12 +106,14 @@ add_medicine_form.submit(function (event) {
         }
     };
 
+    // REST call to add new medicine to the database
     $.ajax({
         url: contextPath + "/rest/medicine",
         method: "POST",
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify(medicine_json),
+        // If success or there is an error show it in a box
         success: function(result) {
             add_medicine_message.removeClass().addClass("alert alert-success").attr("role", "alert").text("New medicine added");
         },

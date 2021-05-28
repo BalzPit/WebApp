@@ -5,10 +5,13 @@ var radio_doctor = document.getElementById("doctor");
 var login_form = document.getElementById("login_form");
 var errors = document.getElementsByClassName("error");
 
+// Regex to validate cf
 const cf_regex = /[A-Za-z]{6}[0-9]{2}[A-Za-z][0-9]{2}[A-Za-z][0-9]{3}[A-Za-z]/;
 
+// Listener on form to validate data on submit
 login_form.addEventListener("submit", function (event) {
 
+    // Check if parameters are null
     if(cf.value == null){
         cf.className = "invalid";
         errors[0].innerHTML = "The fiscal code can't be null!";
@@ -26,6 +29,7 @@ login_form.addEventListener("submit", function (event) {
     var cf_value = cf.value.trim().toUpperCase();
     var pwd_value = password.value;
 
+    // Check if parameters value are valid or not
     if(cf_value.length === 0) {
         cf.className = "invalid";
         errors[0].innerHTML = "The fiscal code can't be empty!";
@@ -61,9 +65,11 @@ login_form.addEventListener("submit", function (event) {
     }
 
     cf.value = cf_value;
+    // Crypt password using CryptoJS library and SHA3 algorithm
     password.value = CryptoJS.SHA3(pwd_value).toString();
 });
 
+// Add listener to remove errors messages and class on focus
 cf.addEventListener("focus", function () {
     cf.classList.remove("invalid");
     errors[0].innerHTML = "";

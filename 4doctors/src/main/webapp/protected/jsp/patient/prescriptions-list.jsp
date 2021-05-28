@@ -8,7 +8,7 @@
     <head>
         <title>Prescriptions List</title>
         <c:import url="/jsp/head.jsp"/>
-        <link type="text/css" rel="stylesheet" href="<c:url value="/css/patient-section.css"/>">
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/main-style.css"/>">
     </head>
 
     <%-- BODY --%>
@@ -22,10 +22,6 @@
                     <h1>List of all prescriptions of <c:out value="${cf}"/></h1>
                 </c:if>
 
-                <!-- display the message -->
-                <c:if test='${not empty message}'>
-                    <c:import url="/jsp/include/show-message.jsp"/>
-                </c:if>
 
                 <!-- display the list of all prescriptions, if any -->
                 <c:if test='${not empty prescriptionsList}'>

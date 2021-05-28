@@ -27,7 +27,7 @@ $(document).ready(function (){
         } else {
             console.log(data);
             console.log(status);
-            alert("Problem occurred while getting the list of doctors");
+            alert("Problem occurred while getting the list of doctors.");
         }
     });
 
@@ -51,7 +51,7 @@ $(document).ready(function (){
         } else {
             console.log(data);
             console.log(status);
-            alert("Problem occurred while getting the list of patients");
+            alert("Problem occurred while getting the list of patients.");
         }
     });
 });
@@ -68,7 +68,7 @@ doctors_table.on("click", "button.info", function (){
         $.getJSON(contextPath + "/rest/doctor/" + cf, function (data, status) {
             if(status == "success") {
                 var doctor = data["data"]["doctor"];
-                var list = $(document.createElement("ul"));
+                var list = $(document.createElement("ul")).css("list-style-type", "none");
                 $.each(doctor, function (index, element) {
                     list.append($(document.createElement("li")).text(element));
                 })
@@ -79,7 +79,7 @@ doctors_table.on("click", "button.info", function (){
             else {
                 console.log(data);
                 console.log(status);
-                alert("Problem occurred while processing the request");
+                alert("Problem occurred while processing the request.");
             }
         });
     } else {
@@ -99,7 +99,7 @@ patients_table.on("click", "button.info", function (){
         $.getJSON(contextPath + "/rest/patient/" + cf, function (data, status) {
             if(status == "success") {
                 var patient = data["data"]["patient"];
-                var list = $(document.createElement("ul"));
+                var list = $(document.createElement("ul")).css("list-style-type", "none");
                 $.each(patient, function (index, element) {
                     list.append($(document.createElement("li")).text(element));
                 })
@@ -110,7 +110,7 @@ patients_table.on("click", "button.info", function (){
             else {
                 console.log(data);
                 console.log(status);
-                alert("Problem occurred while processing the request");
+                alert("Problem occurred while processing the request.");
             }
         });
     } else {
@@ -138,7 +138,8 @@ doctors_table.on("click", "button.update", function (){
         },
         error: function(result) {
             console.log(result);
-            alert("Problem occurred while processing the request");
+            var error_message = result.responseJSON["error"]["message"];
+            alert("Problem occurred while processing the request. "+error_message);
         }
     });
 });
@@ -162,7 +163,8 @@ patients_table.on("click", "button.delete", function (){
         },
         error: function(result) {
             console.log(result);
-            alert("Problem occurred while processing the request");
+            var error_message = result.responseJSON["error"]["message"];
+            alert("Problem occurred while processing the request. "+error_message);
         }
     });
 });

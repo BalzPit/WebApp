@@ -9,7 +9,7 @@
     margin: auto;
     padding: 25px;
     border-radius: 30px;
-    box-shadow: 2px 2px 6px #8a8a8a;
+    box-shadow: 12px 6px 13px 0px #000;
     background-color: rgba(0, 0, 0, 0.5);
     text-align: center;
 }
@@ -34,15 +34,7 @@
     font-weight: bold;
 }
 
-.form-box #password_strength {
-    width: 100%;
-    max-width: 300px;
-    padding: 7px;
-    margin: 10px auto;
-    border: none;
-}
-
-.form-box #add_doctor_message {
+.form-box #add_medicine_message {
     margin-top: 20px;
 }
 

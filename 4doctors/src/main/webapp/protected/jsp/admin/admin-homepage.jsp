@@ -9,14 +9,14 @@
     <link type="text/css" rel="stylesheet" href="<c:url value="/css/admin-homepage-style.css"/>">
   </head>
   <body>
+  <!-- display error/message -->
+  <c:if test='${not empty message}'>
+      <c:import url="/jsp/include/error-message.jsp"/>
+  </c:if>
     <c:import url="/jsp/header.jsp"/>
     <div id="site">
       <c:import url="/jsp/admin-nav.jsp"/><!--
       --><section>
-            <c:if test='${not empty message}'>
-              <c:import url="/jsp/include/show-message.jsp"/>
-            </c:if>
-          
             <c:if test='${not empty sessionScope.username}'>
               <h1>Welcome, admin <c:out value="${sessionScope.username}"/></h1>
             </c:if>
@@ -40,8 +40,8 @@
                 </tr>
               </table>
             </div>
-      </section>
-    </div>
+      </section><!--
+    --></div>
 
     <c:import url="/jsp/footer.jsp"/>
     <script src="${pageContext.request.contextPath}/js/admin-homepage.js"></script>

@@ -20,7 +20,7 @@
         <div id="site">
             <section>
                 <c:if test='${not empty cf}'>
-                    <h2 class="welcome-title">Welcome, doctor <c:out value="${cf}"/></h2>
+                    <h2 class="welcome-title">Welcome, doctor </h2>
                 </c:if>
                 <a id="log-out-button" class="button button-2" href="${pageContext.request.contextPath}/user/logout">log out</a>
                 <div id="menu-button-container">
@@ -43,7 +43,9 @@
              </section>
         </div>
         <script>var cf="${cf}"</script>
+        <script>var role="${role}"</script>
         <script>var contexPath="${pageContext.request.contextPath}"</script>
+        <script src="${pageContext.request.contextPath}/js/getUserName.js"></script>
         <c:import url="/jsp/footer.jsp"/>
     </body>
 </html>

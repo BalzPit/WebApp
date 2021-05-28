@@ -39,8 +39,9 @@
              </section>
         </div>
         <script>var cf="${cf}"</script>
+        <script>var role="${role}"</script>
         <script>var contexPath="${pageContext.request.contextPath}"</script>
-        <script src="${pageContext.request.contextPath}/js/getPatientName.js"></script>
+        <script src="${pageContext.request.contextPath}/js/getUserName.js"></script>
         <c:import url="/jsp/footer.jsp"/>
     </body>
 </html>

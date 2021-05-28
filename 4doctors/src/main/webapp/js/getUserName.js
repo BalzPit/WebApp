@@ -23,7 +23,7 @@ function getName() {
             if (httpRequest.status == 200) {
                 var jsonData = JSON.parse(httpRequest.responseText);
                 var user = jsonData['data'][String(role)];
-                $('.welcome-title').append(user.name.charAt(0).toUpperCase() + user.name.slice(1));
+                $('.welcome-title').append(user.name.charAt(0).toUpperCase() + user.name.slice(1) + '!');
             }
         }
     }

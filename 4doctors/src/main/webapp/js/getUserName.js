@@ -2,7 +2,7 @@ var absolutePath = function(href) {
     var link = document.createElement("a");
     link.href = href;
     return link.href;
-}
+};
 
 function getName() {
     var httpRequest = new XMLHttpRequest();

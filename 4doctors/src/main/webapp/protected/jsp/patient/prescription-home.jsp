@@ -91,8 +91,11 @@
                 </div>
         </section>
         </div>
-        <c:import url="/jsp/footer.jsp"/>
+        <script>var cf="${cf}"</script>
+        <script>var role="${role}"</script>
+        <script>var contexPath="${pageContext.request.contextPath}"</script>
         <script type="text/javascript" src="<c:url value="/js/prescription-home.js"/>"></script>
+        <c:import url="/jsp/footer.jsp"/>
     </body>
 
 </html>

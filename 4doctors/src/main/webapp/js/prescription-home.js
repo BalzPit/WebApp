@@ -53,7 +53,32 @@ function alertContents2() {
     }
 }
 
+var prescription_form = document.getElementById("p_form");
+var inputFields = document.querySelectorAll('input[class=req]');
+var errors = document.getElementsByClassName("error");
 
+prescription_form.addEventListener("submit", function (event) {
+
+    inputFields.forEach(function (element, i) {
+        if(element.value == null){
+            element.className = "invalid";
+            errors[i].innerHTML = "The field can't be null!";
+            event.preventDefault();
+            return false;
+        }
+        var field_value = element.value;
+
+        if(field_value.length === 0) {
+            element.className = "invalid";
+            errors[i].innerHTML = "The field can't be empty!";
+            event.preventDefault();
+            return false;
+        } else {
+            element.className = "valid";
+        }
+
+    });
+});
 
 $("#medicine").click(function(){
         $("#medicine_select").css("display","block");

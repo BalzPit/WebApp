@@ -16,7 +16,7 @@ AUTHORS:
 
 
 ## Introduction
-Our goal for this project is to implement a web application where both patients and doctors can interact easily. Our case study is about a group of doctors that work together with a pool of patients. This kind of medical office organization is very common in italy. From the doctor side, the web application provides different services such as: remote prescriptions, a patient's manager, an examinations manager and other interesting features dedicated to facilitate the cooperation with patients. From the patient side, the user can ask for prescriptions, exams, checkups and so on, without the need to go in person at the medical office. Detailed explanationa re reported in the **report** `./HW1 - 4Doctors Report.pdf`
+Our goal for this project is to implement a web application where both patients and doctors can interact easily. Our case study is about a group of doctors that work together with a pool of patients. This kind of medical office organization is very common in italy. From the doctor side, the web application provides different services such as: remote prescriptions, a patient's manager, an examinations manager and other interesting features dedicated to facilitate the cooperation with patients. From the patient side, the user can ask for prescriptions, exams, checkups and so on, without the need to go in person at the medical office. Detailed explanation are reported in the **report** `./HW1 - 4Doctors Report.pdf`
 
 ## Mockup
 In the report provided we show the mockup of only some pages. To visulize all the mockups see `./mockup/4doctors-mockup.pdf`
@@ -33,22 +33,22 @@ To create the database see `./4doctors/src/main/database/dbMed.sql` and to popul
 - **Password**: `4Doctors`
 
 ### Login patient
-- **CF**: `GVNPVAG4RE44S3D9`
+- **CF**: `GVNPVA94R44S347D`
 - **password**:`test`
 
 ### Login doctor
-- **CF**: `SON01MED1C0G1UR0`
+- **CF**: `RSSNDR97A21H347Q`
 - **password**:`test`
 
 ### Login admin
-Go manually to `/jsp/admin-login`
+Go manually to `/jsp/admin-login.jsp`
 
-- **Username**: `nico9779`
+- **Username**: `admin`
 - **password**:`password`
 
 
 ### REST
-In order to test the REST call we provided a file `./REST calls 4Doctors.txt` which contains some test calls.
+In order to test the REST calls we provided a file `./REST calls 4Doctors.txt` which contains some test calls.
 
 
 

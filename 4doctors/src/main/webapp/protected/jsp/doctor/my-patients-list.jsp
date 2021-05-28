@@ -4,19 +4,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Home</title>
+    <c:import url="/jsp/head.jsp"/>
 </head>
 
-<body>
-<c:import url="/protected/jsp/doctor/doctor-header.jsp"/>
 
+<body>
+<c:import url="/jsp/header.jsp"/>
+<div id="site">
+<c:import url="/jsp/doctor-nav.jsp"/><!--
+    --><section>
 <h2>List of Your Followed Patients</h2>
 
-<!-- display the message -->
-<c:if test='${not empty message}'>
-    <c:import url="/jsp/include/show-message.jsp"/>
-</c:if>
 
 <!-- display the list of past medical examinations, if any -->
 <c:if test='${not empty patientsList}'>
@@ -49,6 +48,7 @@
     <input name="patient_cf" type="text"/><br>
     <button type="submit">Add</button><br>
 </form>
-
+    </section><!--
+--></div>
 </body>
 </html>

@@ -4,10 +4,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    <script type="text/javascript" src="<c:url value="/js/patient-medical-examinations.js"/>">
+    </script>
+
 	<head>
 		<title>Medical Examination</title>
         <c:import url="/jsp/head.jsp"/>
-        <link type="text/css" rel="stylesheet" href="<c:url value="/css/patient-section.css"/>">
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/patient-medical-examination.css"/>">
 	</head>
 
     <body>
@@ -15,86 +18,121 @@
         <div id="site">
             <c:import url="/jsp/patient-nav.jsp"/><!--
             --><section>
-                <h1>New Medical Examination Form</h1>
+                <section id="reservation">
+                    <div id="form-box">
+                        <h1>New Reservation</h1>
+                        <form action="javascript:void(0);">
+                            <label for="patientDoctor">Select Doctor:</label>
+                            <select name = "patientDoctor" id = "patientDoctor">
+                                <c:forEach var = "patientDoctor" items="${patientDoctors}" >
+                                    <option value ="${patientDoctor.cf}">${patientDoctor.surname} ${patientDoctor.name}</option>
+                                </c:forEach>
+                            </select><br/>
 
-                <form method="POST" action="<c:url value="/patient-medical-examinations"/>">
+                            <label>Select Date:</label>
+                            <input name="dateselect" type="date" id="dateselect"/><br/>
+                            <div class="error"></div>
 
-                    <label for="patientDoctor">Select Doctor:</label>
-                    <select name = "patientDoctor" id = "patientDoctor">
-                        <c:forEach var = "patientDoctor" items="${patientDoctors}" >
-                            <option value ="${patientDoctor.cf}">${patientDoctor.surname} ${patientDoctor.name}</option>
-                        </c:forEach>
-                    </select><br/>
+                            <label for="timeToSelect">Select Time:</label>
+                            <select name = "timeToSelect" id = "timeToSelect">
+                                <c:forEach var = "timeToSelect" items="${timeSelection}" >
+                                    <option ng-disabled="${timeToSelect.booked}" value ="${timeToSelect.hour}:${timeToSelect.min}">${timeToSelect.hour}:${timeToSelect.min}</option>
+                                </c:forEach>
+                            </select><br/>
+                            <div class="error"></div>
 
-                    <label for="date">Select Date:</label>
-                    <input name="date" type="date"/><br/>
+                            <button type="reset">Cancel</button>
+                            <button onclick="addMedEx()" style="float: right">Confirm</button><br/>
 
-                    <label for="timeToSelect">Select Time:</label>
-                    <select name = "timeToSelect" id = "timeToSelect">
-                        <c:forEach var = "timeToSelect" items="${timeSelection}" >
-                            <option ng-disabled="${timeToSelect.booked}" value ="${timeToSelect.hour}:${timeToSelect.min}">${timeToSelect.hour}:${timeToSelect.min}</option>
-                        </c:forEach>
-                    </select><br/>
+                        </form>
+                    </div>
 
-                    <button type="submit">Submit</button><br/>
-                    <button type="reset">Reset the form</button>
+                    <!-- display the list of FUTURE medical examinations -->
 
-                </form>
+                        <table id="future-exams">
+                            <caption>FUTURE EXAMINATIONS</caption>
+                            <thead>
+                            <tr>
+                                <th>Date</th><th>Time</th><th>Doctor</th><th></th>
+                            </tr>
+                            </thead>
 
-                <h1>Medical Examinations List</h1>
+                            <tbody>
+                                <c:choose>
+                                    <c:when test='${not empty futureExaminationsList && !message.error}'>
+                                        <c:forEach var="examination" items="${futureExaminationsList}">
+                                            <tr>
+                                                <td><c:out value="${examination.date}"/></td>
+                                                <td><c:out value="${examination.time}"/></td>
+                                                <td data-attr="${examination.doctor_cf}">
+                                                    <c:forEach var = "patientDoctor" items="${patientDoctors}" >
+                                                        <c:if test="${patientDoctor.cf == examination.doctor_cf}">
+                                                            <p>${patientDoctor.surname} ${patientDoctor.name}</p>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </td>
+                                                <td><button id="deletemedex" onclick="deleteMedEx(this)">Cancel</button></td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <tr id="notbooked"><td>No examinations booked.</td><td></td><td></td></tr>
+                                    </c:otherwise>
+                                </c:choose>
+                            </tbody>
+                        </table>
+
+                </section>
 
                 <hr/>
 
-                <!-- display the list of FUTURE medical examinations -->
-
-                <c:if test='${not empty futureExaminationsList && !message.error}'>
-                    <table><caption>FUTURE EXAMINATIONS</caption>
-                        <thead>
-                        <tr>
-                            <th>Doctor</th><th>Patient</th><th>Date</th><th>Time</th><th>Outcome</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <c:forEach var="examination" items="${futureExaminationsList}">
-                            <tr>
-                                <td><c:out value="${examination.doctor_cf}"/></td>
-                                <td><c:out value="${examination.patient_cf}"/></td>
-                                <td><c:out value="${examination.date}"/></td>
-                                <td><c:out value="${examination.time}"/></td>
-                                <td><c:out value="${examination.outcome}"/></td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </c:if>
-
-
                 <!-- display the list of PAST medical examinations -->
-
-                <c:if test='${not empty pastExaminationsList && !message.error}'>
-                    <table><caption>PAST EXAMINATIONS</caption>
-                        <thead>
-                        <tr>
-                            <th>Doctor</th><th>Patient</th><th>Date</th><th>Time</th><th>Outcome</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <c:forEach var="examination" items="${pastExaminationsList}">
+                <div>
+                    <c:if test='${not empty pastExaminationsList && !message.error}'>
+                        <table>
+                            <caption>PAST EXAMINATIONS</caption>
+                            <thead>
                             <tr>
-                                <td><c:out value="${examination.doctor_cf}"/></td>
-                                <td><c:out value="${examination.patient_cf}"/></td>
-                                <td><c:out value="${examination.date}"/></td>
-                                <td><c:out value="${examination.time}"/></td>
-                                <td><c:out value="${examination.outcome}"/></td>
+                                <th>Doctor</th><th>Date</th><th>Time</th><th>Outcome</th>
                             </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </c:if>
-                </section>
+                            </thead>
+
+                            <tbody>
+                            <c:forEach var="examination" items="${pastExaminationsList}">
+                                <tr>
+                                    <td value="${examination.doctor_cf}">
+                                        <c:forEach var = "patientDoctor" items="${patientDoctors}" >
+                                            <c:if test="${patientDoctor.cf == examination.doctor_cf}">
+                                                <p>${patientDoctor.surname} ${patientDoctor.name}</p>
+                                            </c:if>
+                                        </c:forEach>
+                                    </td>
+                                    <td><c:out value="${examination.date}"/></td>
+                                    <td><c:out value="${examination.time}"/></td>
+                                    <td><button id="outcome" value="${examination.outcome}" onclick="openPopup(this)">Details</button></td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:if>
+                </div>
+
+                <!-- The Modal -->
+                <div id="popupModal" class="modal">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h2>Examination Outcome</h2>
+                        <span class="close" onclick="closePopup()">&times;</span>
+                      </div>
+                      <div class="modal-body">
+                        <p id="outcomeText"></p>
+                      </div>
+                    </div>
+                </div>
+            </section>
         </div>
+
         <c:import url="/jsp/footer.jsp"/>
+
     </body>
 </html>

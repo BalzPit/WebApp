@@ -12,6 +12,7 @@ import it.unipd.dei.webapp.utils.InputFormatException;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,6 +23,8 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -52,6 +55,9 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
         HttpSession session = req.getSession(false);
         String patient_cf = (String) session.getAttribute("cf");
 
+        Cookie patientCF = new Cookie("patientCF", patient_cf);
+        res.addCookie(patientCF);
+
         //get current date as sql.date
         Date date = new java.sql.Date(new java.util.Date().getTime());
 
@@ -77,6 +83,7 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
             examinations = medicalExaminationDAO.getMedicalExaminations();
 
             pastExaminations = examinations.get(0);
+            Collections.reverse(pastExaminations);
             futureExaminations = examinations.get(1);
 
             //m = new Message("Examinations successfully retrieved.");
@@ -137,8 +144,8 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
 
         try{
             //convert date and time strings to java.sql format for storage in the database
-            java.util.Date selectedDate = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("date"));
-            java.util.Date selectedTime = new SimpleDateFormat("hh:mm").parse(req.getParameter("timeToSelect"));
+            java.util.Date selectedDate = new SimpleDateFormat("yyyy-MM-dd").parse(req.getParameter("dateselect"));
+            java.util.Date selectedTime = new SimpleDateFormat("HH:mm").parse(req.getParameter("timeToSelect"));
 
             date =  new java.sql.Date(selectedDate.getTime());
             time =  new java.sql.Time(selectedTime.getTime());

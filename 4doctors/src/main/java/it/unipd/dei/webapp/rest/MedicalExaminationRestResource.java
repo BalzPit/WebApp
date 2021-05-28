@@ -122,7 +122,7 @@ public class MedicalExaminationRestResource extends RestResource{
             final String doctor_cf = params[0];
             java.util.Date utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(params[1]);
             final Date date = new java.sql.Date(utilDate.getTime());
-            java.util.Date utilTime = new SimpleDateFormat("hh:mm").parse(params[2]);
+            java.util.Date utilTime = new SimpleDateFormat("HH:mm").parse(params[2]);
             final Time time = new java.sql.Time(utilTime.getTime());
 
             // creates a new object for accessing the database and reads the examination
@@ -180,7 +180,7 @@ public class MedicalExaminationRestResource extends RestResource{
             final String doctor_cf = params[0];
             java.util.Date utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(params[1]);
             final Date date = new java.sql.Date(utilDate.getTime());
-            java.util.Date utilTime = new SimpleDateFormat("hh:mm").parse(params[2]);
+            java.util.Date utilTime = new SimpleDateFormat("HH:mm").parse(params[2]);
             final Time time = new java.sql.Time(utilTime.getTime());
 
             final MedicalExamination updatedExamination = MedicalExamination.fromJSON(req.getInputStream());
@@ -279,7 +279,7 @@ public class MedicalExaminationRestResource extends RestResource{
             final String doctor_cf = params[0];
             java.util.Date utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(params[1]);
             final Date date = new java.sql.Date(utilDate.getTime());
-            java.util.Date utilTime = new SimpleDateFormat("hh:mm").parse(params[2]);
+            java.util.Date utilTime = new SimpleDateFormat("HH:mm").parse(params[2]);
             final Time time = new java.sql.Time(utilTime.getTime());
 
             // delete the medical examination

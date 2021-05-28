@@ -119,13 +119,12 @@ $("#pres_med").click(function(){
                                 var medicine_class_html = $(document.createElement("td")).text(medicine_list[i].medicine.medicine_class);
                                 var description_html = $(document.createElement("td")).text(medicine_list[i].medicine.description);
 
-                                $("#medicine_table").append($(document.createElement("tr")).append(code_html).append(name_html).append(description_html).append(medicine_class_html).append(producer_html));
-
+                                $("#medicine_table").html($(document.createElement("tr")).append(code_html).append(name_html).append(description_html).append(medicine_class_html).append(producer_html));
                     }
-                    $("#medicine_wrapper").css("display", "block");
                 } else{
                     $("#medicine_wrapper").html("<p class='table_message'>There are no medicines already prescribed to you.</p>");
                 }
+                $("#medicine_wrapper").css("display", "block");
             },
             error: function(){
                 console.log(error);

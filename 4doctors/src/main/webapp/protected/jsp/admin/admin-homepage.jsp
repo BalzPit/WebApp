@@ -44,6 +44,8 @@
     --></div>
 
     <c:import url="/jsp/footer.jsp"/>
+    <script>var cf="${cf}"</script>
+    <script>var contextPath="${pageContext.request.contextPath}"</script>
     <script src="${pageContext.request.contextPath}/js/admin-homepage.js"></script>
   </body>
 </html>

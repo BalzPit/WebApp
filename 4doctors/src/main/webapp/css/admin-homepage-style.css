@@ -14,14 +14,6 @@ p.table_message {
     margin: 20px 20px 20px 0px;
 }
 
-tbody tr {
-    background-color: transparent !important;
-}
-
 tbody tr.info_row {
     background-color: #ff990050 !important;
-}
-
-th, td {
-    border: 1px solid black;
 }

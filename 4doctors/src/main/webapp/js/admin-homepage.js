@@ -3,7 +3,7 @@ var patients_table = $("#patients_table");
 var doctors_wrapper = $("#doctors_wrapper");
 var patients_wrapper = $("#patients_wrapper");
 
-const contextPath = "http://localhost:8080/4Doctors-1.00";
+// const contextPath = "http://localhost:8080/4Doctors-1.00";
 
 // When the page is loaded call the two REST service to get the list of all active doctors and all patients in the database
 // and build two tables dynamically

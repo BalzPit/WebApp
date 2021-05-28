@@ -10,7 +10,7 @@
 		<script src="<c:url value="/js/login-registration-centralizer.js"/>"></script>
 	</head>
 	<body>
-		
+
 	<!-- display error/message -->
 	<c:if test='${not empty message}'>
 		<c:import url="/jsp/include/error-message.jsp"/>

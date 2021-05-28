@@ -17,15 +17,17 @@ var add_doctor_message = $("#add_doctor_message");
 
 const contextPath = "http://localhost:8080/4Doctors-1.00";
 
-
+// Regex to validate cf, email, asl code and password strength
 const cf_regex = /[A-Za-z]{6}[0-9]{2}[A-Za-z][0-9]{2}[A-Za-z][0-9]{3}[A-Za-z]/;
 const email_regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const asl_regex = /[A-Z0-9]+/;
 const strong_password = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
 const medium_password = /(?=.*[a-z])(?=.*[0-9])(?=.{6,})/;
 
+// Listener on form to validate data on submit
 add_doctor_form.submit(function (event) {
 
+    // Check if parameters are null
     if(cf.val() == null){
         cf.addClass("invalid");
         errors.eq(0).html("The fiscal code can't be null!");
@@ -96,6 +98,7 @@ add_doctor_form.submit(function (event) {
         return false;
     }
 
+    // Remove leading and trailing whitespace
     var cf_value = cf.val().trim().toUpperCase();
     var name_value = _name.val().trim();
     var surname_value = surname.val().trim();
@@ -107,6 +110,7 @@ add_doctor_form.submit(function (event) {
     var address_value = address.val().trim();
     var asl_code_value = asl_code.val().trim();
 
+    // Check if parameters value are valid or not
     if(cf_value.length === 0) {
         cf.addClass("invalid");
         errors.eq(0).html("The fiscal code can't be empty!");
@@ -241,8 +245,10 @@ add_doctor_form.submit(function (event) {
         retype_password.addClass("valid");
     }
 
+    // Prevent to submit form since the action to perform is an AJAX call
     event.preventDefault();
 
+    // Build JSON with doctor fields
     var doctor_json = {
         doctor: {
             cf: cf_value,
@@ -258,12 +264,14 @@ add_doctor_form.submit(function (event) {
         }
     };
 
+    // REST call to add new doctor to the database
     $.ajax({
         url: contextPath + "/rest/doctor",
         method: "POST",
         contentType: "application/json",
         dataType: "json",
         data: JSON.stringify(doctor_json),
+        // If success or there is an error show it in a box
         success: function(result) {
             add_doctor_message.removeClass().addClass("alert alert-success").attr("role", "alert").text("New doctor added");
         },

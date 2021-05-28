@@ -185,7 +185,7 @@ a {
 	color: var(--main-red);
 }
 
-a:hover:not(.button) {
+a:hover {
 	color: var(--main-dark);
 	text-decoration: underline;
 }
@@ -204,6 +204,7 @@ a:hover:not(.button) {
 	font-weight: bold;
 	color: #fff !important;
 	text-transform: uppercase;
+	text-decoration: none !important;
 	outline: none !important;
 	cursor: pointer;
 	transition: background-color 0.3s ease-in-out;

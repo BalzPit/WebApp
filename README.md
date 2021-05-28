@@ -20,6 +20,9 @@ Our goal for this project is to implement a web application where both patients 
 
 ## Mockup
 In the report provided we show the mockup of only some pages. To visulize all the mockups see `./mockup/4doctors-mockup.pdf`
+
+## Presentation Slides (II Homework)
+The presentation slides are in the home directory of the repository, `./slides/4doctors-presentation.pdf`
  
 ## Demo test
 

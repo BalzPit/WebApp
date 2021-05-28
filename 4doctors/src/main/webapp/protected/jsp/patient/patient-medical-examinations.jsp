@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    <script type="text/javascript" src="<c:url value="/js/patient-medical-examinations.js"/>">
+    </script>
+
 	<head>
 		<title>Medical Examination</title>
         <c:import url="/jsp/head.jsp"/>
@@ -44,16 +47,7 @@
                         </form>
                     </div>
 
-                    <!--<h1>Medical Examinations List</h1>
-
-                    <hr/>
-
-                    <c:import url="/jsp/include/show-message.jsp"/>
-                    -->
-
                     <!-- display the list of FUTURE medical examinations -->
-
-
 
                         <table id="future-exams">
                             <caption>FUTURE EXAMINATIONS</caption>
@@ -70,7 +64,13 @@
                                             <tr>
                                                 <td><c:out value="${examination.date}"/></td>
                                                 <td><c:out value="${examination.time}"/></td>
-                                                <td><c:out value="${examination.doctor_cf}"/></td>
+                                                <td data-attr="${examination.doctor_cf}">
+                                                    <c:forEach var = "patientDoctor" items="${patientDoctors}" >
+                                                        <c:if test="${patientDoctor.cf == examination.doctor_cf}">
+                                                            <p>${patientDoctor.surname} ${patientDoctor.name}</p>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </td>
                                                 <td><button id="deletemedex" onclick="deleteMedEx(this)">Cancel</button></td>
                                             </tr>
                                         </c:forEach>
@@ -100,10 +100,15 @@
                             <tbody>
                             <c:forEach var="examination" items="${pastExaminationsList}">
                                 <tr>
-                                    <td><c:out value="${examination.doctor_cf}"/></td>
+                                    <td value="${examination.doctor_cf}">
+                                        <c:forEach var = "patientDoctor" items="${patientDoctors}" >
+                                            <c:if test="${patientDoctor.cf == examination.doctor_cf}">
+                                                <p>${patientDoctor.surname} ${patientDoctor.name}</p>
+                                            </c:if>
+                                        </c:forEach>
+                                    </td>
                                     <td><c:out value="${examination.date}"/></td>
                                     <td><c:out value="${examination.time}"/></td>
-                                    <!--<td><c:out value="${examination.outcome}"/></td>-->
                                     <td><button id="outcome" value="${examination.outcome}" onclick="openPopup(this)">Details</button></td>
                                 </tr>
                             </c:forEach>
@@ -129,7 +134,5 @@
 
         <c:import url="/jsp/footer.jsp"/>
 
-        <script type="text/javascript" src="<c:url value="/js/patient-medical-examinations.js"/>">
-        </script>
     </body>
 </html>

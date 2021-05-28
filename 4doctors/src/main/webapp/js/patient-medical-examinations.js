@@ -1,3 +1,4 @@
+
 function addMedEx() {
 
     if(validate()){
@@ -65,6 +66,8 @@ function addMedEx() {
                         var doctorcell = newRow.insertCell(2);
                         var cancelbutton = newRow.insertCell(3);
 
+                        doctorcell.setAttribute("data-attr",responseMedEx.medicalExamination.doctor_cf);
+
                         datecell.innerText = responseMedEx.medicalExamination.date;
                         timecell.innerText = responseMedEx.medicalExamination.time;
                         doctorcell.innerText = responseMedEx.medicalExamination.doctor_cf;
@@ -84,6 +87,8 @@ function addMedEx() {
                     var timecell = newRow.insertCell(1);
                     var doctorcell = newRow.insertCell(2);
                     var cancelbutton = newRow.insertCell(3);
+
+                    doctorcell.setAttribute("data-attr",responseMedEx.medicalExamination.doctor_cf);
 
                     datecell.innerText = responseMedEx.medicalExamination.date;
                     timecell.innerText = responseMedEx.medicalExamination.time;
@@ -111,7 +116,7 @@ function deleteMedEx(b){
         var medEx = {
             date: row.cells[0].innerText,
             time: formatTime(row.cells[1].innerText),
-            doctor: row.cells[2].innerText
+            doctor: row.cells[2].dataset.attr
         }
 
         $.ajax({

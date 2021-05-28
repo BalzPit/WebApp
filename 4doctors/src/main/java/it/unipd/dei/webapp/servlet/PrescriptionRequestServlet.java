@@ -78,7 +78,7 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
             description = req.getParameter("description");
             duration = Integer.parseInt(req.getParameter("numeroprestazioni"));
             date = new Date(System.currentTimeMillis());
-            code = req.getParameter("code");
+            //code = req.getParameter("code");
 
             type = req.getParameter("type");
 
@@ -101,9 +101,11 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
 
             if(typeEnum == Prescription.TypeOfPrescription.FARMACO){
                 quantity = Integer.parseInt(req.getParameter("qnt"));
+                code = req.getParameter("codeM");
             }
             else{
                 quantity = 1;
+                code = req.getParameter("codeE");
             }
             if(quantity<1 || quantity>100){
                 throw  new InputFormatException("The quantity must be in the range of 1-100");
@@ -159,16 +161,16 @@ public final class PrescriptionRequestServlet extends AbstractDatabaseServlet {
             // creates a new object for accessing the database and stores the patient
             MedicineDAO show = new MedicineDAO(getDataSource().getConnection());
             medicineList = show.getListMedicines();
-            message = new Message("Medicine succesfully searched!");
+            //message = new Message("Medicine succesfully searched!");
 
         } catch (SQLException ex) {
             ErrorCode err = ErrorCode.SERVER_ERROR;
             res.setStatus(err.getHTTPCode());
-            message = new Message(err.getErrorMessage(), err.getErrorCode(), "Cannot search for Medicine: unexpected error while accessing the database.");
+            //message = new Message(err.getErrorMessage(), err.getErrorCode(), "Cannot search for Medicine: unexpected error while accessing the database.");
         }
 
         req.setAttribute("medicineList", medicineList);
-        req.setAttribute("message", message);
+        //req.setAttribute("message", message);
         req.setAttribute("cf", patient_cf);
 
         // forwards the control

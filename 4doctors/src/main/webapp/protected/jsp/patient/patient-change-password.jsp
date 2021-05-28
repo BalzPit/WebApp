@@ -15,22 +15,20 @@
       --><section>
           <h1>Change Password</h1>
 
-          <!-- display the message -->
-          <c:if test='${not empty message}'>
-            <c:import url="/jsp/include/show-message.jsp"/>
-          </c:if>
-
-          <form method="POST" action="<c:url value="/change-password"/>">
-            <table>
-              <tr><td>Current Password</td><td><input type="password" name="current" ></td></tr>
-              <tr><td>New Password</td><td><input type="password" name="new"></td></tr>
-              <tr><td>Confirm Password</td><td><input type="password" name="confirm"></td></tr>
-              <tr><td><input type="submit" value="Change Password"></td></tr>
-            </table>
+          <form id="change_password_form" method="POST" action="<c:url value="/change-password"/>">
+              <input type="password" name="current" placeholder="Current password"><br>
+              <div class="error"></div>
+              <input type="password" name="new" placeholder="New password"><br>
+              <div class="error"></div>
+              <input type="password" name="confirm" placeholder="Confirm password"><br>
+              <div class="error"></div>
+              <input type="submit" value="Change Password">
           </form>
           </section>
     </div>
     <c:import url="/jsp/footer.jsp"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js" integrity="sha512-nOQuvD9nKirvxDdvQ9OMqe2dgapbPB7vYAMrzJihw5m+aNcf0dX53m6YxM4LgA9u8e9eg9QX+/+mPu8kCNpV2A==" crossorigin="anonymous"></script>
+    <script src="${pageContext.request.contextPath}/js/change-password-check.js"></script>
   </body>
 
 

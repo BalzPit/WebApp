@@ -8,6 +8,7 @@
     <head>
         <title>Prescriptions</title>
         <c:import url="/jsp/head.jsp"/>
+        <link type="text/css" rel="stylesheet" href="<c:url value="/css/prescription-patient-style.css"/>">
     </head>
     <%-- BODY --%>
     <body>
@@ -16,7 +17,7 @@
             <c:import url="/jsp/patient-nav.jsp"/><!--
             --><section>
                 <c:if test='${not empty cf}'>
-                <h1>Prescriptions management page of <c:out value="${cf}"/></h1>
+                <h1>Prescriptions management page</h1>
                 </c:if>
 
                 <%-- List the prescriptions --%>
@@ -30,47 +31,68 @@
 
                 <%-- Request --%>
                 <h2>Prescription request</h2>
-                <form method="POST" action="<c:url value="/prescription-request"/>">
+                <form method="POST" id="p_form" action="<c:url value="/prescription-request"/>">
                     <div>
                         <label>Doctor email</label>
-                        <input name="doctor_email" type="text"/><br>
-
+                        <input class="req" name="doctor_email" type="text" /><br>
+                        <div class="error"></div>
                         <label>Description:</label>
-                        <input name="description" type="text"/><br>
+                        <input class="req" name="description" type="text" /><br>
+                        <div class="error"></div>
                         <label>Times of validity (max. 10)</label>
-                        <input type="number" id="quantity" name="numeroprestazioni" min="1" max="10"/>
-
-
-                        <input type="radio" id="exam" name="type" value="ESAME">
-                        <label for="patient">Exam</label>
-                        <input type="radio" id="medicine" name="type" value="FARMACO">
-                        <label for="doctor">Medicine</label><br><br>
-
-                        <%-- <select name="medicine" id="medicine">
-                            <c:forEach var="med" items="${medicineList}">
-                                <option name="code" value="<c:out value="${med.getCode()}"/>"><c:out value="${med.getName()}"/></option>
-                            </c:forEach>
-                        </select> --%>
-                        <label>code: </label>
-                        <input name="code" type="text"><br>
-
-                        <label>Quantity</label>
-                        <input type="number" id="qnt" name="qnt"/>
+                        <input class="req" type="number" id="quantity" name="numeroprestazioni" min="1" max="10" /><br>
+                        <div class="error"></div>
+                        <div id="radioB">
+                            <input class="req" type="radio" id="exam" name="type" value="ESAME" >
+                            <label for="exam">Exam</label>
+                            <input class="req" type="radio" id="medicine" name="type" value="FARMACO">
+                            <label for="medicine">Medicine</label>
+                        </div><br>
+                        <div class="error"></div>
+                        <div id="medicine_select">
+                            <label>Choose a medicine</label>
+                            <select class="reqM" name="codeM" id="med_select" ></select>
+                        </div>
+                        <div class="error"></div>
+                        <div id="exam_select">
+                             <label>Choose an exam</label>
+                             <select class="reqE" name="codeE" id="ex_select" required></select>
+                        </div>
+                        <div class="error"></div>
+                        <br>
+                        <div id="quant">
+                            <label>Quantity</label>
+                            <input class="reqM" type="number" id="qnt" name="qnt" />
+                        </div><br>
+                        <div class="error"></div>
+                    </div>
+                    <div>
+                        <button id="request" type="submit">Submit</button>
+                        <button type="reset">Reset</button>
                     </div>
 
-                    <button type="submit">Submit</button><br>
-                    <button type="reset">Reset</button>
-
                 </form>
 
-                <%-- Available medicines in the database --%>
-                <h2>Medicine List</h2>
-                <form method="GET" action="<c:url value="/list-medicines"/>">
-                    <input name="type" type="submit" value="list medicines" />
-                </form>
+                <%-- Available medicines prescripted to the user --%>
+                <div>
+                <h2>Prescribed medicines</h2>
+                    <button id="pres_med" value=<c:out value="${cf}"/> >List</button>
+                    <div id="medicine_wrapper">
+                         <table id="medicine_table">
+                            <tr>
+                                <th scope="col">Code</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Medicine class</th>
+                                <th scope="col">Producer</th>
+                            </tr>
+                         </table>
+                    </div>
+                </div>
         </section>
         </div>
         <c:import url="/jsp/footer.jsp"/>
+        <script type="text/javascript" src="<c:url value="/js/prescription-home.js"/>"></script>
     </body>
 
 </html>

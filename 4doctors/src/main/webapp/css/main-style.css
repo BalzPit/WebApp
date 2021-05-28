@@ -1,3 +1,10 @@
+:root {
+    --main-green: #01b050;
+    --main-yellow: #ff9900;
+    --error-red: #d00;
+    --error-red-light: #ff8080;
+}
+
 * {
 	font-family: Arial, sans-serif !important;
 	color: #444;
@@ -39,7 +46,7 @@ header img {
 nav {
 	width: 15%;
 	height: 100%;
-	background-color: #ff9900;
+	background-color: var(--main-yellow);
 }
 
 nav > a {
@@ -49,15 +56,17 @@ nav > a {
 	color: #fff;
 }
 
-nav > a:hover {
+nav > a:hover, nav > a.selected {
 	background-color: #000;
 	border-left: 5px solid #fff;
 	text-decoration: none !important;
+	color: var(--main-yellow);
 }
 
 nav > a:active {
-	box-shadow: inset 0 0 8px #000;
-	background-color: #00b050; 
+	/*box-shadow: inset 0 0 8px #000;
+	background-color: #00b050; */
+	color: #fff !important;
 }
 
 #toggle-menu-button {
@@ -105,9 +114,10 @@ nav > a:active {
 	transform: rotate(-45deg);
 }
 
-#overlay {
+.overlay {
 	opacity: 0;
 	z-index: 2;
+	display: flex;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -121,9 +131,9 @@ nav > a:active {
 section {
 	width: 85%;
 	height: 100%;
-	padding: 16px;
+	padding: 30px 50px 30px 50px;
 	background-color: #ff990047;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 /* -------------------------------------- FOOTER -------------------------------------- */
@@ -142,11 +152,11 @@ footer p {
 /* -------------------------------------- LINKS --------------------------------------- */
 a {
 	font-weight: bold;
-	color: #ff9900;
+	color: var(--main-yellow);
 }
 
 a:hover {
-	color: #ff9900;
+	color: var(--main-yellow);
 	text-decoration: underline;
 }
 
@@ -157,18 +167,19 @@ a:hover {
 	padding: 9px 24px;
 	border: none;
 	border-radius: 50px;
-	background-color: #01b050;
+	background-color: var(--main-green);
 	letter-spacing: 0.04em;
 	text-align: center;
 	font-weight: bold;
 	color: #fff;
 	text-transform: uppercase;
+	outline: none !important;
 	cursor: pointer;
 	transition: background-color 0.3s ease-in-out;
 }
 
 .button:hover, button:hover, input[type=submit]:hover, input[type=reset]:hover {
-	background-color: #ff9900;
+	background-color: var(--main-yellow);
 }
 
 .button:active, button:active, input[type=submit]:active, input[type=reset]:active {
@@ -177,7 +188,7 @@ a:hover {
 
 /* ------------------------------------ TABLE ------------------------------------ */
 thead tr, th {
-    background-color: #01b050;
+    background-color: var(--main-green);
     color: #fff;
     font-weight: bold;
 }
@@ -191,7 +202,7 @@ td, th {
 }
 
 /* ------------------------------------ FORM INPUT ------------------------------------ */
-input[type="text"], input[type="password"], input[type="date"], select {
+input[type="text"], input[type="password"], input[type="date"], input[type="email"], select {
 	width: 100%;
 	max-width: 300px;
 	height: 40px;
@@ -203,21 +214,21 @@ input[type="text"], input[type="password"], input[type="date"], select {
 	color: #444;
 }
 
-input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, select:focus {
+input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus, input[type="email"]:focus, select:focus {
 	outline: none;
-    border: 3px solid #01b050;
+    border: 3px solid var(--main-green);
     padding: 4px 4px 4px 40px;
-    color: #01b050;
+    color: var(--main-green);
 }
 
-input[type="text"]:focus::placeholder, input[type="password"]:focus::placeholder, input[type="date"]:focus::placeholder, select:focus::placeholder {
-	color: #01b050;
+input[type="text"]:focus::placeholder, input[type="password"]:focus::placeholder, input[type="date"]:focus::placeholder, input[type="email"]:focus::placeholder, select:focus::placeholder {
+	color: var(--main-green);
 }
 
-input:not([type=date]):invalid:not(:placeholder-shown):not(:focus) {
-	border: 3px solid #d00 !important;
-	color: #d00 !important;
-	background-color: #ffcbcb;
+input:not([type=date]):invalid:not(:placeholder-shown):not(:focus), input.invalid {
+	border: 3px solid var(--error-red) !important;
+	color: var(--error-red) !important;
+	background-color: /*#ffcbcbvar*/var(--error-red-light);
 }
 
 input[name=username], input[name=cf], input[type=password] {
@@ -232,4 +243,35 @@ input[name=username], input[name=cf] {
 
 input[type=password] {
     background-image: url('../media/key.png') !important;
+}
+
+.error {
+	font-weight: bold;
+	color: var(--error-red-light);
+}
+
+/* ------------------------------- ERROR MESSAGE ALERT  --------------------------------- */
+.overlay {
+    opacity: 1;
+    cursor: initial;
+}
+
+#error-message-box {
+    width: 100%;
+    margin: auto;
+    padding: 15px;
+    background-color: #000;
+    text-align: center;
+}
+
+#error-message-box p {
+	color: #fff;
+}
+
+#error-message-box h1.error {
+    color: #d00;
+}
+
+#error-message-box h1.message {
+    color: #01b050;
 }

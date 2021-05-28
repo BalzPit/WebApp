@@ -23,6 +23,10 @@ table{
     margin:auto;
 }
 
+p {
+    margin:auto;
+}
+
 caption{
     text-align: center;
     caption-side: top;

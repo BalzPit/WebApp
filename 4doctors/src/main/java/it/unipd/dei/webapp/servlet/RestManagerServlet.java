@@ -1,10 +1,7 @@
 package it.unipd.dei.webapp.servlet;
 
 import it.unipd.dei.webapp.resource.*;
-import it.unipd.dei.webapp.rest.DoctorRestResource;
-import it.unipd.dei.webapp.rest.MedicineRestResource;
-import it.unipd.dei.webapp.rest.MedicalExaminationRestResource;
-import it.unipd.dei.webapp.rest.PatientRestResource;
+import it.unipd.dei.webapp.rest.*;
 import it.unipd.dei.webapp.utils.ErrorCode;
 import org.json.JSONObject;
 
@@ -60,6 +57,10 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
         }
         // if the requested resource was a Doctor, delegate its processing and return
         if(processDoctor(req, res)){
+            return;
+        }
+        // if the requested resource was a Exams, delegate its processing and return
+        if(processExams(req, res)){
             return;
         }
 
@@ -121,10 +122,56 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
 
         return true;
     }
+    /**
+     * Checks whether the request is for an {@link Medicine} resource and, in case, processes it.
+     *
+     * @param req the HTTP request.
+     * @param res the HTTP response.
+     * @return {@code true} if the request was for an {@code Medicine; {@code false} otherwise.
+     *
+     * @throws IOException if any error occurs in the client/server communication.
+     */
+    private boolean processExams(HttpServletRequest req, HttpServletResponse res) throws IOException {
 
+        final String method = req.getMethod();
+
+        String path = req.getRequestURI();
+        Message m = null;
+
+
+        if(path.lastIndexOf("rest/exams") <= 0) {
+            return false;
+        }
+
+        try {
+            // strip everyhing until after the /exams
+            path = path.substring(path.lastIndexOf("exams") + 5);
+
+            if (path.length() == 0 || path.equals("/")) {
+
+                switch (method) {
+                    case "GET":
+                        new ExamsRestResource(req, res, getDataSource().getConnection()).listExams();
+                        break;
+                    default:
+                        writeError(res, ErrorCode.EXAMS_UNSUPPORTED_OPERATION);
+                }
+            } else {
+                ErrorCode ec = ErrorCode.EXAMS_INVALID_PARAMETERS;
+                res.setStatus(ec.getHTTPCode());
+                res.getWriter().write(ec.toJSON().toString());
+            }
+
+        } catch(Throwable t) {
+            writeError(res, ErrorCode.SERVER_ERROR);
+        }
+
+        return true;
+
+    }
 
     /**
-     * Checks whether the request if for an {@link Medicine} resource and, in case, processes it.
+     * Checks whether the request is for an {@link Medicine} resource and, in case, processes it.
      *
      * @param req the HTTP request.
      * @param res the HTTP response.
@@ -189,7 +236,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
 
      
     /**
-     * Checks whether the request if for an {@link MedicalExamination} resource and, in case, processes it.
+     * Checks whether the request is for an {@link MedicalExamination} resource and, in case, processes it.
      *
      * @param req the HTTP request.
      * @param res the HTTP response.
@@ -267,7 +314,7 @@ public final class RestManagerServlet extends AbstractDatabaseServlet {
 
 
     /**
-     * Checks whether the request if for a {@link Patient} resource and, in case, processes it.
+     * Checks whether the request is     for a {@link Patient} resource and, in case, processes it.
      *
      * @param req the HTTP request.
      * @param res the HTTP response.

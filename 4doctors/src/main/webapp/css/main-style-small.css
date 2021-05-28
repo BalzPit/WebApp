@@ -7,12 +7,9 @@ header {
 	padding: 10px;
 }
 
-#site {
-	height: auto !important;
-}
-
 section {
 	width: 100%;
+	padding: 15px 25px 15px 25px;
 	overflow-y: auto;
 }
 

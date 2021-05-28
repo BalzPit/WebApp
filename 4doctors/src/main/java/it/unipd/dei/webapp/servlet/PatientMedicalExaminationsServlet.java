@@ -23,6 +23,8 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -64,7 +66,7 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
         List<MedicalExamination> futureExaminations = null;
         List<MedicalExamination> pastExaminations = null;
         List<Doctor> patientDoctors = null;
-        Message m;
+        Message m = null;
 
         //get times (empty arraylist as parameter to get standard list with all times not booked)
         ArrayList<BookingTime> bookingTimeList = BookingTime.TimesList(new ArrayList<>());
@@ -81,9 +83,10 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
             examinations = medicalExaminationDAO.getMedicalExaminations();
 
             pastExaminations = examinations.get(0);
+            Collections.reverse(pastExaminations);
             futureExaminations = examinations.get(1);
 
-            m = new Message("Examinations successfully retrieved.");
+            //m = new Message("Examinations successfully retrieved.");
         }
         catch (SQLException | NamingException ex) {
             ErrorCode ec = ErrorCode.MEDICAL_EXAMINATION_NOT_FOUND;

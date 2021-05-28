@@ -83,6 +83,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>ChangeEmail</servlet-name>
+        <servlet-class>it.unipd.dei.webapp.servlet.ChangeEmailServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeEmail</servlet-name>
+        <url-pattern>/change-email</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ListMedicines</servlet-name>
         <servlet-class>it.unipd.dei.webapp.servlet.ListMedicinesServlet</servlet-class>
     </servlet>
@@ -125,15 +134,6 @@
     <servlet-mapping>
         <servlet-name>AdminLogin</servlet-name>
         <url-pattern>/admin/login</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>AdminHome</servlet-name>
-        <servlet-class>it.unipd.dei.webapp.servlet.AdminHomeServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminHome</servlet-name>
-        <url-pattern>/admin/homepage</url-pattern>
     </servlet-mapping>
 
     <servlet>

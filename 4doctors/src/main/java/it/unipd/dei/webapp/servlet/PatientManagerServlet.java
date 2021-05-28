@@ -68,7 +68,7 @@ public final class PatientManagerServlet extends AbstractDatabaseServlet {
             // creates a new object for accessing the database and stores the patient
             ListMyPatientsDAO listPatients = new ListMyPatientsDAO(getDataSource().getConnection(), cf);
             patients = listPatients.listMyPatients();
-            message = new Message("Patients succesfully searched into the database!");
+//            message = new Message("Patients succesfully searched into the database!");
 
         } catch (SQLException | InputFormatException ex) {
             ErrorCode err = ErrorCode.SERVER_ERROR;

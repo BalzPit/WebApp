@@ -232,7 +232,7 @@ table {
     text-align: inherit;
 }
 
-thead tr, th {
+thead tr, th, thead td {
     background-color: var(--main-dark);
     color: #fff;
     font-weight: bold;

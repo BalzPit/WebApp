@@ -74,7 +74,7 @@ public final class LoginServlet extends AbstractDatabaseServlet {
                 HttpSession session = req.getSession();
                 session.setAttribute("cf", cf);
                 session.setAttribute("role", role);
-                message = new Message(String.format("User %s successfully logged in.", cf));
+                //message = new Message(String.format("User %s successfully logged in.", cf));
                 // stores the message as a request attribute
                 req.setAttribute("message", message);
 

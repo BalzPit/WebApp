@@ -10,11 +10,12 @@
 		<script src="<c:url value="/js/login-registration-centralizer.js"/>"></script>
 	</head>
 	<body>
+
 	<!-- display error/message -->
 	<c:if test='${not empty message}'>
 		<c:import url="/jsp/include/error-message.jsp"/>
 	</c:if>
-		<div class="form-box">
+		<div class="form-box white-box">
 			<img src="<c:url value="/media/logo.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
 			<h2>Admin Login</h2>
 			<form id="login_form" method="POST" action="<c:url value="/admin/login"/>">

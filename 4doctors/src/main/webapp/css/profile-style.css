@@ -1,5 +1,5 @@
 .personal-info h3 {
-    color: var(--main-green);
+    color: var(--main-red);
     width: 80%;
     text-transform: uppercase;
     font-size: 1em;
@@ -7,9 +7,9 @@
 }
 
 .personal-info p {
-    border-width: 1px; /* thickness of border line*/
+    border-width: 2px; /* thickness of border line*/
     border-style: solid; /* type of border line*/
-    border-color: var(--main-yellow);
+    border-color: var(--main-dark);
     border-top: 0;
     border-right: 0;
     border-left: 0;
@@ -19,22 +19,10 @@
     display: inline-block;
 }
 
-
 .personal-info a.button{
     border: none;
     font-weight: normal;
 }
-
-/*.btn {*/
-/*    margin-top:  7px;*/
-/*    margin-right: 0;*/
-/*    text-transform: uppercase;*/
-/*    font-size: 1em;*/
-/*    border: none;*/
-/*    padding: 0px;*/
-/*    margin: 0px;*/
-/*    color: var(--main-green);*/
-/*}*/
 
 .pinfo-block {
     /*display:flex;*/

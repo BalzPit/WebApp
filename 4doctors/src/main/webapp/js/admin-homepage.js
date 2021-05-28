@@ -3,7 +3,7 @@ var patients_table = $("#patients_table");
 var doctors_wrapper = $("#doctors_wrapper");
 var patients_wrapper = $("#patients_wrapper");
 
-const contextPath = "http://localhost:8080/4Doctors-1.00";
+// const contextPath = "http://localhost:8080/4Doctors-1.00";
 
 // When the page is loaded call the two REST service to get the list of all active doctors and all patients in the database
 // and build two tables dynamically
@@ -23,7 +23,7 @@ $(document).ready(function (){
                     doctors_table.append($(document.createElement("tr")).append(cf_html).append(name_html).append(surname_html).append(buttons));
                 });
 
-                doctors_table.css("display", "block");
+                doctors_table.css("display", "inline-block");
             }
             else {
                 // If there are no doctor in the db show a message
@@ -52,7 +52,7 @@ $(document).ready(function (){
                     patients_table.append($(document.createElement("tr")).append(cf_html).append(name_html).append(surname_html).append(buttons));
                 });
 
-                patients_table.css("display", "block");
+                patients_table.css("display", "inline-block");
             } else {
                 // If there are no patient in the db show a message
                 patients_wrapper.html("<p class='table_message'>There are no patients in the database.</p>");

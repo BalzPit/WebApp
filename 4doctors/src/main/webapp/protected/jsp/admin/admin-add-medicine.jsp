@@ -14,7 +14,7 @@
     <div id="site">
         <c:import url="/jsp/admin-nav.jsp"/><!--
         --><section>
-            <div class="form-box">
+            <div class="form-box white-box">
                 <h2>Add new medicine</h2>
                 <form id="add_medicine_form" method="POST">
                     <input id="m_code" name="m_code" type="text" placeholder="Medicine Code" maxlength="16">
@@ -31,7 +31,7 @@
                     <div class="error"></div>
                     <input id="description" name="description" type="text" placeholder="Description" maxlength="200">
                     <div class="error"></div>
-                    <br><br>
+                    <br>
                     <input name="submit" type="submit" value="Add new medicine">
                     <div id="add_medicine_message"></div>
                 </form>

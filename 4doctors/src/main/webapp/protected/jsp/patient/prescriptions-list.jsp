@@ -19,7 +19,7 @@
             <c:import url="/jsp/patient-nav.jsp"/><!--
             --><section>
                 <c:if test='${not empty cf}'>
-                    <h1>List of all prescriptions of <c:out value="${cf}"/></h1>
+                    <h1 class="welcome-title">List of all prescriptions of </h1>
                 </c:if>
 
 
@@ -50,8 +50,16 @@
                         </tbody>
                     </table>
                 </c:if>
+                <c:if test='${empty prescriptionsList}'>
+                    <h3>Prescriptions</h3>
+                    <p>No prescriptions already present</p>
+                </c:if>
                 </section>
         </div>
+        <script>var cf="${cf}"</script>
+        <script>var role="${role}"</script>
+        <script>var contexPath="${pageContext.request.contextPath}"</script>
+        <script src="${pageContext.request.contextPath}/js/getUserName.js"></script>
         <c:import url="/jsp/footer.jsp"/>
     </body>
 </html>

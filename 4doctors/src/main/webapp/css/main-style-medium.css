@@ -9,4 +9,6 @@ nav {
 
 section {
 	width: 75%;
+	padding: 15px;
+	background-image: none;
 }

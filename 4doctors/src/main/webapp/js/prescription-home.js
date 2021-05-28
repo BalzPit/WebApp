@@ -3,8 +3,14 @@
 var xhr1 = new XMLHttpRequest();
 var xhr2 = new XMLHttpRequest();
 
-var url_medicine = 'http://localhost:8080/4Doctors-1.00/rest/medicine';
-var url_exams = 'http://localhost:8080/4Doctors-1.00/rest/exams';
+var absolutePath = function(href) {
+    var link = document.createElement("a");
+    link.href = href;
+    return link.href;
+};
+
+var url_medicine = absolutePath(contexPath + '/rest/medicine');
+var url_exams = absolutePath(contexPath + '/rest/exams');
 
 xhr1.onreadystatechange = alertContents1;
 xhr2.onreadystatechange = alertContents2;
@@ -96,14 +102,14 @@ $("#pres_med").click(function(){
         var cf = $("#pres_med").val();
         console.log(cf);
         $.ajax({
-            url: 'http://localhost:8080/4Doctors-1.00/rest/medicine/'+cf,
+            url: url_medicine + '/' +cf,
             type: 'get',
             success: function(data){
                 console.log(data);
 
                 var medicine_list = data.resourceList;
 
-                if(medicine_list.length!=0){
+                if(medicine_list.length!==0){
                     console.log(medicine_list);
 
                     for (var i = 0; i < medicine_list.length; i++){
@@ -117,10 +123,10 @@ $("#pres_med").click(function(){
                                 $("#medicine_table tbody").html($(document.createElement("tr")).append(code_html).append(name_html).append(description_html).append(medicine_class_html).append(producer_html));
 
                     }
-                    $("#medicine_wrapper").css("display", "block");
                 } else{
-                    medicine_wrapper.html("<p class='table_message'>There are no medicine already prescribed to you.</p>");
+                    $("#medicine_wrapper").html("<p class='table_message'>There are no medicines already prescribed to you.</p>");
                 }
+                $("#medicine_wrapper").css("display", "block");
             },
             error: function(){
                 console.log(error);

@@ -19,9 +19,9 @@
     <c:if test='${not empty message}'>
         <c:import url="/jsp/include/error-message.jsp"/>
     </c:if>
-	<div class="form-box">
+	<div class="form-box white-box">
 		<img src="<c:url value="/media/logo.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
-		<h2>Registration</h2>
+		<h3>Registration</h3>
 		<form id="registration_form" method="POST" action="<c:url value="/patient"/>">
 			<input id="cf" name="cf" type="text" placeholder="Fiscal Code" required pattern="[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}">
 			<div class="error"></div>
@@ -31,7 +31,7 @@
 			<div class="error"></div>
 			<input id="email" name="email" type="email" placeholder="Email" required pattern=".*@.*\..+">
 			<div class="error"></div>
-			<label>Birth date</label>
+			<label>Birthday</label>
 			<input id="birthday" name="birthday" type="date" placeholder="Birth date" required>
 			<div class="error"></div>
 			<input id="birthplace" name="birthplace" type="text" placeholder="Place of birth" required pattern="[\w/ ]+">

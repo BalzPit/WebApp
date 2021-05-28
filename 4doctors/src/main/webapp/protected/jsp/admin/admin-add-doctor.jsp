@@ -14,7 +14,7 @@
     <div id="site">
         <c:import url="/jsp/admin-nav.jsp"/><!--
         --><section>
-            <div class="form-box">
+            <div class="form-box white-box">
                 <h2>Add new doctor</h2>
                 <form id="add_doctor_form" method="POST">
                     <input id="cf" name="cf" type="text" placeholder="Fiscal Code" required pattern="[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}">
@@ -25,9 +25,7 @@
                     <div class="error"></div>
                     <input id="email" name="email" type="email" placeholder="Email" required pattern=".*@.*\..+">
                     <div class="error"></div>
-                    <br>
-                    <label>Date of birth</label>
-                    <br>
+                    <label>Birthday</label>
                     <input id="birthday" name="birthday" type="date" placeholder="Birth date" required>
                     <div class="error"></div>
                     <input id="birthplace" name="birthplace" type="text" placeholder="Place of birth" required pattern="[\w/ ]+">
@@ -46,7 +44,7 @@
                     <div class="error"></div>
                     <input id="retype_password" name="retype_password" type="password" placeholder="Retype Password" required pattern=".{6,}">
                     <div class="error"></div>
-                    <br><br>
+                    <br>
                     <input name="submit" type="submit" value="Add new doctor">
                     <div id="add_doctor_message"></div>
                 </form>

@@ -164,7 +164,7 @@ public class PatientMedicalExaminationsServlet extends AbstractDatabaseServlet {
             MedExDAO.createMedicalExamination(newExamination);
 
 
-            m = new Message("Examination successfully added to the database.");
+            //m = new Message("Examination successfully added to the database.");
 
         }
         catch (ParseException | InputFormatException ex){

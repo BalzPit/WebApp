@@ -16,6 +16,8 @@
             <c:if test='${not empty sessionScope.username}'>
               <h1>Welcome, <c:out value="${sessionScope.username}"/></h1>
             </c:if>
+            <br>
+            <h3>List of all patients</h3>
             <div id="doctors_wrapper">
               <table id="doctors_table">
                 <tr>
@@ -26,6 +28,8 @@
                 </tr>
               </table>
             </div>
+            <br>
+            <h3>List of all patients</h3>
             <div id="patients_wrapper">
               <table id="patients_table">
                 <tr>

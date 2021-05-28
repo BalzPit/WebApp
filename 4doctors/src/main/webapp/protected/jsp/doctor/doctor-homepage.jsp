@@ -19,8 +19,9 @@
         <c:import url="/jsp/header.jsp"/>
         <div id="site">
             <section>
+                <br>
                 <c:if test='${not empty cf}'>
-                    <h2 class="welcome-title">Welcome, doctor </h2>
+                    <h1 class="welcome-title">Welcome, doctor </h1>
                 </c:if>
                 <a id="log-out-button" class="button button-2" href="${pageContext.request.contextPath}/user/logout">log out</a>
                 <div id="menu-button-container">

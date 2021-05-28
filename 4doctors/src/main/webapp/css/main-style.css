@@ -161,7 +161,7 @@ section {
 	background-color: #fff;
     background-image: url(../media/doctors-bg.png);
     background-position: right bottom;
-    background-size: 50%;
+    background-size: auto 50%;
     background-repeat: no-repeat;
 	overflow-y: auto;
 }
@@ -192,7 +192,7 @@ a:hover {
 
 /* ------------------------------------- BUTTONS -------------------------------------- */
 .button, button, input[type=submit], input[type=reset] {
-	min-width: 150px;
+	/*min-width: 150px;*/
 	margin: 5px;
 	padding: 9px 24px;
 	border: none;
@@ -306,4 +306,8 @@ input[type=password] {
 
 #error-message-box p {
 	color: #fff;
+}
+
+#error-message-box button {
+    box-shadow: none;
 }

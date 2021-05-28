@@ -23,30 +23,30 @@
 		<img src="<c:url value="/media/logo.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
 		<h3>Registration</h3>
 		<form id="registration_form" method="POST" action="<c:url value="/patient"/>">
-			<input id="cf" name="cf" type="text" placeholder="Fiscal Code" required pattern="[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}">
+			<input id="cf" name="cf" type="text" placeholder="Fiscal Code" required>
 			<div class="error"></div>
-			<input id="name" name="name" type="text" placeholder="Name" required pattern="[A-Za-z ]+">
+			<input id="name" name="name" type="text" placeholder="Name" required>
 			<div class="error"></div>
-			<input id="surname" name="surname" type="text" placeholder="Surname" required pattern="[A-Za-z ]+">
+			<input id="surname" name="surname" type="text" placeholder="Surname" required>
 			<div class="error"></div>
-			<input id="email" name="email" type="email" placeholder="Email" required pattern=".*@.*\..+">
+			<input id="email" name="email" type="email" placeholder="Email" required>
 			<div class="error"></div>
 			<label>Birthday</label>
 			<input id="birthday" name="birthday" type="date" placeholder="Birth date" required>
 			<div class="error"></div>
-			<input id="birthplace" name="birthplace" type="text" placeholder="Place of birth" required pattern="[\w/ ]+">
+			<input id="birthplace" name="birthplace" type="text" placeholder="Place of birth" required>
 			<div class="error"></div>
-			<input id="address" name="address" type="text" placeholder="Residence Address" required pattern="[\w/ ]+">
+			<input id="address" name="address" type="text" placeholder="Residence Address" required>
 			<div class="error"></div>
 			<div>
 				<label><input id="male" type="radio" name="gender" value="M" required> Male </label>
 				<label><input id="female" type="radio" name="gender" value="F" required> Female</label>
 				<div class="error"></div>
 			</div>
-			<input id="password" name="password" type="password" placeholder="Password" required pattern=".{6,}">
+			<input id="password" name="password" type="password" placeholder="Password" required>
 			<div id="password_strength" class="badge badge-pill"></div>
 			<div class="error"></div>
-			<input id="retype_password" name="retype_password" type="password" placeholder="Retype Password" required pattern=".{6,}">
+			<input id="retype_password" name="retype_password" type="password" placeholder="Retype Password" required>
 			<div class="error"></div>
 			<br>
 			<input name="submit" type="submit" value="Create account">

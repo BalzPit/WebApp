@@ -11,7 +11,7 @@
                 <p>message: <c:out value="${message.message}"/></p>
                 <p>details: <c:out value="${message.errorDetails}"/></p>
                 <br>
-                <p>Please contact the customer support</p>
+                <p>Please contact the customer support if the problem persists</p>
             </c:when>
             <c:otherwise>
                 <h1 class="message">INFO</h1>

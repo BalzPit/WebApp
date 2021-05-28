@@ -15,7 +15,7 @@
     <c:import url="/jsp/doctor-nav.jsp"/><!--
     --><section>
       <div class="personal-info">
-        <h2>Personal Information</h2>
+        <h1>Personal Information</h1>
         <br>
         <img class="roundpic" src="${pageContext.request.contextPath}/media/image-profile.png" alt="image-profile" />
         <br>

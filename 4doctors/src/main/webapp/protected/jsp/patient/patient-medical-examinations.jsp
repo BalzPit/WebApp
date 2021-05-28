@@ -18,9 +18,11 @@
         <div id="site">
             <c:import url="/jsp/patient-nav.jsp"/><!--
             --><section>
-                <section id="reservation">
-                    <div id="form-box">
-                        <h1>New Reservation</h1>
+                <h1>Examinations</h1>
+                <br>
+                <div id="reservation">
+                    <div id="form-box" class="white-box">
+                        <h2>New Reservation</h2>
                         <form action="javascript:void(0);">
                             <label for="patientDoctor">Select Doctor:</label>
                             <select name = "patientDoctor" id = "patientDoctor">
@@ -48,12 +50,11 @@
                     </div>
 
                     <!-- display the list of FUTURE medical examinations -->
-
                         <table id="future-exams">
-                            <caption>FUTURE EXAMINATIONS</caption>
+                            <caption class="h3">Future Examinations</caption>
                             <thead>
                             <tr>
-                                <th>Date</th><th>Time</th><th>Doctor</th><th></th>
+                                <th>Date</th><th>Time</th><th>Doctor</th><th>Actions</th>
                             </tr>
                             </thead>
 
@@ -82,7 +83,7 @@
                             </tbody>
                         </table>
 
-                </section>
+                </div>
 
                 <hr/>
 
@@ -90,7 +91,7 @@
                 <div>
                     <c:if test='${not empty pastExaminationsList && !message.error}'>
                         <table>
-                            <caption>PAST EXAMINATIONS</caption>
+                            <caption class="h3">Past Examinations</caption>
                             <thead>
                             <tr>
                                 <th>Doctor</th><th>Date</th><th>Time</th><th>Outcome</th>

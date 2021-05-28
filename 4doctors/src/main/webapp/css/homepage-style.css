@@ -55,11 +55,11 @@ section {
 }
 
 #menu-button-container a:nth-child(1) div {
-    background-image: url('../media/examinations-link.jpg');
+    background-image: url('../media/prescriptions-link.jpg');
 }
 
 #menu-button-container a:nth-child(2) div {
-    background-image: url('../media/prescriptions-link.jpg');
+    background-image: url('../media/examinations-link.jpg');
 }
 
 #menu-button-container a:nth-child(3) div {

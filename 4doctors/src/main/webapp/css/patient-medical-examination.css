@@ -1,12 +1,5 @@
 #form-box{
-    width: 100%;
-    max-width: fit-content;
-    height: fit-content;
-    margin: auto;
     padding: 25px;
-    border-radius: 30px;
-    box-shadow: 3px 4px 6px 0px #000;
-    background-color: rgba(181, 255, 225, 1);
     float: left;
 }
 
@@ -32,9 +25,6 @@ caption{
     caption-side: top;
 }
 
-section{
-    text-align:center;
-}
 section div{
     margin:auto;
 }

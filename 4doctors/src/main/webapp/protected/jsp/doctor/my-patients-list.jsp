@@ -14,12 +14,10 @@
 <div id="site">
 <c:import url="/jsp/doctor-nav.jsp"/><!--
     --><section>
-<h2>List of Your Followed Patients</h2>
-
-
+<h1>List of your followed Patients</h1>
+<br>
 <!-- display the list of past medical examinations, if any -->
 <c:if test='${not empty patientsList}'>
-    <h3>Your Patients</h3>
     <table>
         <thead>
         <tr>
@@ -41,11 +39,9 @@
     </table>
 </c:if>
 <br>
-<br>
-<br>
+<h3>Follow a new patient</h3>
 <form method="POST" action="<c:url value="/add-my-patient"/>">
-    <label>Patient's CF:</label>
-    <input name="patient_cf" type="text"/><br>
+    <input name="patient_cf" type="text" placeholder="patient's fiscal code"/><br>
     <button type="submit">Add</button><br>
 </form>
     </section><!--

@@ -21,7 +21,7 @@
 	<div class="form-box white-box">
 		<img src="<c:url value="/media/logo.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
 		<form id="login_form" method="POST" action="<c:url value="/user/login"/>">
-			<input id="user" name="cf" type="text" placeholder="Username" required pattern="[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}"><br>
+			<input id="user" name="cf" type="text" placeholder="Username" required><br>
 			<div class="error"></div>
 			<input id="key" name="password" type="password" placeholder="Password" required><br>
 			<div class="error"></div>

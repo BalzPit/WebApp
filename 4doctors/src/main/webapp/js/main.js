@@ -14,7 +14,7 @@ function setSiteHeight() {
     $("#site").css("height", "auto");
 
     //set height always except for mobile version
-    if( ($(window).width() > 768)  || ( ($(window).width() <= 768) && ($("body").height() < $(window).height()) )) {
+    if( ($(window).outerWidth() > 768)  || ( ($(window).outerWidth() <= 768) && ($("body").height() < $(window).height()) )) {
         if($("header").css("display") == "none")
             $("#site").css("height", $(window).height() - $("footer").outerHeight());
         else

@@ -18,10 +18,11 @@
             --><section>
                 <c:if test='${not empty cf}'>
                 <h1>Prescriptions management page</h1>
+                <br>
                 </c:if>
 
                 <%-- List the prescriptions --%>
-                <h2>List of your prescriptions</h2>
+                <h3>List of your prescriptions</h3>
                 <form method="GET" action="<c:url value="/list-user-prescriptions"/>">
                     <input name="typeReq" type="submit" value="all" />
                     <input name="typeReq" type="submit" value="pending" />
@@ -30,14 +31,13 @@
                 </form>
 
                 <%-- Request --%>
-                <h2>Prescription request</h2>
+                <br>
+                <h3>Prescription request</h3>
                 <form method="POST" id="p_form" action="<c:url value="/prescription-request"/>">
                     <div>
-                        <label>Doctor email</label>
-                        <input class="req" name="doctor_email" type="text" /><br>
+                        <input class="req" name="doctor_email" type="text" placeholder="Doctor email" /><br>
                         <div class="error"></div>
-                        <label>Description:</label>
-                        <input class="req" name="description" type="text" /><br>
+                        <input class="req" name="description" type="text" placeholder="Description" /><br>
                         <div class="error"></div>
                         <label>Times of validity (max. 10)</label>
                         <input class="req" type="number" id="quantity" name="numeroprestazioni" min="1" max="10" /><br>
@@ -72,11 +72,13 @@
                     </div>
 
                 </form>
+                <br>
 
                 <%-- Available medicines prescripted to the user --%>
                 <div>
-                <h2>Prescribed medicines</h2>
+                <h3>Prescribed medicines</h3>
                     <button id="pres_med" value=<c:out value="${cf}"/> >List</button>
+                    <br>
                     <div id="medicine_wrapper">
                          <table id="medicine_table">
                             <thead>

@@ -79,13 +79,16 @@
                     <button id="pres_med" value=<c:out value="${cf}"/> >List</button>
                     <div id="medicine_wrapper">
                          <table id="medicine_table">
-                            <tr>
-                                <th scope="col">Code</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Medicine class</th>
-                                <th scope="col">Producer</th>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Code</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Medicine class</th>
+                                    <th scope="col">Producer</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
                          </table>
                     </div>
                 </div>

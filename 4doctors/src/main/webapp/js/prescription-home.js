@@ -111,6 +111,7 @@ $("#pres_med").click(function(){
 
                 if(medicine_list.length!==0){
                     console.log(medicine_list);
+
                     for (var i = 0; i < medicine_list.length; i++){
 
                                 var code_html = $(document.createElement("td")).text(medicine_list[i].medicine.code);
@@ -119,7 +120,8 @@ $("#pres_med").click(function(){
                                 var medicine_class_html = $(document.createElement("td")).text(medicine_list[i].medicine.medicine_class);
                                 var description_html = $(document.createElement("td")).text(medicine_list[i].medicine.description);
 
-                                $("#medicine_table").html($(document.createElement("tr")).append(code_html).append(name_html).append(description_html).append(medicine_class_html).append(producer_html));
+                                $("#medicine_table tbody").html($(document.createElement("tr")).append(code_html).append(name_html).append(description_html).append(medicine_class_html).append(producer_html));
+
                     }
                 } else{
                     $("#medicine_wrapper").html("<p class='table_message'>There are no medicines already prescribed to you.</p>");

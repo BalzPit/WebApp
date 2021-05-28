@@ -8,7 +8,7 @@ INSERT INTO doctors.Paziente VALUES ('SCCWLM97P23A001U', 'wiliam', 'scicchitano'
 INSERT INTO doctors.Medico VALUES ('RSSNDR97A21H347Q', 'andrea', 'rossi','andrea.rossi@gmail.com',MD5('1e2e9fc2002b002d75198b7503210c05a1baac4560916a3c6d93bcce3a50d7f00fd395bf1647b9abb8d1afcc9c76c289b0c9383ba386a956da4b38934417789e'), 'M', '1965-06-11', 'Venezia', 'A34VE', 'Via dei medici, 118 (VE), 34761');
 INSERT INTO doctors.Medico VALUES ('BNCGLA94B14S617D', 'giulia', 'bianchi','giulia.bianchi@gmail.com',MD5('1e2e9fc2002b002d75198b7503210c05a1baac4560916a3c6d93bcce3a50d7f00fd395bf1647b9abb8d1afcc9c76c289b0c9383ba386a956da4b38934417789e'), 'F', '1979-04-06', 'Milano', 'A34VE', 'Via del corto, 143 (VE), 35676');
 
-INSERT INTO doctors.Admin VALUES ('nico9779', 'Nicola', 'Levorato', 'nicola.levorato.2@studenti.unipd.it', MD5('a6818b8188b36c44d17784c5551f63accc5deaf8786f9d0ad1ae3cd8d887cbab4f777286dbb315fb14854c8774dc0d10b5567e4a705536cc2a1d61ec0a16a7a6'));
+INSERT INTO doctors.Admin VALUES ('admin', 'Nicola', 'Levorato', 'nicola.levorato.2@studenti.unipd.it', MD5('a6818b8188b36c44d17784c5551f63accc5deaf8786f9d0ad1ae3cd8d887cbab4f777286dbb315fb14854c8774dc0d10b5567e4a705536cc2a1d61ec0a16a7a6'));
 
 INSERT INTO doctors.Farmaco VALUES ('1322AB0001', 'Tachipirina', 'OTC', 'Angelini', 'gocce');
 INSERT INTO doctors.Farmaco VALUES ('234DF21345', 'Broncovaleas', 'SOP', 'Valeant', 'compresse 100mg');

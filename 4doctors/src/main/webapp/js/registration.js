@@ -13,14 +13,16 @@ var radio_female = $("#female");
 var errors = $("div.error");
 var password_strength = $("#password_strength");
 
-
+// Regex to validate cf, email and password strength
 const cf_regex = /[A-Za-z]{6}[0-9]{2}[A-Za-z][0-9]{2}[A-Za-z][0-9]{3}[A-Za-z]/;
 const email_regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const strong_password = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
 const medium_password = /(?=.*[a-z])(?=.*[0-9])(?=.{6,})/;
 
+// Listener on form to validate data on submit
 registration_form.submit(function (event) {
 
+    // Check if parameters are null
     if(cf.val() == null){
         cf.addClass("invalid");
         errors.eq(0).html("The fiscal code can't be null!");
@@ -84,6 +86,7 @@ registration_form.submit(function (event) {
         return false;
     }
 
+    // Remove leading and trailing whitespace
     var cf_value = cf.val().trim().toUpperCase();
     var name_value = _name.val().trim();
     var surname_value = surname.val().trim();
@@ -94,6 +97,7 @@ registration_form.submit(function (event) {
     var birthplace_value = birthplace.val().trim();
     var address_value = address.val().trim();
 
+    // Check if parameters value are valid or not
     if(cf_value.length === 0) {
         cf.addClass("invalid");
         errors.eq(0).html("The fiscal code can't be empty!");
@@ -214,6 +218,7 @@ registration_form.submit(function (event) {
         retype_password.addClass("valid");
     }
 
+    // Update variables with new value and crypt passwords
     cf.val(cf_value);
     _name.val(name_value);
     surname.val(surname_value);
@@ -225,11 +230,13 @@ registration_form.submit(function (event) {
     address.val(address_value);
 });
 
+// Add listener to remove errors messages and class on focus
 $("input").focus(function () {
     $(this).removeClass("invalid");
     errors.html("");
 });
 
+// Check password strength when writing new password
 password.on("input", function (event) {
 
     if($(this).val().length === 0) {
@@ -240,12 +247,14 @@ password.on("input", function (event) {
     }
 });
 
+// Check if a date is invalid
 function isDateInvalid(date_string) {
 
     var date = Date.parse(date_string);
     return isNaN(date);
 }
 
+// Check if a date is future respect to the current date
 function isFutureDate(date_string) {
     var date = new Date(date_string);
     var currentdate = new Date();
@@ -253,6 +262,7 @@ function isFutureDate(date_string) {
     return date > currentdate;
 }
 
+// Check the strength of a password changing style according to 3 different level
 function strengthChecker(password){
 
     if(strong_password.test(password)) {

@@ -17,7 +17,7 @@
             <div class="form-box white-box">
                 <h2>Add new doctor</h2>
                 <form id="add_doctor_form" method="POST">
-                    <input id="cf" name="cf" type="text" placeholder="Fiscal Code" required pattern="[A-Za-z]{6}[0-9]{2}[A-Za-z]{1}[0-9]{2}[A-Za-z]{1}[0-9]{3}[A-Za-z]{1}">
+                    <input id="cf" name="cf" type="text" placeholder="Fiscal Code" required >
                     <div class="error"></div>
                     <input id="name" name="name" type="text" placeholder="Name" required pattern="[A-Za-z ]+">
                     <div class="error"></div>

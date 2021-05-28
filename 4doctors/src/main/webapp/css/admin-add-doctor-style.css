@@ -39,6 +39,7 @@ section {
     padding: 7px;
     margin: 10px auto;
     border: none;
+    color: #fff;
 }
 
 .form-box #add_doctor_message {

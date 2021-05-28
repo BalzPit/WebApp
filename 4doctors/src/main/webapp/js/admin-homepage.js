@@ -2,6 +2,8 @@ var doctors_table = $("#doctors_table");
 var patients_table = $("#patients_table");
 var doctors_wrapper = $("#doctors_wrapper");
 var patients_wrapper = $("#patients_wrapper");
+var doctors_list_h3 = $("#list_doctors_h3");
+var patients_list_h3 = $("#list_patients_h3");
 
 // const contextPath = "http://localhost:8080/4Doctors-1.00";
 
@@ -27,6 +29,7 @@ $(document).ready(function (){
             }
             else {
                 // If there are no doctor in the db show a message
+                doctors_list_h3.css("display", "none");
                 doctors_wrapper.html("<p class='table_message'>There are no active doctors in the database.</p>");
             }
         } else {
@@ -55,6 +58,7 @@ $(document).ready(function (){
                 patients_table.css("display", "inline-block");
             } else {
                 // If there are no patient in the db show a message
+                patients_list_h3.css("display", "none");
                 patients_wrapper.html("<p class='table_message'>There are no patients in the database.</p>");
             }
         } else {
@@ -156,6 +160,7 @@ doctors_table.on("click", "button.update", function (){
                 next_row.remove();
             }
             if($("#doctors_table tr").length === 1) {
+                doctors_list_h3.css("display", "none");
                 doctors_wrapper.html("<p class='table_message'>There are no active doctors in the database.</p>");
             }
         },
@@ -185,6 +190,7 @@ patients_table.on("click", "button.delete", function (){
                 next_row.remove();
             }
             if($("#patients_table tr").length === 1) {
+                patients_list_h3.css("display", "none");
                 patients_wrapper.html("<p class='table_message'>There are no patients in the database.</p>");
             }
         },

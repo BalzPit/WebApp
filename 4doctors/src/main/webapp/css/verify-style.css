@@ -4,7 +4,7 @@
 
 body {
     display: flex;
-    background: linear-gradient(-45deg, rgba(255,153,0,1) 0%, rgba(255,255,255,1) 50%, rgba(255,153,0,1) 100%);
+    background: var(--light-gray);
 }
 
 .verify_box {
@@ -33,7 +33,7 @@ body {
 }
 
 .verify_box .error {
-    color: var(--error-red-light);
+    color: var(--main-red);
     font-weight: bold;
 }
 

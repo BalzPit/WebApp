@@ -109,7 +109,7 @@ public class BookingTime {
         String time = this.hour+":"+this.min;
 
         //parse string and convert into dql time
-        java.util.Date utilTime = new SimpleDateFormat("hh:mm").parse(time);
+        java.util.Date utilTime = new SimpleDateFormat("HH:mm").parse(time);
         return  new java.sql.Time(utilTime.getTime());
     }
 

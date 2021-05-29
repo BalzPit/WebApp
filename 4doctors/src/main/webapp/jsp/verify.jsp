@@ -21,8 +21,9 @@
                     sessionStorage.setItem("verification_code", "${sessionScope.verification_code}");
                 </script>
 
-                <div class="verify_box">
+                <div class="verify_box white-box">
                     <img src="<c:url value="/media/logo.png"/>" alt="Logo 4Doctors" title="Logo 4Doctors">
+                    <br><br>
                     <p>We already sent a verification code to your email.</p>
                     <p>Please enter the code in the field.</p>
 

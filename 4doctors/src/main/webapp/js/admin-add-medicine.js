@@ -30,7 +30,7 @@ add_medicine_form.submit(function (event) {
     }
 
     if(description.val() == null){
-        code.addClass("invalid");
+        description.addClass("invalid");
         errors.eq(4).html("The description can't be null!");
         event.preventDefault();
         return false;

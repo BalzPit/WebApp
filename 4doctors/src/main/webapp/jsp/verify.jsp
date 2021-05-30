@@ -36,7 +36,7 @@
                 <script src="${pageContext.request.contextPath}/js/verify.js"></script>
             </c:when>
             <c:otherwise>
-                <div class="verify_box">
+                <div class="verify_box white-box">
                     <p class="verify_message">An error occurred while processing the request. You will redirected to the registration page in 5 seconds.</p>
                     <script>
                         setTimeout(function(){

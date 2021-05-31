@@ -6,7 +6,6 @@
   <head>
     <title>Change Password</title>
     <c:import url="/jsp/head.jsp"/>
-      <link type="text/css" rel="stylesheet" href="<c:url value="/css/patient-section.css"/>">
   </head>
 
   <body>
@@ -19,7 +18,8 @@
           <form id="change_password_form" method="POST" action="<c:url value="/change-password"/>">
               <input type="password" name="current" placeholder="Current password"><br>
               <div class="error"></div>
-              <input type="password" name="new" placeholder="New password"><br>
+              <input id="pwd" type="password" name="new" placeholder="New password"><br>
+              <div id="password_strength" class="badge badge-pill"></div>
               <div class="error"></div>
               <input type="password" name="confirm" placeholder="Confirm password"><br>
               <div class="error"></div>

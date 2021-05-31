@@ -311,3 +311,13 @@ input[type=password] {
 #error-message-box button {
     box-shadow: none;
 }
+
+#password_strength {
+	width: 100%;
+	max-width: 300px;
+	padding: 7px;
+	margin: 10px 0px;
+	border: none;
+	color: #fff;
+}
+

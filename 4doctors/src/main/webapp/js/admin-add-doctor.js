@@ -201,11 +201,11 @@ add_doctor_form.submit(function (event) {
         return false;
     } else if(!asl_regex.test(asl_code_value)) {
         asl_code.addClass("invalid");
-        errors.eq(7).html("The format of the fiscal code is wrong!");
+        errors.eq(7).html("The format of the ASL Code is wrong!");
         event.preventDefault();
         return false;
     } else {
-        address.addClass("valid");
+        asl_code.addClass("valid");
     }
 
     if(!radio_male.is(":checked") && !radio_female.is(":checked")){

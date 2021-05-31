@@ -45,7 +45,7 @@ registration_form.submit(function (event) {
     }
 
     if(email.val() == null){
-        _name.addClass("invalid");
+        email.addClass("invalid");
         errors.eq(3).html("The email can't be null!");
         event.preventDefault();
         return false;

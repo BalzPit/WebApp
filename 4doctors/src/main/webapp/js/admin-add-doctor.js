@@ -22,7 +22,7 @@ const cf_regex = /[A-Za-z]{6}[0-9]{2}[A-Za-z][0-9]{2}[A-Za-z][0-9]{3}[A-Za-z]/;
 const email_regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const asl_regex = /[A-Z0-9]+/;
 const strong_password = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
-const medium_password = /(?=.*[a-z])(?=.*[0-9])(?=.{6,})/;
+const medium_password = /(?=.*[A-Za-z])(?=.*[0-9])(?=.{6,})/;
 
 // Listener on form to validate data on submit
 add_doctor_form.submit(function (event) {

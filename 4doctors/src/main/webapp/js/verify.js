@@ -32,6 +32,8 @@ verification_form.addEventListener("submit", function (event){
         code.className = "valid";
         sessionStorage.removeItem("verification_code");
     }
+
+    code.value = code_value;
 });
 
 code.addEventListener("focus", function () {

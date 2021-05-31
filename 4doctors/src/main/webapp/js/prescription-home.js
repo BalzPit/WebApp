@@ -112,7 +112,15 @@ $("#pres_med").click(function(){
                 if(medicine_list.length!==0){
                     console.log(medicine_list);
 
-                    for (var i = 0; i < medicine_list.length; i++){
+                    var code_html = $(document.createElement("td")).text(medicine_list[0].medicine.code);
+                    var name_html = $(document.createElement("td")).text(medicine_list[0].medicine.name);
+                    var producer_html = $(document.createElement("td")).text(medicine_list[0].medicine.producer);
+                    var medicine_class_html = $(document.createElement("td")).text(medicine_list[0].medicine.medicine_class);
+                    var description_html = $(document.createElement("td")).text(medicine_list[0].medicine.description);
+                    $("#medicine_table tbody").html($(document.createElement("tr")).append(code_html).append(name_html).append(description_html).append(medicine_class_html).append(producer_html));
+
+
+                    for (var i = 1; i < medicine_list.length; i++){
 
                                 var code_html = $(document.createElement("td")).text(medicine_list[i].medicine.code);
                                 var name_html = $(document.createElement("td")).text(medicine_list[i].medicine.name);
@@ -120,7 +128,7 @@ $("#pres_med").click(function(){
                                 var medicine_class_html = $(document.createElement("td")).text(medicine_list[i].medicine.medicine_class);
                                 var description_html = $(document.createElement("td")).text(medicine_list[i].medicine.description);
 
-                                $("#medicine_table tbody").html($(document.createElement("tr")).append(code_html).append(name_html).append(description_html).append(medicine_class_html).append(producer_html));
+                                $("#medicine_table tbody").append($(document.createElement("tr")).append(code_html).append(name_html).append(description_html).append(medicine_class_html).append(producer_html));
 
                     }
                 } else{

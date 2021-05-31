@@ -64,7 +64,7 @@ public final class ListUserPrescriptionsServlet extends AbstractDatabaseServlet 
             // creates a new object for accessing the database and stores the patient
             PrescriptionDAO listPresc = new PrescriptionDAO(getDataSource().getConnection());
             pres = listPresc.listUserPrescriptions(cf, type);
-            message = new Message("Prescriptions succesfully searched into the database!");
+            //message = new Message("Prescriptions succesfully searched into the database!");
 
         } catch (InputFormatException ex) {
             ErrorCode ec = ErrorCode.INVALID_INPUT_PARAMETERS;
